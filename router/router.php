@@ -30,7 +30,17 @@ function router (){
                 "listar"=>"list.php",
 		        "buscar"=>"search.php",
                 "borrar"=>"delete.php",
-                "editar"=>"edit.php"
+                "editar"=>"edit.php",
+                "administrar"=>"administrar.php",
+        ],
+        "digimones"=>[//defino las acciones permitidas para esa tabla
+                "crear"=>"create.php",
+                "guardar"=>"store.php",
+                "ver"=> "show.php",
+                "listar"=>"list.php",
+		        "buscar"=>"search.php",
+                "borrar"=>"delete.php",
+                "editar"=>"edit.php",
         ],
     ];
 
