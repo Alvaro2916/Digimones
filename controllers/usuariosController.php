@@ -65,14 +65,9 @@ class UsuariosController
         return $this->model->read($id);
     }
 
-    public function listar($comprobarSiEsBorrable = false)
+    public function listar()
     {
         $users = $this->model->readAll();
-        if ($comprobarSiEsBorrable) {
-            foreach ($users as $user) {
-                $user->esBorrable = $this->esBorrable($user);
-            }
-        }
         return $users;
     }
 
@@ -145,25 +140,9 @@ class UsuariosController
         //vuelvo a la pagina donde estaba
     }
 
-    public function buscar(string $campo = "usuario", string $metodo = "contiene", string $texto = "", bool  $comprobarSiEsBorrable = false): array
+    public function buscar(string $campo = "usuario", string $metodo = "contiene", string $texto = ""): array
     {
         $users = $this->model->search($campo, $metodo, $texto);
-        if ($comprobarSiEsBorrable) {
-            foreach ($users as $user) {
-                $user->esBorrable = $this->esBorrable($user);
-            }
-        }
         return $users;
-    }
-
-    private function esBorrable(stdClass $user): bool
-    {
-        $projectController = new ProjectsController();
-        $borrable = true;
-        // si ese usuario está en algún proyecto, No se puede borrar.
-        if (count($projectController->buscar("user_id", "igual", $user->id)) > 0)
-            $borrable = false;
-
-        return $borrable;
     }
 }
