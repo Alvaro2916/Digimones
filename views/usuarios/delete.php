@@ -1,5 +1,5 @@
 <?php
-require_once "controllers/usersController.php";
+require_once "controllers/usuariosController.php";
 //pagina invisible
 if (!isset ($_REQUEST["id"])){
    header('location:index.php' );
@@ -8,5 +8,5 @@ if (!isset ($_REQUEST["id"])){
 //recoger datos
 $id=$_REQUEST["id"];
 
-$controlador= new UsersController();
+$controlador= new UsuariosController();
 $borrado=$controlador->borrar($id);

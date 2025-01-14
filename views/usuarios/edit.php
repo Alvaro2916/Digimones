@@ -1,5 +1,5 @@
 <?php
-require_once "controllers/usersController.php";
+require_once "controllers/usuariosController.php";
 //recoger datos
 if (!isset($_REQUEST["id"])) {
     header('location:index.php?tabla=user&accion=listar');
@@ -8,7 +8,7 @@ if (!isset($_REQUEST["id"])) {
     exit();
 }
 $id = $_REQUEST["id"];
-$controlador = new UsersController();
+$controlador = new UsuariosController();
 $user = $controlador->ver($id);
 
 $visibilidad = "hidden";

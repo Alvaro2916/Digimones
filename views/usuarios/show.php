@@ -1,5 +1,5 @@
 <?php
-require_once "controllers/usersController.php";
+require_once "controllers/usuariosController.php";
 if (!isset($_REQUEST['id'])) {
     header("location:index.php");
     exit();
@@ -8,7 +8,7 @@ if (!isset($_REQUEST['id'])) {
     // No poner exit puede provocar acciones no esperadas dificiles de depurar
 }
 $id = $_REQUEST['id'];
-$controlador = new usersController();
+$controlador = new UsuariosController();
 $user = $controlador->ver($id);
 ?>
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">

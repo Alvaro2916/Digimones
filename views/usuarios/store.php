@@ -1,5 +1,5 @@
 <?php
-require_once "controllers/usersController.php";
+require_once "controllers/usuariosController.php";
 //recoger datos
 if (!isset($_REQUEST["usuario"])) {
     header('Location:index.php?tabla=user&accion=crear');
@@ -19,7 +19,7 @@ $arrayUser = [
 ];
 
 //pagina invisible
-$controlador = new UsersController();
+$controlador = new UsuariosController();
 
 if ($_REQUEST["evento"] == "crear") {
     $controlador->crear($arrayUser);

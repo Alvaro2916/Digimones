@@ -1,11 +1,11 @@
 <?php
-require_once "controllers/usersController.php";
+require_once "controllers/usuariosController.php";
 
 $mensaje = "";
 $clase = "alert alert-success";
 $visibilidad = "hidden";
 $mostrarDatos = false;
-$controlador = new UsersController();
+$controlador = new UsuariosController();
 $usuario = "";
 $campo = "";
 $modo = "";

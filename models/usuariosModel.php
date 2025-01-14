@@ -1,7 +1,7 @@
 <?php
 require_once('config/db.php');
 
-class UserModel
+class UsuariosModel
 {
     private $conexion;
 
@@ -120,10 +120,10 @@ class UserModel
         return $usuarios;
     }
 
-    public function login(string $usuario,string $contrasenya): ?stdClass {
-        $sentencia = $this->conexion->prepare("SELECT * FROM usuarios WHERE usuario=:usuario");
+    public function login(string $nombre,string $contrasenya): ?stdClass {
+        $sentencia = $this->conexion->prepare("SELECT * FROM usuarios WHERE nombre=:nombre");
         $arrayDatos = [
-            ":usuario" => $usuario,
+            ":nombre" => $nombre,
         ];
         $resultado = $sentencia->execute($arrayDatos);
         if (!$resultado) return null;

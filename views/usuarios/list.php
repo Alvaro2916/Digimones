@@ -1,7 +1,7 @@
 <?php
-require_once "controllers/usersController.php";
+require_once "controllers/usuariosController.php";
 
-$controlador = new UsersController();
+$controlador = new UsuariosController();
 $users = $controlador->listar();
 $visibilidad = "hidden";
 if (isset($_REQUEST["evento"]) && $_REQUEST["evento"] == "borrar") {
