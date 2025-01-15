@@ -22,7 +22,6 @@ $vista = router();
         if (!file_exists($vista)) echo "Error, REVISA TUS RUTAS";
         else require_once($vista);
         ?>
-        uwu
     </div>
 </div>
 <?php

@@ -6,7 +6,7 @@ $clase = "alert alert-success";
 $visibilidad = "hidden";
 $mostrarDatos = false;
 $controlador = new UsuariosController();
-$usuarios = "";
+$user = "";
 $campo = "";
 $modo = "";
 
@@ -35,7 +35,7 @@ if (isset($_REQUEST["evento"])) {
             <?= $mensaje ?>
         </div>
         <div>
-            <form action="index.php?tabla=user&accion=buscar&evento=filtrar" method="POST">
+            <form action="index.php?tabla=usuarios&accion=buscar&evento=filtrar" method="POST">
                 <div class="form-group">
                     <label for="usuario">Buscar Usuario</label><br>
                     <select class="form-select" aria-label="Default select example" id="campo" name="campo">
@@ -52,12 +52,12 @@ if (isset($_REQUEST["evento"])) {
                         <option value="contiene">Contiene</option>
                         <option value="igual">Igual A</option>
                     </select>
-                    <input type="text" required class="form-control" id="busqueda" name="busqueda" value="<?= $usuarios ?>" placeholder="Buscar por Usuario">
+                    <input type="text" required class="form-control" id="busqueda" name="busqueda" value="<?= $user ?>" placeholder="Buscar por Usuario">
                 </div>
                 <button type="submit" class="btn btn-success" name="Filtrar"><i class="fas fa-search"></i> Buscar</button>
             </form>
             <!-- Este formulario es para ver todos los datos    -->
-            <form action="index.php?tabla=user&accion=buscar&evento=todos" method="POST">
+            <form action="index.php?tabla=usuarios&accion=buscar&evento=todos" method="POST">
                 <button type="submit" class="btn btn-info" name="Todos"><i class="fas fa-list"></i> Listar</button>
             </form>
         </div>
@@ -68,12 +68,11 @@ if (isset($_REQUEST["evento"])) {
                 <thead class="table-dark">
                     <tr>
                         <th scope="col">ID</th>
-                        <th scope="col">Usuario</th>
                         <th scope="col">Nombre</th>
-                        <th scope="col">Email</th>
                         <th scope="col">Partidas Ganadas</th>
                         <th scope="col">Partidas Perdidas</th>
                         <th scope="col">Partidas totales</th>
+                        <th scope="col">Ver Usuario</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -82,11 +81,11 @@ if (isset($_REQUEST["evento"])) {
                     ?>
                         <tr>
                             <th scope="row"><?= $usuario->id ?></th>
-                            <td><?= $usuario->usuario ?></td>
-                            <td><?= $usuario->name ?></td>
+                            <td><?= $usuario->nombre ?></td>
                             <td><?= $usuario->partidas_ganadas ?></td>
                             <td><?= $usuario->partidas_perdidas ?></td>
                             <td><?= $usuario->partidas_totales ?></td>
+                            <td scope="col"><a class="btn btn-primary" href="index.php?tabla=usuarios&accion=ver&id=<?= $_SESSION["usuario"]->id ?>"><i class="fa-solid fa-sitemap"></i> Ver Usuario</a></td>
                     <?php
                     endforeach;
                     ?>

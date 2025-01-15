@@ -6,8 +6,8 @@
         <table class="table table-light table-hover">
         <thead class="table-dark">
                 <tr>
-                    <th scope="col"><a class="btn btn-primary" href="index.php?tabla=usuarios&accion=buscar&id=<?= $_SESSION["usuario"]->id ?>"><i class="fa-regular fa-eye"></i> Listar Usuario</a></th>
                     <th scope="col"><a class="btn btn-primary" href="index.php?tabla=usuarios&accion=ver&id=<?= $_SESSION["usuario"]->id ?>"><i class="fa-solid fa-sitemap"></i> Ver Usuario</a></th>
+                    <th scope="col"><a class="btn btn-primary" href="index.php?tabla=usuarios&accion=buscar&id=<?= $_SESSION["usuario"]->id ?>"><i class="fa-regular fa-eye"></i> Listar Usuario</a></th>
                     <th scope="col"><a class="btn btn-primary" href="index.php?tabla=digimones&accion=jugar&id=<?= $_SESSION["usuario"]->id ?>"><i class="fa-solid fa-hand-fist"></i> Dar de alta a un Digimon</a></th>
                     <th scope="col"><a class="btn btn-primary" href="index.php?tabla=digimones&accion=evoluvcionar&id=<?= $_SESSION["usuario"]->id ?>"><i class="fa-solid fa-dna"></i> Definir Evoluciones</a></th>
                     <th scope="col"><a class="btn btn-primary" href="index.php?tabla=digimones&accion=editar&id=<?= $_SESSION["usuario"]->id ?>"><i class="fa-solid fa-gear"></i> Borrar Digimones</a></th>
