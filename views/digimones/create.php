@@ -54,6 +54,11 @@ if (isset($_REQUEST["error"])) {
         <input type="text" class="form-control" id="tipo" name="tipo" value="<?= $_SESSION["datos"]["tipo"] ?? "" ?>" placeholder="Introduce el tipo">
         <?= isset($errores["tipo"]) ? '<div class="alert alert-danger" role="alert">' . DibujarErrores($errores, "tipo") . '</div>' : ""; ?>
       </div>
+      <div class="form-group">
+        <label for="tipo">Sube la imagen </label>
+        <input type="file" class="form-control" id="tipo" name="tipo" value="<?= $_SESSION["datos"]["tipo"] ?? "" ?>" placeholder="Introduce el tipo">
+        <?= isset($errores["tipo"]) ? '<div class="alert alert-danger" role="alert">' . DibujarErrores($errores, "tipo") . '</div>' : ""; ?>
+      </div>
       <button type="submit" class="btn btn-primary">Guardar</button>
       <a class="btn btn-danger" href="index.php">Cancelar</a>
     </form>

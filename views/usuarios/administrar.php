@@ -1,3 +1,16 @@
+<?php
+ob_start();
+require_once ("router/router.php");
+$vista=router ();
+
+if (!file_exists($vista)) "Error, REVISA TUS RUTAS";
+else require_once ($vista);
+
+$vista = router();
+
+echo $vista;
+?>
+
 <!doctype html>
 <html lang="es">
 
