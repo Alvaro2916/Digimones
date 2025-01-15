@@ -65,8 +65,7 @@ class UsuariosController
         return $this->model->read($id);
     }
 
-    public function listar()
-    {
+    public function listar() {
         $users = $this->model->readAll();
         return $users;
     }

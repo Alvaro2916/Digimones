@@ -6,7 +6,7 @@ $clase = "alert alert-success";
 $visibilidad = "hidden";
 $mostrarDatos = false;
 $controlador = new UsuariosController();
-$usuario = "";
+$usuarios = "";
 $campo = "";
 $modo = "";
 
@@ -14,7 +14,7 @@ if (isset($_REQUEST["evento"])) {
     $mostrarDatos = true;
     switch ($_REQUEST["evento"]) {
         case "todos":
-            $users = $controlador->listar(comprobarSiEsBorrable: true);
+            $usuarios = $controlador->listar();
             $mostrarDatos = true;
             break;
         case "filtrar":
@@ -22,18 +22,7 @@ if (isset($_REQUEST["evento"])) {
             $metodo = ($_REQUEST["modo"]) ?? "contiene";
             $texto = ($_REQUEST["busqueda"]) ?? "";
             //es borrable Parametro con nombre
-            $users = $controlador->buscar($campo, $metodo, $texto, comprobarSiEsBorrable: true); //solo añadimos esto
-            break;
-        case "borrar":
-            $visibilidad = "visibility";
-            $mostrarDatos = true;
-            $clase = "alert alert-success";
-            //Mejorar y poner el nombre/usuario
-            $mensaje = "El usuario con id: {$_REQUEST['id']} Borrado correctamente";
-            if (isset($_REQUEST["error"])) {
-                $clase = "alert alert-danger ";
-                $mensaje = "ERROR!!! No se ha podido borrar el usuario con id: {$_REQUEST['id']}";
-            }
+            $usuarios = $controlador->buscar($campo, $metodo, $texto); //solo añadimos esto
             break;
     }
 } ?>
@@ -53,7 +42,9 @@ if (isset($_REQUEST["evento"])) {
                         <option value="id">ID</option>
                         <option value="usuario" selected>Usuario</option>
                         <option value="name">Nombre</option>
-                        <option value="email">Email</option>
+                        <option value="partidas_ganadas">Partidas Ganadas</option>
+                        <option value="partidas_perdidas">Partidas Perdidas</option>
+                        <option value="partidas_totales">Partidas Totales</option>
                     </select>
                     <select class="form-select" aria-label="Default select example" id="modo" name="modo">
                         <option value="empieza" selected>Empieza Por</option>
@@ -61,7 +52,7 @@ if (isset($_REQUEST["evento"])) {
                         <option value="contiene">Contiene</option>
                         <option value="igual">Igual A</option>
                     </select>
-                    <input type="text" required class="form-control" id="busqueda" name="busqueda" value="<?= $usuario ?>" placeholder="Buscar por Usuario">
+                    <input type="text" required class="form-control" id="busqueda" name="busqueda" value="<?= $usuarios ?>" placeholder="Buscar por Usuario">
                 </div>
                 <button type="submit" class="btn btn-success" name="Filtrar"><i class="fas fa-search"></i> Buscar</button>
             </form>
@@ -80,32 +71,22 @@ if (isset($_REQUEST["evento"])) {
                         <th scope="col">Usuario</th>
                         <th scope="col">Nombre</th>
                         <th scope="col">Email</th>
-                        <th scope="col"></th>
-                        <th scope="col"></th>
+                        <th scope="col">Partidas Ganadas</th>
+                        <th scope="col">Partidas Perdidas</th>
+                        <th scope="col">Partidas totales</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($users as $user) :
-                        $id = $user->id;
+                    <?php foreach ($usuarios as $usuario) :
+                        $id = $usuario->id;
                     ?>
                         <tr>
-                            <th scope="row"><?= $user->id ?></th>
-                            <td><?= $user->usuario ?></td>
-                            <td><?= $user->name ?></td>
-                            <td><?= $user->email ?></td>
-                            <td>
-                                <?php
-                                $disable = "";
-                                $ruta = "index.php?tabla=user&accion=borrar&id={$id}";
-                                if (isset($user->esBorrable) && $user->esBorrable == false) {
-                                    $disable = "disabled";
-                                    $ruta = "#";
-                                }
-                                ?>
-                                <a class="btn btn-danger <?= $disable ?>" href="<?= $ruta ?>"><i class="fa fa-trash"></i> Borrar</a>
-                            </td>
-                            <td><a class="btn btn-success" href="index.php?tabla=user&accion=editar&id=<?= $id ?>"><i class="fa fa-pencil"></i>Editar</a></td>
-                        </tr>
+                            <th scope="row"><?= $usuario->id ?></th>
+                            <td><?= $usuario->usuario ?></td>
+                            <td><?= $usuario->name ?></td>
+                            <td><?= $usuario->partidas_ganadas ?></td>
+                            <td><?= $usuario->partidas_perdidas ?></td>
+                            <td><?= $usuario->partidas_totales ?></td>
                     <?php
                     endforeach;
                     ?>

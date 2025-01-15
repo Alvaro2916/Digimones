@@ -9,7 +9,7 @@ if (!isset($_REQUEST['id'])) {
 }
 $id = $_REQUEST['id'];
 $controlador = new UsuariosController();
-$user = $controlador->ver($id);
+$usuarios = $controlador->ver($id);
 ?>
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -18,16 +18,16 @@ $user = $controlador->ver($id);
     <div id="contenido">
         <div class="card"  style="width: 18rem;">
             <div >
-                <h5 class="card-title">ID: <?= $user->id ?> <br>NOMBRE: <?= $user->nombre ?></h5>
+                <h5 class="card-title">ID: <?= $usuarios->id ?> <br>NOMBRE: <?= $usuarios->nombre ?></h5>
                 <p class="card-text">
-                    ID: <?= $user->id ?> <br>
-                    Nombre: <?= $user->nombre ?><br>
-                    Foto de Perfil: <?= $user->pfp ?><br>
-                    Partidas Gandas: <?= $user->partidas_ganadas ?><br>
-                    Partidas Perdidas: <?= $user->partidas_perdidas ?><br>
-                    Partidas Totales: <?= $user->partidas_totales ?><br>
+                    ID: <?= $usuarios->id ?> <br>
+                    Nombre: <?= $usuarios->nombre ?><br>
+                    Foto de Perfil: <?= $usuarios->pfp ?><br>
+                    Partidas Gandas: <?= $usuarios->partidas_ganadas ?><br>
+                    Partidas Perdidas: <?= $usuarios->partidas_perdidas ?><br>
+                    Partidas Totales: <?= $usuarios->partidas_totales ?><br>
                 </p>
-                <a href="index.php" class="btn btn-primary">Volver a Inicio</a>
+                <a href="index.php?tabla=usuarios&accion=administrar&id=<?= $usuarios->nombre ?>" class="btn btn-primary">Volver a Inicio</a>
             </div>
         </div>
 </main>

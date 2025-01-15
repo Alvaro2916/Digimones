@@ -16,6 +16,7 @@ $vista = router();
 <div class="container-fluid">
     <div class="row">
         <?php
+        //Si quitamos esto no se vería el navbar pero no se cuadraría nuestra página. Tenemos que verlo bien
         require_once "views/layout/navbar.php";
 
         if (!file_exists($vista)) echo "Error, REVISA TUS RUTAS";
