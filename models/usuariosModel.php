@@ -94,23 +94,23 @@ class UsuariosModel
     }
 
     public function search (string $campo, string $modo, string $usuario):array{
-        $sentencia = $this->conexion->prepare("SELECT * FROM usuarios WHERE $campo LIKE :usuario");
+        $sentencia = $this->conexion->prepare("SELECT * FROM usuarios WHERE $campo LIKE :nombre");
         //ojo el si ponemos % siempre en comillas dobles "
         switch ($modo) {
             case 'empieza':
-                $arrayDatos=[":usuario"=>"$usuario%" ];
+                $arrayDatos=[":nombre"=>"$usuario%" ];
                 break;
 
             case 'acaba':
-                $arrayDatos=[":usuario"=>"%$usuario" ];
+                $arrayDatos=[":nombre"=>"%$usuario" ];
                 break;
 
             case 'contiene':
-                $arrayDatos=[":usuario"=>"%$usuario%" ];
+                $arrayDatos=[":nombre"=>"%$usuario%" ];
                 break;
             
             default:
-                $arrayDatos=[":usuario"=>$usuario];
+                $arrayDatos=[":nombre"=>$usuario];
                 break;
         }
 

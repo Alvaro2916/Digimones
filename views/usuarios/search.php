@@ -18,7 +18,7 @@ if (isset($_REQUEST["evento"])) {
             $mostrarDatos = true;
             break;
         case "filtrar":
-            $campo = ($_REQUEST["campo"]) ?? "usuario";
+            $campo = ($_REQUEST["campo"]) ?? "nombre";
             $metodo = ($_REQUEST["modo"]) ?? "contiene";
             $texto = ($_REQUEST["busqueda"]) ?? "";
             //es borrable Parametro con nombre
@@ -40,8 +40,7 @@ if (isset($_REQUEST["evento"])) {
                     <label for="usuario">Buscar Usuario</label><br>
                     <select class="form-select" aria-label="Default select example" id="campo" name="campo">
                         <option value="id">ID</option>
-                        <option value="usuario" selected>Usuario</option>
-                        <option value="name">Nombre</option>
+                        <option value="nombre" selected>Nombre</option>
                         <option value="partidas_ganadas">Partidas Ganadas</option>
                         <option value="partidas_perdidas">Partidas Perdidas</option>
                         <option value="partidas_totales">Partidas Totales</option>
@@ -85,12 +84,13 @@ if (isset($_REQUEST["evento"])) {
                             <td><?= $usuario->partidas_ganadas ?></td>
                             <td><?= $usuario->partidas_perdidas ?></td>
                             <td><?= $usuario->partidas_totales ?></td>
-                            <td scope="col"><a class="btn btn-primary" href="index.php?tabla=usuarios&accion=ver&id=<?= $_SESSION["usuario"]->id ?>"><i class="fa-solid fa-sitemap"></i> Ver Usuario</a></td>
+                            <td scope="col"><a class="btn btn-primary" href="index.php?tabla=usuarios&accion=ver&id=<?= $usuario->id ?>"><i class="fa-solid fa-sitemap"></i> Ver Usuario</a></td>
                     <?php
                     endforeach;
                     ?>
                 </tbody>
             </table>
+            <a href="index.php?tabla=usuarios&accion=administrar&id=<?= $usuario->nombre ?>" class="btn btn-primary">Volver a Inicio</a>
         <?php
         }
         ?>
