@@ -1,5 +1,5 @@
 <?php
-require_once "models/digimonessModel.php";
+require_once "models/digimonesModel.php";
 require_once "assets/php/funciones.php";
 
 class DigimonesController
@@ -50,12 +50,12 @@ class DigimonesController
         if ($id == null) {
             $_SESSION["errores"] = $errores;
             $_SESSION["datos"] = $arrayUser;
-            header("location:index.php?accion=crear&tabla=user&error=true&id={$id}");
+            header("location:index.php?accion=crear&tabla=digimones&error=true&id={$id}");
             exit();
         } else {
             unset($_SESSION["errores"]);
             unset($_SESSION["datos"]);
-            header("location:index.php?accion=ver&tabla=user&id=" . $id);
+            header("location:index.php?accion=ver&tabla=digimones&id=" . $id);
             exit();
         }
     }
@@ -65,22 +65,17 @@ class DigimonesController
         return $this->model->read($id);
     }
 
-    public function listar($comprobarSiEsBorrable = false)
+    public function listar()
     {
-        $users = $this->model->readAll();
-        if ($comprobarSiEsBorrable) {
-            foreach ($users as $user) {
-                $user->esBorrable = $this->esBorrable($user);
-            }
-        }
-        return $users;
+        $digimones = $this->model->readAll();
+        return $digimones;
     }
 
     public function borrar(int $id): void
     {
         $usuario = $this->ver($id);
         $borrado = $this->model->delete($id);
-        $redireccion = "location:index.php?accion=listar&tabla=user&evento=borrar&id={$id}&usuario={$usuario->usuario}&nombre={$usuario->name}";
+        $redireccion = "location:index.php?accion=listar&tabla=digimones&evento=borrar&id={$id}&usuario={$usuario->usuario}&nombre={$usuario->name}";
 
         if ($borrado == false) $redireccion .=  "&error=true";
         header($redireccion);
@@ -145,25 +140,9 @@ class DigimonesController
         //vuelvo a la pagina donde estaba
     }
 
-    public function buscar(string $campo = "usuario", string $metodo = "contiene", string $texto = "", bool  $comprobarSiEsBorrable = false): array
+    public function buscar(string $campo = "usuario", string $metodo = "contiene", string $texto = ""): array
     {
         $users = $this->model->search($campo, $metodo, $texto);
-        if ($comprobarSiEsBorrable) {
-            foreach ($users as $user) {
-                $user->esBorrable = $this->esBorrable($user);
-            }
-        }
         return $users;
-    }
-
-    private function esBorrable(stdClass $user): bool
-    {
-        $projectController = new ProjectsController();
-        $borrable = true;
-        // si ese usuario está en algún proyecto, No se puede borrar.
-        if (count($projectController->buscar("user_id", "igual", $user->id)) > 0)
-            $borrable = false;
-
-        return $borrable;
     }
 }

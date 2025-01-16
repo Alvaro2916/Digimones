@@ -25,11 +25,6 @@ if (isset($_REQUEST["error"])) {
         <?= isset($errores["nombre"]) ? '<div class="alert alert-danger" role="alert">' . DibujarErrores($errores, "nombre") . '</div>' : ""; ?>
       </div>
       <div class="form-group">
-        <label for="imagen">Imagen</label>
-        <input type="imagen" required class="form-control" id="imagen" name="imagen" value="<?= $_SESSION["datos"]["imagen"] ?? "" ?>" placeholder="Imagen">
-        <?= isset($errores["imagen"]) ? '<div class="alert alert-danger" role="alert">' . DibujarErrores($errores, "imagen") . '</div>' : ""; ?>
-      </div>
-      <div class="form-group">
         <label for="ataque">Ataque </label>
         <input type="text" class="form-control" id="ataque" name="ataque" placeholder="Introduce el ataque" value="<?= $_SESSION["datos"]["ataque"] ?? "" ?>">
         <?= isset($errores["ataque"]) ? '<div class="alert alert-danger" role="alert">' . DibujarErrores($errores, "ataque") . '</div>' : ""; ?>
@@ -55,9 +50,9 @@ if (isset($_REQUEST["error"])) {
         <?= isset($errores["tipo"]) ? '<div class="alert alert-danger" role="alert">' . DibujarErrores($errores, "tipo") . '</div>' : ""; ?>
       </div>
       <div class="form-group">
-        <label for="tipo">Sube la imagen </label>
-        <input type="file" class="form-control" id="tipo" name="tipo" value="<?= $_SESSION["datos"]["tipo"] ?? "" ?>" placeholder="Introduce el tipo">
-        <?= isset($errores["tipo"]) ? '<div class="alert alert-danger" role="alert">' . DibujarErrores($errores, "tipo") . '</div>' : ""; ?>
+        <label for="imagen">Sube la imagen </label>
+        <input type="file" class="form-control" id="imagen" name="imagen" value="<?= $_SESSION["datos"]["imagen"] ?? "" ?>" placeholder="Introduce la Imagen">
+        <?= isset($errores["imagen"]) ? '<div class="alert alert-danger" role="alert">' . DibujarErrores($errores, "imagen") . '</div>' : ""; ?>
       </div>
       <button type="submit" class="btn btn-primary">Guardar</button>
       <a class="btn btn-danger" href="index.php">Cancelar</a>

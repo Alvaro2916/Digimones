@@ -53,10 +53,10 @@ class DigimonesModel
     }
 
     public function readAll(): array {
-        $sentencia = $this->conexion->prepare("SELECT * FROM usuarios;");
+        $sentencia = $this->conexion->prepare("SELECT * FROM digimones;");
         $resultado = $sentencia->execute();
-        $usuarios = $sentencia->fetchAll(PDO::FETCH_OBJ);
-        return $usuarios;
+        $digimones = $sentencia->fetchAll(PDO::FETCH_OBJ);
+        return $digimones;
     }
 
     public function delete (int $id):bool {

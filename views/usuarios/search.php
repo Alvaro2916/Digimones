@@ -90,7 +90,7 @@ if (isset($_REQUEST["evento"])) {
                     ?>
                 </tbody>
             </table>
-            <a href="index.php?tabla=usuarios&accion=administrar&id=<?= $usuario->nombre ?>" class="btn btn-primary">Volver a Inicio</a>
+            <a href="index.php?tabla=usuarios&accion=administrar" class="btn btn-primary">Volver a Inicio</a>
         <?php
         }
         ?>

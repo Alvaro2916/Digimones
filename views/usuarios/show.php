@@ -27,7 +27,7 @@ $usuarios = $controlador->ver($id);
                     Partidas Perdidas: <?= $usuarios->partidas_perdidas ?><br>
                     Partidas Totales: <?= $usuarios->partidas_totales ?><br>
                 </p>
-                <a href="index.php?tabla=usuarios&accion=administrar&id=<?= $usuarios->nombre ?>" class="btn btn-primary">Volver a Inicio</a>
+                <a href="index.php?tabla=usuarios&accion=administrar" class="btn btn-primary">Volver a Inicio</a>
             </div>
         </div>
 </main>
