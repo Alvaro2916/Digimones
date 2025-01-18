@@ -84,6 +84,8 @@ if (isset($_REQUEST["evento"])) {
                         <th scope="col">Defensa</th>
                         <th scope="col">Nivel</th>
                         <th scope="col">Tipo</th>
+                        <th scope="col">Borrar</th>
+                        <th scope="col">Editar</th>
                     </tr>
                 </thead>
                 <tbody>
