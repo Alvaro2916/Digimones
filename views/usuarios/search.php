@@ -1,5 +1,5 @@
 <?php
-require_once "controllers/usuariosController.php";
+require_once "controllers/digimonesController.php";
 
 $mensaje = "";
 $clase = "alert alert-success";

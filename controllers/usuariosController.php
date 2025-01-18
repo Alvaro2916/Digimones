@@ -56,6 +56,24 @@ class UsuariosController
             unset($_SESSION["errores"]);
             unset($_SESSION["datos"]);
             header("location:index.php?accion=ver&tabla=user&id=" . $id);
+
+            $directorio = "assets/img/usuarios/" . $_REQUEST["nombre"] . "/";
+                if (!file_exists($directorio)) {
+                    mkdir($directorio, 0777, true);
+                }
+
+            $nombreTemp = $_FILES["imagen"]["tmp_name"];
+            $nombreImagen = $_FILES["imagen"]["name"];
+
+
+            if (empty($_FILES["imagen"]["tmp_name"])) {
+                move_uploaded_file($nombreTemp, $directorio . $nombreImagen);
+            } else {              
+                $imagenPorDefecto = "assets/img/usuarios/default.png";
+                $destino = $directorio . "default.png";
+                copy($imagenPorDefecto, $destino);
+            }
+
             exit();
         }
     }
@@ -65,7 +83,8 @@ class UsuariosController
         return $this->model->read($id);
     }
 
-    public function listar() {
+    public function listar()
+    {
         $users = $this->model->readAll();
         return $users;
     }

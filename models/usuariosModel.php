@@ -12,12 +12,12 @@ class UsuariosModel
     public function insert(array $user): ?int //devuelve entero o null
     {
         try{
-            $sql = "INSERT INTO usuarios(nombre, pfp, partidas_ganadas, partidas_perdidas, partidas_totales, permisos, contrasenya, digi_evu)  
-            VALUES (:nombre, :pfp, :partidas_ganadas, :partidas_perdidas, :partidas_totales, :permisos, :contrasenya, :digi_evu);";
+            $sql = "INSERT INTO usuarios(nombre, imagen, partidas_ganadas, partidas_perdidas, partidas_totales, permisos, contrasenya, digi_evu)  
+            VALUES (:nombre, :imagen, :partidas_ganadas, :partidas_perdidas, :partidas_totales, :permisos, :contrasenya, :digi_evu);";
             $sentencia = $this->conexion->prepare($sql);
             $arrayDatos = [
                 ":nombre"=>$user["nombre"],
-                ":pfp"=>$user["pfp"],
+                ":imagen"=>$user["imagen"]["name"],
                 ":partidas_ganadas"=>$user["partidas_ganadas"],
                 ":partidas_perdidas"=>$user["partidas_perdidas"],
                 ":partidas_totales"=>$user["partidas_totales"],

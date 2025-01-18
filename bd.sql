@@ -2,8 +2,8 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: localhost
--- Tiempo de generación: 14-01-2025 a las 11:23:28
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 18-01-2025 a las 13:39:49
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -31,12 +31,24 @@ CREATE TABLE `digimones` (
   `id` int(11) NOT NULL,
   `nombre` varchar(255) NOT NULL,
   `imagen` varchar(255) NOT NULL,
+  `imagenV` varchar(255) NOT NULL,
+  `imagenD` varchar(255) NOT NULL,
   `ataque` int(11) NOT NULL,
   `defensa` int(11) NOT NULL,
   `nivel` int(11) NOT NULL DEFAULT 1,
   `evo_id` int(11) NOT NULL,
-  `tipo` int(11) NOT NULL
+  `tipo` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `digimones`
+--
+
+INSERT INTO `digimones` (`id`, `nombre`, `imagen`, `imagenV`, `imagenD`, `ataque`, `defensa`, `nivel`, `evo_id`, `tipo`) VALUES
+(1, 'sdfr', '8f39df25cd2944ed11be02c3e98ee7a1.jpg', '', '', 1, 1, 1, 1, 'vacuna'),
+(7, '1asf', '428627950_3596220243932349_1074481071812024296_n.jpg', '', '', 1, 1, 1, 1, 'planta'),
+(8, 'sav', '711a7693e211a4452e41120a17dc293c.jpg', '', '', 0, 1, 1, 1, 'vacuna'),
+(9, 'fbdsv', 'bb193d3c2af2d12905197222b95e635d.jpg', '428627950_3596220243932349_1074481071812024296_n.jpg', '8a31fdd1b57afb650105e1f7fca17415.jpg', 1, 1, 1, 1, 'planta');
 
 -- --------------------------------------------------------
 
@@ -72,7 +84,7 @@ CREATE TABLE `equipo` (
 CREATE TABLE `usuarios` (
   `id` int(11) NOT NULL,
   `nombre` varchar(255) NOT NULL,
-  `pfp` varchar(255) DEFAULT NULL,
+  `imagen` varchar(255) DEFAULT NULL,
   `partidas_ganadas` int(11) NOT NULL DEFAULT 0,
   `partidas_perdidas` int(11) NOT NULL DEFAULT 0,
   `partidas_totales` int(11) NOT NULL DEFAULT 0,
@@ -85,9 +97,10 @@ CREATE TABLE `usuarios` (
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `nombre`, `pfp`, `partidas_ganadas`, `partidas_perdidas`, `partidas_totales`, `permisos`, `contrasenya`, `digi_evu`) VALUES
+INSERT INTO `usuarios` (`id`, `nombre`, `imagen`, `partidas_ganadas`, `partidas_perdidas`, `partidas_totales`, `permisos`, `contrasenya`, `digi_evu`) VALUES
 (1, 'admin', NULL, 0, 0, 0, 1, '$2y$10$dIBvy.QseqFNzP7GErgSF.P7coKdx/onIiO4QNiiLnbwYyPMxOUFm', 0),
-(2, 'ana', NULL, 0, 0, 0, 0, '$2y$10$w4HeBV2bvsRvlRG7Om0vweL6UZvGRtfjw0NAT0b2M/Hfu45HSvWge', 0);
+(2, 'ana', NULL, 0, 0, 0, 0, '$2y$10$w4HeBV2bvsRvlRG7Om0vweL6UZvGRtfjw0NAT0b2M/Hfu45HSvWge', 0),
+(3, 'luis', 'default.png', 0, 0, 0, 0, 'luis', 0);
 
 --
 -- Índices para tablas volcadas
@@ -137,7 +150,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `digimones`
 --
 ALTER TABLE `digimones`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `digimones_inv`
@@ -155,7 +168,7 @@ ALTER TABLE `equipo`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Restricciones para tablas volcadas

@@ -16,6 +16,7 @@ $arrayUser = [
     "password" => $_REQUEST["password"],
     "name" => $_REQUEST["name"],
     "email" => $_REQUEST["email"],
+    "imagen" => $_FILES["imagen"],
 ];
 
 //pagina invisible

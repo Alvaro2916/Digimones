@@ -9,22 +9,28 @@ if (!isset($_REQUEST['id'])) {
 }
 $id = $_REQUEST['id'];
 $controlador = new DigimonesController();
-$user = $controlador->ver($id);
+$digi = $controlador->ver($id);
 ?>
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h3">Ver Usuario</h1>
+        <h1 class="h3">Ver Digimon</h1>
     </div>
     <div id="contenido">
         <div class="card"  style="width: 18rem;">
             <div >
-                <h5 class="card-title">ID: <?= $user->id ?> <br>NOMBRE: <?= $user->name ?></h5>
+                <h5 class="card-title">ID: <?= $digi->id ?> <br>NOMBRE: <?= $digi->nombre ?></h5>
                 <p class="card-text">
-                    Usuario: <?= $user->usuario ?> <br>
-                    Nombre: <?= $user->name ?><br>
-                    Email: <?= $user->email ?><br>
+                    <img src=assets/img/digimones/<?= $digi->nombre."/".$digi->imagen ?> width="100px"><br>
+                    <img src=assets/img/digimones/<?= $digi->nombre."/".$digi->imagenV ?> width="100px"><br>
+                    <img src=assets/img/digimones/<?= $digi->nombre."/".$digi->imagenD ?> width="100px"><br>
+                    Nombre: <?= $digi->nombre ?><br>
+                    Nivel: <?= $digi->nivel ?><br>
+                    Tipo: <?= $digi->tipo ?><br>
+                    Ataque: <?= $digi->ataque ?> - 
+                    Defensa: <?= $digi->defensa ?><br>
+                    ID de la evolución: <?= $digi->evo_id ?><br>
                 </p>
-                <a href="index.php" class="btn btn-primary">Volver a Inicio</a>
+                <a href="index.php?tabla=usuarios&accion=administrar" class="btn btn-primary">Volver a Inicio</a>
             </div>
         </div>
 </main>

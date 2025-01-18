@@ -18,7 +18,7 @@ if (isset($_REQUEST["error"])) {
   </div>
   <div id="contenido">
     <div class="alert alert-danger <?= $visibilidad ?>"><?= $cadena ?></div>
-    <form action="index.php?tabla=user&accion=guardar&evento=crear" method="POST">
+    <form action="index.php?tabla=digimones&accion=guardar&evento=crear" method="POST" enctype="multipart/form-data">
       <div class="form-group">
         <label for="nombre">Nombre Digimon </label>
         <input type="text" required class="form-control" id="nombre" name="nombre" value="<?= $_SESSION["datos"]["nombre"] ?? "" ?>" aria-describedby="nombre" placeholder="Introduce Digimon">
@@ -50,9 +50,19 @@ if (isset($_REQUEST["error"])) {
         <?= isset($errores["tipo"]) ? '<div class="alert alert-danger" role="alert">' . DibujarErrores($errores, "tipo") . '</div>' : ""; ?>
       </div>
       <div class="form-group">
-        <label for="imagen">Sube la imagen </label>
+        <label for="imagen">Sube la imagen Principal </label>
         <input type="file" class="form-control" id="imagen" name="imagen" value="<?= $_SESSION["datos"]["imagen"] ?? "" ?>" placeholder="Introduce la Imagen">
         <?= isset($errores["imagen"]) ? '<div class="alert alert-danger" role="alert">' . DibujarErrores($errores, "imagen") . '</div>' : ""; ?>
+      </div>
+      <div class="form-group">
+        <label for="imagenV">Sube la imagen de Victoria</label>
+        <input type="file" class="form-control" id="imagenV" name="imagenV" value="<?= $_SESSION["datos"]["imagenV"] ?? "" ?>" placeholder="Introduce la Imagen de victoria">
+        <?= isset($errores["imagenV"]) ? '<div class="alert alert-danger" role="alert">' . DibujarErrores($errores, "imagenV") . '</div>' : ""; ?>
+      </div>
+      <div class="form-group">
+        <label for="imagenD">Sube la imagen de Derrota</label>
+        <input type="file" class="form-control" id="imagenD" name="imagenD" value="<?= $_SESSION["datos"]["imagenD"] ?? "" ?>" placeholder="Introduce la Imagen de derrota">
+        <?= isset($errores["imagenD"]) ? '<div class="alert alert-danger" role="alert">' . DibujarErrores($errores, "imagenD") . '</div>' : ""; ?>
       </div>
       <button type="submit" class="btn btn-primary">Guardar</button>
       <a class="btn btn-danger" href="index.php">Cancelar</a>

@@ -34,6 +34,8 @@ $vista = router();
             "crearDigimon" => "views/digimones/create.php",
             "borrarDigimon" => "views/digimones/delete.php",
             "editarDigimon" => "views/digimones/edit.php",
+            "buscarDigimon" => "views/digimones/search.php",
+            "verDigimon" => "views/digimones/show.php",
         ];
 
         foreach ($vistasArray as $key => $vistaAlt) {

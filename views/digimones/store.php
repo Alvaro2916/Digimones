@@ -1,8 +1,8 @@
 <?php
 require_once "controllers/digimonesController.php";
 //recoger datos
-if (!isset($_REQUEST["usuario"])) {
-    header('Location:index.php?tabla=user&accion=crear');
+if (!isset($_REQUEST["nombre"])) {
+    header('Location:index.php?tabla=digimones&accion=crear');
     exit();
 }
 
@@ -10,12 +10,15 @@ $id = ($_REQUEST["id"]) ?? ""; //el id me servirá en editar
 
 $arrayUser = [
     "id" => $id,
-    "usuario" => $_REQUEST["usuario"],
-    "usuarioOriginal" => ($_REQUEST["usuarioOriginal"]) ?? "",
-    "emailOriginal" => ($_REQUEST["emailOriginal"]) ?? "",
-    "password" => $_REQUEST["password"],
-    "name" => $_REQUEST["name"],
-    "email" => $_REQUEST["email"],
+    "nombre" => $_REQUEST["nombre"],
+    "imagen" => $_FILES["imagen"],
+    "imagenV" => $_FILES["imagenV"],
+    "imagenD" => $_FILES["imagenD"],
+    "ataque" => $_REQUEST["ataque"],
+    "defensa" => $_REQUEST["defensa"],
+    "nivel" => $_REQUEST["nivel"] ?? "1",
+    "evo_id" => $_REQUEST["evo_id"],
+    "tipo" => $_REQUEST["tipo"],
 ];
 
 //pagina invisible

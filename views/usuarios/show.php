@@ -22,7 +22,7 @@ $usuarios = $controlador->ver($id);
                 <p class="card-text">
                     ID: <?= $usuarios->id ?> <br>
                     Nombre: <?= $usuarios->nombre ?><br>
-                    Foto de Perfil: <?= $usuarios->pfp ?><br>
+                    <img src=assets/img/usuarios/<?= $usuarios->nombre."/".$usuarios->imagen ?> width="100px"><br>
                     Partidas Gandas: <?= $usuarios->partidas_ganadas ?><br>
                     Partidas Perdidas: <?= $usuarios->partidas_perdidas ?><br>
                     Partidas Totales: <?= $usuarios->partidas_totales ?><br>

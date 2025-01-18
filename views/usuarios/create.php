@@ -40,6 +40,11 @@ if (isset($_REQUEST["error"])) {
         <input type="text" class="form-control" id="email" name="email" value="<?= $_SESSION["datos"]["email"] ?? "" ?>" placeholder="Introduce tu email">
         <?= isset($errores["email"]) ? '<div class="alert alert-danger" role="alert">' . DibujarErrores($errores, "email") . '</div>' : ""; ?>
       </div>
+      <div class="form-group">
+        <label for="imagen">Sube tu foto de perfil (opcional) </label>
+        <input type="file" class="form-control" id="imagen" name="imagen" value="<?= $_SESSION["datos"]["imagen"] ?? "" ?>" placeholder="Introduce la Imagen (opcional)">
+        <?= isset($errores["imagen"]) ? '<div class="alert alert-danger" role="alert">' . DibujarErrores($errores, "imagen") . '</div>' : ""; ?>
+      </div>
       <button type="submit" class="btn btn-primary">Guardar</button>
       <a class="btn btn-danger" href="index.php">Cancelar</a>
     </form>

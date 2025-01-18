@@ -1,12 +1,24 @@
 <?php
-function is_valid_dni(string $dni): bool
+function is_valid_tipo(string $tipo): bool
 {
-    $letter = substr($dni, -1);
-    $numbers = substr($dni, 0, -1);
-    $patron = "/[0-9]{7,8}[A-Z]/";
-    if (preg_match($patron, $dni) && substr("TRWAGMYFPDXBNJZSQVHLCKE", $numbers % 23, 1) == $letter && strlen($letter) == 1 ) {
-        return true;
+    switch ($tipo) {
+        case 'vacuna':
+            return true;
+            break;
+        case 'virus':
+            return true;
+            break;
+        case 'animal':
+            return true;
+            break;
+        case 'planta':
+            return true;
+            break;
+        case 'elemental':
+            return true;
+            break;
     }
+
     return false;
 }
 
@@ -23,8 +35,7 @@ function HayNulos(array $camposNoNulos, array $arrayDatos): array
 
 function existeValor(array $array, string $campo, mixed $valor): bool
 {
-        return in_array ($array[$campo],$valor);
-
+    return in_array($array[$campo], $valor);
 }
 
 function DibujarErrores($errores, $campo)

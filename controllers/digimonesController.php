@@ -11,7 +11,7 @@ class DigimonesController
         $this->model = new DigimonesModel();
     }
 
-    public function crear(array $arrayUser): void
+    public function crear(array $arrayDigi): void
     {
         $error = false;
         $errores = [];
@@ -20,14 +20,16 @@ class DigimonesController
         $_SESSION["datos"] = [];
 
         // ERRORES DE TIPO
-        if (!is_valid_email($arrayUser["email"])) {
+        $arrayDigi["tipo"] = strtolower($arrayDigi["tipo"]);
+
+        if (!is_valid_tipo($arrayDigi["tipo"])) {
             $error = true;
-            $errores["email"][] = "El email tiene un formato incorrecto";
+            $errores["tipo"][] = "El tipo tiene un formato incorrecto";
         }
 
         //campos NO VACIOS
-        $arrayNoNulos = ["email", "password", "usuario"];
-        $nulos = HayNulos($arrayNoNulos, $arrayUser);
+        $arrayNoNulos = ["nombre", "imagen", "ataque", "defensa", "evo_id", "tipo", "imagenV", "imagenD"];
+        $nulos = HayNulos($arrayNoNulos, $arrayDigi);
         if (count($nulos) > 0) {
             $error = true;
             for ($i = 0; $i < count($nulos); $i++) {
@@ -36,25 +38,47 @@ class DigimonesController
         }
 
         //CAMPOS UNICOS
-        $arrayUnicos = ["email", "usuario"];
+        $arrayUnicos = ["nombre"];
 
         foreach ($arrayUnicos as $CampoUnico) {
-            if ($this->model->exists($CampoUnico, $arrayUser[$CampoUnico])) {
-                $errores[$CampoUnico][] = "El {$arrayUser[$CampoUnico]} de {$CampoUnico} ya existe";
+            if ($this->model->exists($CampoUnico, $arrayDigi[$CampoUnico])) {
+                $errores[$CampoUnico][] = "El {$arrayDigi[$CampoUnico]} de {$CampoUnico} ya existe";
                 $error = true;
             }
         }
         $id = null;
-        if (!$error) $id = $this->model->insert($arrayUser);
+        if (!$error) $id = $this->model->insert($arrayDigi);
 
         if ($id == null) {
             $_SESSION["errores"] = $errores;
-            $_SESSION["datos"] = $arrayUser;
+            $_SESSION["datos"] = $arrayDigi;
             header("location:index.php?accion=crear&tabla=digimones&error=true&id={$id}");
             exit();
         } else {
             unset($_SESSION["errores"]);
             unset($_SESSION["datos"]);
+
+            $directorio = "assets/img/digimones/" . $_REQUEST["nombre"] . "/";
+            if (!file_exists($directorio)) {
+                mkdir($directorio, 0777, true);
+            }
+
+            $nombreTemp = $_FILES["imagen"]["tmp_name"];
+            $nombreImagen = $_FILES["imagen"]["name"];
+
+            move_uploaded_file($nombreTemp, $directorio . $nombreImagen);
+
+            $nombreTemp = $_FILES["imagenV"]["tmp_name"];
+            $nombreImagen = $_FILES["imagenV"]["name"];
+
+            move_uploaded_file($nombreTemp, $directorio . $nombreImagen);
+
+
+            $nombreTemp = $_FILES["imagenD"]["tmp_name"];
+            $nombreImagen = $_FILES["imagenD"]["name"];
+
+            move_uploaded_file($nombreTemp, $directorio . $nombreImagen);
+
             header("location:index.php?accion=ver&tabla=digimones&id=" . $id);
             exit();
         }
@@ -82,7 +106,7 @@ class DigimonesController
         exit();
     }
 
-    public function editar(string $id, array $arrayUser): void
+    public function editar(string $id, array $arrayDigi): void
     {
         $error = false;
         $errores = [];
@@ -92,14 +116,14 @@ class DigimonesController
         }
 
         // ERRORES DE TIPO
-        if (!is_valid_email($arrayUser["email"])) {
+        if (!is_valid_email($arrayDigi["email"])) {
             $error = true;
             $errores["email"][] = "El email tiene un formato incorrecto";
         }
 
         //campos NO VACIOS
         $arrayNoNulos = ["email", "password", "usuario"];
-        $nulos = HayNulos($arrayNoNulos, $arrayUser);
+        $nulos = HayNulos($arrayNoNulos, $arrayDigi);
         if (count($nulos) > 0) {
             $error = true;
             for ($i = 0; $i < count($nulos); $i++) {
@@ -109,30 +133,30 @@ class DigimonesController
 
         //CAMPOS UNICOS
         $arrayUnicos = [];
-        if ($arrayUser["email"] != $arrayUser["emailOriginal"]) $arrayUnicos[] = "email";
-        if ($arrayUser["usuario"] != $arrayUser["usuarioOriginal"]) $arrayUnicos[] = "usuario";
+        if ($arrayDigi["email"] != $arrayDigi["emailOriginal"]) $arrayUnicos[] = "email";
+        if ($arrayDigi["usuario"] != $arrayDigi["usuarioOriginal"]) $arrayUnicos[] = "usuario";
 
         foreach ($arrayUnicos as $CampoUnico) {
-            if ($this->model->exists($CampoUnico, $arrayUser[$CampoUnico])) {
-                $errores[$CampoUnico][] = "El {$CampoUnico}  {$arrayUser[$CampoUnico]}  ya existe";
+            if ($this->model->exists($CampoUnico, $arrayDigi[$CampoUnico])) {
+                $errores[$CampoUnico][] = "El {$CampoUnico}  {$arrayDigi[$CampoUnico]}  ya existe";
                 $error = true;
             }
         }
 
         //todo correcto
         $editado = false;
-        if (!$error) $editado = $this->model->edit($id, $arrayUser);
+        if (!$error) $editado = $this->model->edit($id, $arrayDigi);
 
         if ($editado == false) {
             $_SESSION["errores"] = $errores;
-            $_SESSION["datos"] = $arrayUser;
+            $_SESSION["datos"] = $arrayDigi;
             $redireccion = "location:index.php?accion=editar&tabla=user&evento=modificar&id={$id}&error=true";
         } else {
             //vuelvo a limpiar por si acaso
             unset($_SESSION["errores"]);
             unset($_SESSION["datos"]);
             //este es el nuevo numpieza
-            $id = $arrayUser["id"];
+            $id = $arrayDigi["id"];
             $redireccion = "location:index.php?accion=editar&tabla=user&evento=modificar&id={$id}";
         }
         header($redireccion);

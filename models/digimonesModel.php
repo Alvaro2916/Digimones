@@ -9,21 +9,22 @@ class DigimonesModel
         $this->conexion = db::conexion();
     }
 
-    public function insert(array $user): ?int //devuelve entero o null
+    public function insert(array $digi): ?int //devuelve entero o null
     {
         try{
-            $sql = "INSERT INTO usuarios(nombre, pfp, partidas_ganadas, partidas_perdidas, partidas_totales, permisos, contrasenya, digi_evu)  
-            VALUES (:nombre, :pfp, :partidas_ganadas, :partidas_perdidas, :partidas_totales, :permisos, :contrasenya, :digi_evu);";
+            $sql = "INSERT INTO digimones(nombre, imagen, imagenV, imagenD, ataque, defensa, nivel, evo_id, tipo)  
+            VALUES (:nombre, :imagen, :imagenV, :imagenD, :ataque, :defensa, :nivel, :evo_id, :tipo);";
             $sentencia = $this->conexion->prepare($sql);
             $arrayDatos = [
-                ":nombre"=>$user["nombre"],
-                ":pfp"=>$user["pfp"],
-                ":partidas_ganadas"=>$user["partidas_ganadas"],
-                ":partidas_perdidas"=>$user["partidas_perdidas"],
-                ":partidas_totales"=>$user["partidas_totales"],
-                ":permisos"=>$user["permisos"],
-                ":contrasenya"=>password_verify($user["contrasenya"], PASSWORD_DEFAULT),
-                ":digi_evu"=>$user["digi_evu"],
+                ":nombre"=>$digi["nombre"],
+                ":imagen"=>$digi["imagen"]["name"],
+                ":imagenV"=>$digi["imagenV"]["name"],
+                ":imagenD"=>$digi["imagenD"]["name"],
+                ":ataque"=>$digi["ataque"],
+                ":defensa"=>$digi["defensa"],
+                ":nivel"=>$digi["nivel"],
+                ":evo_id"=>$digi["evo_id"],
+                ":tipo"=>$digi["tipo"],
             ];
             $resultado = $sentencia->execute($arrayDatos);
 
@@ -39,7 +40,7 @@ class DigimonesModel
     }
 
     public function read(int $id): ?stdClass {
-        $sentencia = $this->conexion->prepare("SELECT * FROM usuarios WHERE id=:id");
+        $sentencia = $this->conexion->prepare("SELECT * FROM digimones WHERE id=:id");
         $arrayDatos = [":id" => $id];
         $resultado = $sentencia->execute($arrayDatos);
         // ojo devuelve true si la consulta se ejecuta correctamente
