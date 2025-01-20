@@ -40,7 +40,6 @@ $vista = router();
 
         foreach ($vistasArray as $key => $vistaAlt) {
             if ($vista == $vistaAlt) {
-                echo $vistaAlt;
                 require_once "views/layout/navbar.php";
                 require_once($vista);
             }
