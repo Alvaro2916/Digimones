@@ -31,7 +31,7 @@ if ($digimon == null) {
 ?>
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h3">Editar Usuario <?= $_SESSION["datos"]["usuario"] ?? $digimon->usuario ?> con Id: <?= $id ?> </h1>
+        <h1 class="h3">Editar Digimon <?= $_SESSION["datos"]["usuario"] ?? $digimon->usuario ?> con Id: <?= $id ?> </h1>
     </div>
     <div id="contenido">
         <div id="msg" name="msg" class="<?= $clase ?>" <?= $visibilidad ?>> <?= $mensaje ?> </div>
@@ -42,24 +42,51 @@ if ($digimon == null) {
             <form action="index.php?tabla=user&accion=guardar&evento=modificar" method="POST">
                 <input type="hidden" id="id" name="id" value="<?= $digimon->id ?>">
                 <div class="form-group">
-                    <label for="usuario">Usuario </label>
-                    <input type="text" required class="form-control" id="usuario" name="usuario" aria-describedby="usuario" value="<?= $_SESSION["datos"]["usuario"] ?? $digimon->usuario ?>">
-                    <input type="hidden" id="usuarioOriginal" name="usuarioOriginal" value="<?= $digimon->usuario ?>">
-                    <small id="usuario" class="form-text text-muted">Compartir tu usuario lo hace menos seguro.</small>
-                    <?= isset($errores["usuario"]) ? '<div class="alert alert-danger" role="alert">' . DibujarErrores($errores, "usuario") . '</div>' : ""; ?>
+                    <label for="nombre">Digimon </label>
+                    <input type="text" required class="form-control" id="nombre" name="nombre" aria-describedby="nombre" value="<?= $_SESSION["datos"]["nombre"] ?? $digimon->nombre ?>">
+                    <input type="hidden" id="nombreOriginal" name="nombreOriginal" value="<?= $digimon->nombre ?>">
+                    <?= isset($errores["nombre"]) ? '<div class="alert alert-danger" role="alert">' . DibujarErrores($errores, "nombre") . '</div>' : ""; ?>
                 </div>
                 <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" required class="form-control" id="password" name="password" value="<?= $_SESSION["datos"]["password"] ?? $digimon->password ?>">
-                    <?= isset($errores["password"]) ? '<div class="alert alert-danger" role="alert">' . DibujarErrores($errores, "password") . '</div>' : ""; ?>
+                    <label for="imagen">Imagen Normal</label>
+                    <input type="imagen" required class="form-control" id="imagen" name="imagen" value="<?= $_SESSION["datos"]["imagen"] ?? $digimon->imagen ?>">
+                    <?= isset($errores["imagen"]) ? '<div class="alert alert-danger" role="alert">' . DibujarErrores($errores, "imagen") . '</div>' : ""; ?>
                 </div>
                 <div class="form-group">
-                    <label for="name">Nombre </label>
-                    <input type="text" class="form-control" id="name" name="name" value="<?= $_SESSION["datos"]["name"] ?? $digimon->name ?>">
-                    <?= isset($errores["name"]) ? '<div class="alert alert-danger" role="alert">' . DibujarErrores($errores, "name") . '</div>' : ""; ?>
+                    <label for="imagenV">Imagen Victoria</label>
+                    <input type="imagenV" required class="form-control" id="imagenV" name="imagenV" value="<?= $_SESSION["datos"]["imagenV"] ?? $digimon->imagenV ?>">
+                    <?= isset($errores["imagenV"]) ? '<div class="alert alert-danger" role="alert">' . DibujarErrores($errores, "imagenV") . '</div>' : ""; ?>
                 </div>
                 <div class="form-group">
-                    <label for="email">Email </label>
+                    <label for="imagenD">Imagen Derrota</label>
+                    <input type="imagenD" required class="form-control" id="imagenD" name="imagenD" value="<?= $_SESSION["datos"]["imagenD"] ?? $digimon->imagenD ?>">
+                    <?= isset($errores["imagenD"]) ? '<div class="alert alert-danger" role="alert">' . DibujarErrores($errores, "imagenD") . '</div>' : ""; ?>
+                </div>
+                <div class="form-group">
+                    <label for="ataque">Ataque </label>
+                    <input type="text" class="form-control" id="ataque" name="ataque" value="<?= $_SESSION["datos"]["ataque"] ?? $digimon->ataque ?>">
+                    <?= isset($errores["ataque"]) ? '<div class="alert alert-danger" role="alert">' . DibujarErrores($errores, "ataque") . '</div>' : ""; ?>
+                </div>
+                <div class="form-group">
+                    <label for="email">Defensa </label>
+                    <input type="text" class="form-control" id="email" name="email" value="<?= $_SESSION["datos"]["email"] ?? $digimon->email ?>">
+                    <input type="hidden" id="emailOriginal" name="emailOriginal" value="<?= $digimon->email ?>">
+                    <?= isset($errores["email"]) ? '<div class="alert alert-danger" role="alert">' . DibujarErrores($errores, "email") . '</div>' : ""; ?>
+                </div>
+                <div class="form-group">
+                    <label for="email">Nivel </label>
+                    <input type="text" class="form-control" id="email" name="email" value="<?= $_SESSION["datos"]["email"] ?? $digimon->email ?>">
+                    <input type="hidden" id="emailOriginal" name="emailOriginal" value="<?= $digimon->email ?>">
+                    <?= isset($errores["email"]) ? '<div class="alert alert-danger" role="alert">' . DibujarErrores($errores, "email") . '</div>' : ""; ?>
+                </div>
+                <div class="form-group">
+                    <label for="email">Defensa </label>
+                    <input type="text" class="form-control" id="email" name="email" value="<?= $_SESSION["datos"]["email"] ?? $digimon->email ?>">
+                    <input type="hidden" id="emailOriginal" name="emailOriginal" value="<?= $digimon->email ?>">
+                    <?= isset($errores["email"]) ? '<div class="alert alert-danger" role="alert">' . DibujarErrores($errores, "email") . '</div>' : ""; ?>
+                </div>
+                <div class="form-group">
+                    <label for="email">Tipo </label>
                     <input type="text" class="form-control" id="email" name="email" value="<?= $_SESSION["datos"]["email"] ?? $digimon->email ?>">
                     <input type="hidden" id="emailOriginal" name="emailOriginal" value="<?= $digimon->email ?>">
                     <?= isset($errores["email"]) ? '<div class="alert alert-danger" role="alert">' . DibujarErrores($errores, "email") . '</div>' : ""; ?>

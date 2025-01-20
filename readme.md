@@ -3,7 +3,7 @@ Cosas pendientes:
 - Admnistrar:
     - Mover el boton definir evoluciones al ver del listar digimones. (hecho)
     - Mover los botones de borrar y editar digimones al ver del listar digimones. (hecho)
-    - Editar y borrar usuarios. 
+    - Editar y borrar usuarios. (hecho pero no funcionan xd)
     - Cambiar el tipo y el nivel a select/option.
     - Arreglar redireccionamiento de crear digimones (cancelar).
     - Corregir Buscar digimones del buscar digimones.

@@ -2,7 +2,7 @@
 require_once "controllers/usuariosController.php";
 //recoger datos
 if (!isset($_REQUEST["id"])) {
-    header('location:index.php?tabla=user&accion=listar');
+    header('location:index.php?tabla=userarios&accion=listar');
     unset($_SESSION["datos"]);
     unset($_SESSION["errores"]);
     exit();
@@ -31,7 +31,7 @@ if ($user == null) {
 ?>
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h3">Editar Usuario <?= $_SESSION["datos"]["usuario"] ?? $user->usuario ?> con Id: <?= $id ?> </h1>
+        <h1 class="h3">Editar Usuario: <?= $_SESSION["datos"]["usuario"] ?? $user->nombre ?> con Id: <?= $id ?> </h1>
     </div>
     <div id="contenido">
         <div id="msg" name="msg" class="<?= $clase ?>" <?= $visibilidad ?>> <?= $mensaje ?> </div>
@@ -39,34 +39,52 @@ if ($user == null) {
         if ($mostrarForm) {
             $errores = $_SESSION["errores"] ?? [];
         ?>
-            <form action="index.php?tabla=user&accion=guardar&evento=modificar" method="POST">
+            <form action="index.php?tabla=usuarios&accion=guardar&evento=modificar" method="POST">
                 <input type="hidden" id="id" name="id" value="<?= $user->id ?>">
                 <div class="form-group">
-                    <label for="usuario">Usuario </label>
-                    <input type="text" required class="form-control" id="usuario" name="usuario" aria-describedby="usuario" value="<?= $_SESSION["datos"]["usuario"] ?? $user->usuario ?>">
-                    <input type="hidden" id="usuarioOriginal" name="usuarioOriginal" value="<?= $user->usuario ?>">
-                    <small id="usuario" class="form-text text-muted">Compartir tu usuario lo hace menos seguro.</small>
-                    <?= isset($errores["usuario"]) ? '<div class="alert alert-danger" role="alert">' . DibujarErrores($errores, "usuario") . '</div>' : ""; ?>
+                    <label for="nombre">Nombre </label>
+                    <input type="text" required class="form-control" id="nombre" name="nombre" aria-describedby="nombre" value="<?= $_SESSION["datos"]["nombre"] ?? $user->nombre ?>">
+                    <input type="hidden" id="nombreOriginal" name="nombreOriginal" value="<?= $user->nombre ?>">
+                    <small id="nombre" class="form-text text-muted">Compartir tu nombre lo hace menos seguro.</small>
+                    <?= isset($errores["nombre"]) ? '<div class="alert alert-danger" role="alert">' . DibujarErrores($errores, "nombre") . '</div>' : ""; ?>
                 </div>
                 <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" required class="form-control" id="password" name="password" value="<?= $_SESSION["datos"]["password"] ?? $user->password ?>">
-                    <?= isset($errores["password"]) ? '<div class="alert alert-danger" role="alert">' . DibujarErrores($errores, "password") . '</div>' : ""; ?>
+                    <label for="contrasenya">Contraseña</label>
+                    <input type="password" required class="form-control" id="contrasenya" name="contrasenya" value="<?= $_SESSION["datos"]["contrasenya"] ?? $user->contrasenya ?>">
+                    <?= isset($errores["contrasenya"]) ? '<div class="alert alert-danger" role="alert">' . DibujarErrores($errores, "contrasenya") . '</div>' : ""; ?>
                 </div>
                 <div class="form-group">
-                    <label for="name">Nombre </label>
-                    <input type="text" class="form-control" id="name" name="name" value="<?= $_SESSION["datos"]["name"] ?? $user->name ?>">
-                    <?= isset($errores["name"]) ? '<div class="alert alert-danger" role="alert">' . DibujarErrores($errores, "name") . '</div>' : ""; ?>
+                    <label for="partidas_ganadas">Partida Ganadas </label>
+                    <input type="text" class="form-control" id="partidas_ganadas" name="partidas_ganadas" value="<?= $_SESSION["datos"]["partidas_ganadas"] ?? $user->partidas_ganadas ?>">
+                    <?= isset($errores["partidas_ganadas"]) ? '<div class="alert alert-danger" role="alert">' . DibujarErrores($errores, "partidas_ganadas") . '</div>' : ""; ?>
                 </div>
                 <div class="form-group">
-                    <label for="email">Email </label>
-                    <input type="text" class="form-control" id="email" name="email" value="<?= $_SESSION["datos"]["email"] ?? $user->email ?>">
-                    <input type="hidden" id="emailOriginal" name="emailOriginal" value="<?= $user->email ?>">
-                    <?= isset($errores["email"]) ? '<div class="alert alert-danger" role="alert">' . DibujarErrores($errores, "email") . '</div>' : ""; ?>
+                    <label for="partidas_perdidas">Partidas Perdidas </label>
+                    <input type="text" class="form-control" id="partidas_perdidas" name="partidas_perdidas" value="<?= $_SESSION["datos"]["partidas_perdidas"] ?? $user->partidas_perdidas ?>">
+                    <input type="hidden" id="partidas_perdidasOriginal" name="partidas_perdidasOriginal" value="<?= $user->partidas_perdidas ?>">
+                    <?= isset($errores["partidas_perdidas"]) ? '<div class="alert alert-danger" role="alert">' . DibujarErrores($errores, "partidas_perdidas") . '</div>' : ""; ?>
+                </div>
+                <div class="form-group">
+                    <label for="partidas_totales">Partidas Totales </label>
+                    <input type="text" class="form-control" id="partidas_totales" name="partidas_totales" value="<?= $_SESSION["datos"]["partidas_totales"] ?? $user->partidas_totales ?>">
+                    <input type="hidden" id="partidas_totalesOriginal" name="partidas_totalesOriginal" value="<?= $user->partidas_totales ?>">
+                    <?= isset($errores["partidas_totales"]) ? '<div class="alert alert-danger" role="alert">' . DibujarErrores($errores, "partidas_totales") . '</div>' : ""; ?>
+                </div>
+                <div class="form-group">
+                    <label for="permisos">Permisos </label>
+                    <input type="text" class="form-control" id="permisos" name="permisos" value="<?= $_SESSION["datos"]["permisos"] ?? $user->permisos ?>">
+                    <input type="hidden" id="permisosesOriginal" name="permisosOriginal" value="<?= $user->permisos ?>">
+                    <?= isset($errores["permisos"]) ? '<div class="alert alert-danger" role="alert">' . DibujarErrores($errores, "permisos") . '</div>' : ""; ?>
+                </div>
+                <div class="form-group">
+                    <label for="digi_evu">Puntos para Digievolucionar </label>
+                    <input type="text" class="form-control" id="digi_evu" name="digi_evu" value="<?= $_SESSION["datos"]["digi_evu"] ?? $user->digi_evu ?>">
+                    <input type="hidden" id="digi_evuOriginal" name="digi_evuOriginal" value="<?= $user->digi_evu ?>">
+                    <?= isset($errores["digi_evu"]) ? '<div class="alert alert-danger" role="alert">' . DibujarErrores($errores, "digi_evu") . '</div>' : ""; ?>
                 </div>
 
                 <button type="submit" class="btn btn-primary">Guardar</button>
-                <a class="btn btn-danger" href="index.php?tabla=user&accion=listar">Cancelar</a>
+                <a class="btn btn-danger" href="index.php?tabla=usuarios&accion=ver&id=<?= $user->id ?>">Cancelar</a>
             </form>
         <?php
         } else {
