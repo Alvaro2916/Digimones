@@ -84,8 +84,7 @@ if (isset($_REQUEST["evento"])) {
                         <th scope="col">Defensa</th>
                         <th scope="col">Nivel</th>
                         <th scope="col">Tipo</th>
-                        <th scope="col">Borrar</th>
-                        <th scope="col">Editar</th>
+                        <th scope="col">Ver Digimon</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -93,14 +92,18 @@ if (isset($_REQUEST["evento"])) {
                         $id = $digimon->id;
                     ?>
                         <tr>
-                            <th scope="row"><?= $digimon->id ?></th>
+                            <th scope="col"><?= $digimon->id ?></th>
                             <td><?= $digimon->nombre ?></td>
                             <td><?= $digimon->ataque ?></td>
                             <td><?= $digimon->defensa ?></td>
                             <td><?= $digimon->nivel ?></td>
                             <td><?= $digimon->tipo ?></td>
+                            <th scope="col"><a class="btn btn-primary" href="index.php?tabla=digimones&accion=ver&id=<?= $digimon->id ?>">Ver Digimon</a></th>
+                            <?php /*
                             <td><a class="btn btn-danger <?= $disable ?>" href="index.php?tabla=digimon&esaccion=borrar&id=<?= $id ?>"><i class="fa fa-trash"></i> Borrar</a></td>
                             <td><a class="btn btn-success" href="index.php?tabla=digimones&accion=editar&id=<?= $id ?>"><i class="fa fa-pencil"></i>Editar</a></td>
+                            <th scope="col"><a class="btn btn-primary" href="index.php?tabla=digimones&accion=evoluvcionar&id=<?= $_SESSION["usuario"]->id ?>">Definir Evoluciones</a></th>
+                            */?>
                         </tr>
                     <?php
                     endforeach;

@@ -30,6 +30,9 @@ $digi = $controlador->ver($id);
                     Defensa: <?= $digi->defensa ?><br>
                     ID de la evolución: <?= $digi->evo_id ?><br>
                 </p>
+                <a class="btn btn-danger <?= $disable ?>" href="index.php?tabla=digimon&esaccion=borrar&id=<?= $id ?>"><i class="fa fa-trash"></i> Borrar</a>
+                <a class="btn btn-success" href="index.php?tabla=digimones&accion=editar&id=<?= $id ?>"><i class="fa fa-pencil"></i>Editar</a>
+                <a class="btn btn-primary" href="index.php?tabla=digimones&accion=evoluvcionar&id=<?= $_SESSION["usuario"]->id ?>">Definir Evoluciones</a>
                 <a href="index.php?tabla=usuarios&accion=administrar" class="btn btn-primary">Volver a Inicio</a>
             </div>
         </div>

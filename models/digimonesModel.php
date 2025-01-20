@@ -94,35 +94,35 @@ class DigimonesModel
         }
     }
 
-    public function search (string $campo, string $modo, string $usuario):array{
-        $sentencia = $this->conexion->prepare("SELECT * FROM usuarios WHERE $campo LIKE :usuario");
+    public function search (string $campo, string $modo, string $digimon):array{
+        $sentencia = $this->conexion->prepare("SELECT * FROM digimones WHERE $campo LIKE :digimon");
         //ojo el si ponemos % siempre en comillas dobles "
         switch ($modo) {
             case 'empieza':
-                $arrayDatos=[":usuario"=>"$usuario%" ];
+                $arrayDatos=[":digimon"=>"$digimon%" ];
                 break;
 
             case 'acaba':
-                $arrayDatos=[":usuario"=>"%$usuario" ];
+                $arrayDatos=[":digimon"=>"%$digimon" ];
                 break;
 
             case 'contiene':
-                $arrayDatos=[":usuario"=>"%$usuario%" ];
+                $arrayDatos=[":digimon"=>"%$digimon%" ];
                 break;
             
             default:
-                $arrayDatos=[":usuario"=>$usuario];
+                $arrayDatos=[":digimon"=>$digimon];
                 break;
         }
 
         $resultado = $sentencia->execute($arrayDatos);
         if (!$resultado) return [];
-        $usuarios = $sentencia->fetchAll(PDO::FETCH_OBJ); 
-        return $usuarios;
+        $digimones = $sentencia->fetchAll(PDO::FETCH_OBJ); 
+        return $digimones;
     }
 
     public function login(string $nombre,string $contrasenya): ?stdClass {
-        $sentencia = $this->conexion->prepare("SELECT * FROM usuarios WHERE nombre=:nombre");
+        $sentencia = $this->conexion->prepare("SELECT * FROM digimones WHERE nombre=:nombre");
         $arrayDatos = [
             ":nombre" => $nombre,
         ];
@@ -134,7 +134,7 @@ class DigimonesModel
     }
 
     public function exists(string $campo, string $valor):bool{
-        $sentencia = $this->conexion->prepare("SELECT * FROM usuarios WHERE $campo=:valor");
+        $sentencia = $this->conexion->prepare("SELECT * FROM digimones WHERE $campo=:valor");
         $arrayDatos = [":valor" => $valor];
         $resultado = $sentencia->execute($arrayDatos);
         return (!$resultado || $sentencia->rowCount()<=0)?false:true;

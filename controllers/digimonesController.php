@@ -164,7 +164,7 @@ class DigimonesController
         //vuelvo a la pagina donde estaba
     }
 
-    public function buscar(string $campo = "usuario", string $metodo = "contiene", string $texto = ""): array
+    public function buscar(string $campo = "digimones", string $metodo = "contiene", string $texto = ""): array
     {
         $users = $this->model->search($campo, $metodo, $texto);
         return $users;
