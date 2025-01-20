@@ -1,16 +1,3 @@
-<?php
-ob_start();
-require_once ("router/router.php");
-$vista=router ();
-
-if (!file_exists($vista)) "Error, REVISA TUS RUTAS";
-else require_once ($vista);
-
-$vista = router();
-
-echo $vista;
-?>
-
 <!doctype html>
 <html lang="es">
 
@@ -35,8 +22,9 @@ echo $vista;
         <table class="table table-light table-hover">
             <thead class="table-dark">
                 <tr>
+                <th scope="col"><a class="btn btn-primary" href="index.php?tabla=usuarios&accion=crear&id=<?= $_SESSION["usuario"]->id ?>"><i class="fa-solid fa-sitemap"></i> Crear Usuario</a></th>
+                <th scope="col"><a class="btn btn-primary" href="index.php?tabla=usuarios&accion=buscar"><i class="fa-regular fa-eye"></i> Listar Usuarios</a></th>
                     <th scope="col"><a class="btn btn-primary" href="index.php?tabla=usuarios&accion=ver&id=<?= $_SESSION["usuario"]->id ?>"><i class="fa-solid fa-sitemap"></i> Ver Usuario</a></th>
-                    <th scope="col"><a class="btn btn-primary" href="index.php?tabla=usuarios&accion=buscar"><i class="fa-regular fa-eye"></i> Listar Usuarios</a></th>
                     <th scope="col"><a class="btn btn-primary" href="index.php?tabla=digimones&accion=crear&id=<?= $_SESSION["usuario"]->id ?>"><i class="fa-solid fa-hand-fist"></i> Dar de alta a un Digimon</a></th>
                     <th scope="col"><a class="btn btn-primary" href="index.php?tabla=digimones&accion=buscar&id=<?= $_SESSION["usuario"]->id ?>"><i class="fa-solid fa-gear"></i> Listar Digimones</a></th>
                 </tr>

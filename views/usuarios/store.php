@@ -1,8 +1,8 @@
 <?php
 require_once "controllers/usuariosController.php";
 //recoger datos
-if (!isset($_REQUEST["usuario"])) {
-    header('Location:index.php?tabla=user&accion=crear');
+if (!isset($_REQUEST["nombre"])) {
+    header('Location:index.php?tabla=usuarios&accion=crear');
     exit();
 }
 
@@ -10,13 +10,14 @@ $id = ($_REQUEST["id"]) ?? ""; //el id me servirá en editar
 
 $arrayUser = [
     "id" => $id,
-    "usuario" => $_REQUEST["usuario"],
-    "usuarioOriginal" => ($_REQUEST["usuarioOriginal"]) ?? "",
-    "emailOriginal" => ($_REQUEST["emailOriginal"]) ?? "",
-    "password" => $_REQUEST["password"],
-    "name" => $_REQUEST["name"],
-    "email" => $_REQUEST["email"],
+    "nombre" => $_REQUEST["nombre"],
     "imagen" => $_FILES["imagen"],
+    "partidas_ganadas" => $_REQUEST["partidas_ganadas"],
+    "partidas_perdidas" => $_REQUEST["partidas_perdidas"],
+    "partidas_totales" => $_REQUEST["partidas_totales"],
+    "permisos" => $_REQUEST["permisos"],
+    "contrasenya" => $_REQUEST["contrasenya"],
+    "digi_evu" => $_REQUEST["digi_evu"],
 ];
 
 //pagina invisible

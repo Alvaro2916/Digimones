@@ -20,13 +20,9 @@ class UsuariosController
         $_SESSION["datos"] = [];
 
         // ERRORES DE TIPO
-        if (!is_valid_email($arrayUser["email"])) {
-            $error = true;
-            $errores["email"][] = "El email tiene un formato incorrecto";
-        }
 
         //campos NO VACIOS
-        $arrayNoNulos = ["email", "password", "usuario"];
+        $arrayNoNulos = ["nombre", "contrasenya"];
         $nulos = HayNulos($arrayNoNulos, $arrayUser);
         if (count($nulos) > 0) {
             $error = true;
@@ -36,7 +32,7 @@ class UsuariosController
         }
 
         //CAMPOS UNICOS
-        $arrayUnicos = ["email", "usuario"];
+        $arrayUnicos = ["nombre"];
 
         foreach ($arrayUnicos as $CampoUnico) {
             if ($this->model->exists($CampoUnico, $arrayUser[$CampoUnico])) {
@@ -50,12 +46,11 @@ class UsuariosController
         if ($id == null) {
             $_SESSION["errores"] = $errores;
             $_SESSION["datos"] = $arrayUser;
-            header("location:index.php?accion=crear&tabla=user&error=true&id={$id}");
+            header("location:index.php?accion=crear&tabla=usuarios&error=true&id={$id}");
             exit();
         } else {
             unset($_SESSION["errores"]);
             unset($_SESSION["datos"]);
-            header("location:index.php?accion=ver&tabla=user&id=" . $id);
 
             $directorio = "assets/img/usuarios/" . $_REQUEST["nombre"] . "/";
                 if (!file_exists($directorio)) {
@@ -66,7 +61,7 @@ class UsuariosController
             $nombreImagen = $_FILES["imagen"]["name"];
 
 
-            if (empty($_FILES["imagen"]["tmp_name"])) {
+            if (!empty($_FILES["imagen"]["tmp_name"])) {
                 move_uploaded_file($nombreTemp, $directorio . $nombreImagen);
             } else {              
                 $imagenPorDefecto = "assets/img/usuarios/default.png";
@@ -74,6 +69,7 @@ class UsuariosController
                 copy($imagenPorDefecto, $destino);
             }
 
+            header("location:index.php?accion=ver&tabla=usuarios&id=" . $id);
             exit();
         }
     }

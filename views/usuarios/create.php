@@ -11,6 +11,11 @@ if (isset($_REQUEST["error"])) {
   $cadena = "Atención Se han producido Errores";
   $visibilidad = "visible";
 }
+
+const PERMISOS = [
+  "Administrador" => "1",
+  "Usuario" => "0",
+];
 ?>
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
   <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -18,27 +23,34 @@ if (isset($_REQUEST["error"])) {
   </div>
   <div id="contenido">
     <div class="alert alert-danger <?= $visibilidad ?>"><?= $cadena ?></div>
-    <form action="index.php?tabla=user&accion=guardar&evento=crear" method="POST">
+    <form action="index.php?tabla=usuarios&accion=guardar&evento=crear" method="POST" enctype="multipart/form-data">
+      <input type="hidden" id="partidas_ganadas" name="partidas_ganadas" value="0">
+      <input type="hidden" id="partidas_perdidas" name="partidas_perdidas" value="0">
+      <input type="hidden" id="partidas_totales" name="partidas_totales" value="0">
+      <input type="hidden" id="digi_evu" name="digi_evu" value="0">
       <div class="form-group">
-        <label for="usuario">Usuario </label>
-        <input type="text" required class="form-control" id="usuario" name="usuario" value="<?= $_SESSION["datos"]["usuario"] ?? "" ?>" aria-describedby="usuario" placeholder="Introduce Usuario">
+        <label for="nombre">Nombre </label>
+        <input type="text" required class="form-control" id="nombre" name="nombre" value="<?= $_SESSION["datos"]["nombre"] ?? "" ?>" aria-describedby="nombre" placeholder="Introduce tu nombre">
         <small id="usuario" class="form-text text-muted">Compartir tu usuario lo hace menos seguro.</small>
-        <?= isset($errores["usuario"]) ? '<div class="alert alert-danger" role="alert">' . DibujarErrores($errores, "usuario") . '</div>' : ""; ?>
+        <?= isset($errores["nombre"]) ? '<div class="alert alert-danger" role="alert">' . DibujarErrores($errores, "nombre") . '</div>' : ""; ?>
       </div>
       <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" required class="form-control" id="password" name="password" value="<?= $_SESSION["datos"]["password"] ?? "" ?>" placeholder="Password">
-        <?= isset($errores["password"]) ? '<div class="alert alert-danger" role="alert">' . DibujarErrores($errores, "password") . '</div>' : ""; ?>
+        <label for="contrasenya">Contraseña</label>
+        <input type="contrasenya" required class="form-control" id="contrasenya" name="contrasenya" value="<?= $_SESSION["datos"]["contrasenya"] ?? "" ?>" placeholder="Contraseña">
+        <?= isset($errores["contrasenya"]) ? '<div class="alert alert-danger" role="alert">' . DibujarErrores($errores, "contrasenya") . '</div>' : ""; ?>
       </div>
       <div class="form-group">
-        <label for="name">Nombre </label>
-        <input type="text" class="form-control" id="name" name="name" placeholder="Introduce tu Nombre" value="<?= $_SESSION["datos"]["name"] ?? "" ?>">
-        <?= isset($errores["name"]) ? '<div class="alert alert-danger" role="alert">' . DibujarErrores($errores, "name") . '</div>' : ""; ?>
-      </div>
-      <div class="form-group">
-        <label for="email">email </label>
-        <input type="text" class="form-control" id="email" name="email" value="<?= $_SESSION["datos"]["email"] ?? "" ?>" placeholder="Introduce tu email">
-        <?= isset($errores["email"]) ? '<div class="alert alert-danger" role="alert">' . DibujarErrores($errores, "email") . '</div>' : ""; ?>
+        <label for="permisos">Permisos </label>
+        <select id="permisos" name="permisos" class="form-select" aria-label="Selecciona los permisos del usuario">
+          <option value="">---- Elije El Permiso ----</option>
+          <?php
+          foreach (PERMISOS as $key => $permiso) :
+            $selected = isset($_SESSION["datos"]["permisos"]) && $_SESSION["datos"]["permisos"] == $permiso ? "selected" : "";
+            echo "<option value='{$permiso}' {$selected}>{$key}</option>";
+          endforeach;
+          ?>
+        </select>
+        <?= isset($errores["permisos"]) ? '<div class="alert alert-danger" role="alert">' . DibujarErrores($errores, "permisos") . '</div>' : ""; ?>
       </div>
       <div class="form-group">
         <label for="imagen">Sube tu foto de perfil (opcional) </label>
