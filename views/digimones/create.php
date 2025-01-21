@@ -11,6 +11,11 @@ if (isset($_REQUEST["error"])) {
   $cadena = "Atención Se han producido Errores";
   $visibilidad = "visible";
 }
+
+const TIPO = ["Planta", "Vacuna", "Elemental", "Virus", "Animal"];
+
+const NIVEL = ["1", "2", "3", "4"];
+
 ?>
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
   <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -36,8 +41,16 @@ if (isset($_REQUEST["error"])) {
       </div>
       <div class="form-group">
         <label for="nivel">Nivel </label>
-        <input type="text" class="form-control" id="nivel" name="nivel" value="<?= $_SESSION["datos"]["nivel"] ?? "" ?>" placeholder="Introduce el nivel">
-        <?= isset($errores["nivel"]) ? '<div class="alert alert-danger" role="alert">' . DibujarErrores($errores, "nivel") . '</div>' : ""; ?>
+        <select id="nivel" name="nivel" class="form-select" aria-label="Selecciona el nivel del digimon">
+          <option value="">---- Elije el Nivel del Digimon ----</option>
+          <?php
+          foreach (NIVEL as $nivel) :
+            $selected = isset($_SESSION["datos"]["nivel"]) && $_SESSION["datos"]["nivel"] == $nivel ? "selected" : "";
+            echo "<option value='{$nivel}'>Nivel: {$nivel}</option>";
+          endforeach;
+          ?>
+        </select>
+        <?= isset($errores["tipo"]) ? '<div class="alert alert-danger" role="alert">' . DibujarErrores($errores, "tipo") . '</div>' : ""; ?>
       </div>
       <div class="form-group">
         <label for="evo_id">Evolución ID </label>
@@ -46,7 +59,15 @@ if (isset($_REQUEST["error"])) {
       </div>
       <div class="form-group">
         <label for="tipo">Tipo </label>
-        <input type="text" class="form-control" id="tipo" name="tipo" value="<?= $_SESSION["datos"]["tipo"] ?? "" ?>" placeholder="Introduce el tipo">
+        <select id="tipo" name="tipo" class="form-select" aria-label="Selecciona el tipo del digimon">
+          <option value="">---- Elije El Tipo del Digimon ----</option>
+          <?php
+          foreach (TIPO as $tipo) :
+            $selected = isset($_SESSION["datos"]["tipo"]) && $_SESSION["datos"]["tipo"] == $tipo ? "selected" : "";
+            echo "<option value='{$tipo}'>{$tipo}</option>";
+          endforeach;
+          ?>
+        </select>
         <?= isset($errores["tipo"]) ? '<div class="alert alert-danger" role="alert">' . DibujarErrores($errores, "tipo") . '</div>' : ""; ?>
       </div>
       <div class="form-group">

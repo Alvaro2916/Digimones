@@ -84,7 +84,7 @@ if (isset($_REQUEST["evento"])) {
                             <td><?= $usuario->partidas_ganadas ?></td>
                             <td><?= $usuario->partidas_perdidas ?></td>
                             <td><?= $usuario->partidas_totales ?></td>
-                            <td scope="col"><a class="btn btn-primary" href="index.php?tabla=usuarios&accion=ver&id=<?= $usuario->id ?>"><i class="fa-solid fa-sitemap"></i> Ver Usuario</a></td>
+                            <td scope="col"><a class="btn btn-primary" href="index.php?tabla=usuarios&accion=ver&id=<?= $usuario->id ?>&buscar=true"><i class="fa-solid fa-sitemap"></i> Ver Usuario</a></td>
                     <?php
                     endforeach;
                     ?>
