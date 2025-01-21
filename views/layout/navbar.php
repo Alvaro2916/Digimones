@@ -7,37 +7,22 @@
           Dashboard
         </a>
       </li>
+      <a class="dropdown-item" href="index.php?tabla=usuarios&accion=administrar&id=<?= $_SESSION["usuario"]->nombre ?>">Inicio</a>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="index.php" role="button" data-bs-toggle="dropdown" aria-expanded="false">
           <i class="far fa-user"></i> Usuarios</a>
         <ul class="dropdown-menu dropdown-menu-dark">
-          <li><a class="dropdown-item" href="index.php?tabla=user&accion=crear">Añadir</a></li>
-          <li><a class="dropdown-item" href="index.php?tabla=user&accion=listar">Listar </a></li>
-          <li><a class="dropdown-item" href="index.php?tabla=user&accion=buscar">Buscar </a></li>
+          <li><a class="dropdown-item" href="index.php?tabla=usuarios&accion=crear">Añadir</a></li>
+          <li><a class="dropdown-item" href="index.php?tabla=usuarios&accion=buscar">Listar </a></li>
+          <li><a class="dropdown-item" href="index.php?tabla=usuarios&accion=ver&id=<?= $_SESSION["usuario"]->id ?>">Ver mi usuario </a></li>
         </ul>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="index.php" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          <i class="far fa-user"></i> Clientes</a>
+          <i class="far fa-user"></i> Digimones</a>
         <ul class="dropdown-menu dropdown-menu-dark">
-          <li><a class="dropdown-item" href="index.php?tabla=client&accion=crear">Añadir</a></li>
-          <li><a class="dropdown-item" href="index.php?tabla=client&accion=listar">Listar </a></li>
-          <li><a class="dropdown-item" href="index.php?tabla=client&accion=buscar">Buscar </a></li>
-        </ul>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="index.php" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          <i class="fas fa-project-diagram"></i> Proyectos</a>
-        <ul class="dropdown-menu dropdown-menu-dark">
-          <li><a class="dropdown-item" href="index.php?tabla=project&accion=crear">Añadir</a></li>
-          <li><a class="dropdown-item" href="index.php?tabla=project&accion=buscar">Buscar </a></li>
-        </ul>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="index.php" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          <i class="fas fa-tasks"></i> Mis Tareas</a>
-        <ul class="dropdown-menu dropdown-menu-dark">
-          <li><a class="dropdown-item" href="index.php?tabla=task&accion=buscar">Buscar </a></li>
+          <li><a class="dropdown-item" href="index.php?tabla=digimones&accion=crear">Añadir</a></li>
+          <li><a class="dropdown-item" href="index.php?tabla=digimones&accion=buscar">Listar </a></li>
         </ul>
       </li>
     </ul>
