@@ -97,9 +97,9 @@ class DigimonesController
 
     public function borrar(int $id): void
     {
-        $usuario = $this->ver($id);
+        $digimon = $this->ver($id);
         $borrado = $this->model->delete($id);
-        $redireccion = "location:index.php?accion=listar&tabla=digimones&evento=borrar&id={$id}&usuario={$usuario->usuario}&nombre={$usuario->name}";
+        $redireccion = "location:index.php?accion=buscar&tabla=digimones";
 
         if ($borrado == false) $redireccion .=  "&error=true";
         header($redireccion);

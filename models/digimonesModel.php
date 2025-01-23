@@ -61,7 +61,7 @@ class DigimonesModel
     }
 
     public function delete (int $id):bool {
-        $sql="DELETE FROM usuarios WHERE id =:id";
+        $sql="DELETE FROM digimones WHERE id =:id";
         try {
             $sentencia = $this->conexion->prepare($sql);
             //devuelve true si se borra correctamente

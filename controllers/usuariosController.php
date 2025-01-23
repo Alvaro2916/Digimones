@@ -89,7 +89,7 @@ class UsuariosController
     {
         $usuario = $this->ver($id);
         $borrado = $this->model->delete($id);
-        $redireccion = "location:index.php?accion=listar&tabla=user&evento=borrar&id={$id}&usuario={$usuario->usuario}&nombre={$usuario->name}";
+        $redireccion = "location:index.php?accion=buscar&tabla=usuarios";
 
         if ($borrado == false) $redireccion .=  "&error=true";
         header($redireccion);

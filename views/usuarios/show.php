@@ -28,15 +28,15 @@ $usuarios = $controlador->ver($id);
                     Partidas Totales: <?= $usuarios->partidas_totales ?><br>
                 </p>
                 <a class="btn btn-success" href="index.php?tabla=usuarios&accion=editar&id=<?= $id ?>"><i class="fa fa-pencil"></i>Editar</a>
-                <a class="btn btn-danger <?= $disable ?>" href="index.php?tabla=usuarios&esaccion=borrar&id=<?= $id ?>"><i class="fa fa-trash"></i> Borrar</a>
+                <a class="btn btn-danger <?= $disable ?>" href="index.php?tabla=usuarios&accion=borrar&id=<?= $id ?>"><i class="fa fa-trash"></i> Borrar</a>
                 <?php
                 if (isset($_REQUEST["buscar"])) {
                 ?>
-                    <a href="index.php?tabla=usuarios&accion=buscar&evento=todos" class="btn btn-primary">Volver a Inicio</a>
+                    <a href="index.php?tabla=usuarios&accion=buscar&evento=todos" class="btn btn-primary">Atras</a>
                 <?php
                 } else {
                 ?>
-                    <a href="index.php?tabla=usuarios&accion=administrar" class="btn btn-primary">Volver a Inicio</a>
+                    <a href="index.php?tabla=usuarios&accion=administrar" class="btn btn-primary">Atras</a>
                 <?php
                 }
                 ?>
