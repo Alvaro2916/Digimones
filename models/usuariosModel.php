@@ -22,7 +22,7 @@ class UsuariosModel
                 ":partidas_perdidas"=>$user["partidas_perdidas"],
                 ":partidas_totales"=>$user["partidas_totales"],
                 ":permisos"=>$user["permisos"],
-                ":contrasenya"=>password_verify($user["contrasenya"], PASSWORD_DEFAULT),
+                ":contrasenya"=>password_hash($user["contrasenya"], PASSWORD_DEFAULT),
                 ":digi_evu"=>$user["digi_evu"],
             ];
             $resultado = $sentencia->execute($arrayDatos);
@@ -75,16 +75,20 @@ class UsuariosModel
 
     public function edit (int $idAntiguo, array $arrayUsuario):bool{
         try {
-            $sql="UPDATE usuarios SET nombre = :nombre, email=:email, ";
-            $sql.= "usuario = :usuario, contrasenya= :contrasenya ";
+            $sql="UPDATE usuarios SET nombre = :nombre, partidas_ganadas = :partidas_ganadas, 
+            partidas_perdidas = :partidas_perdidas, partidas_totales = :partidas_totales, permisos = :permisos, 
+            contrasenya = :contrasenya, digi_evu = :digi_evu ";
             $sql.= " WHERE id = :id;";
-            $arrayDatos=[
-                    ":id"=>$idAntiguo,
-                    ":usuario"=>$arrayUsuario["usuario"],
-                    ":contrasenya"=>password_verify($arrayUsuario["contrasenya"], PASSWORD_DEFAULT),
-                    ":nombre"=>$arrayUsuario["nombre"],
-                    ":email"=>$arrayUsuario["email"],
-                    ];
+            $arrayDatos = [
+                ":id"=>$idAntiguo,
+                ":nombre"=>$arrayUsuario["nombre"],
+                ":partidas_ganadas"=>$arrayUsuario["partidas_ganadas"],
+                ":partidas_perdidas"=>$arrayUsuario["partidas_perdidas"],
+                ":partidas_totales"=>$arrayUsuario["partidas_totales"],
+                ":permisos"=>$arrayUsuario["permisos"],
+                ":contrasenya"=>password_hash($arrayUsuario["contrasenya"], PASSWORD_DEFAULT),
+                ":digi_evu"=>$arrayUsuario["digi_evu"],
+            ];
             $sentencia = $this->conexion->prepare($sql);
             return $sentencia->execute($arrayDatos); 
         } catch (Exception $e) {

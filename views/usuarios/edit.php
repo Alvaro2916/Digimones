@@ -2,7 +2,7 @@
 require_once "controllers/usuariosController.php";
 //recoger datos
 if (!isset($_REQUEST["id"])) {
-    header('location:index.php?tabla=userarios&accion=listar');
+    header('location:index.php?tabla=usuarios&accion=buscar&evento=todos');
     unset($_SESSION["datos"]);
     unset($_SESSION["errores"]);
     exit();
@@ -22,12 +22,18 @@ if ($user == null) {
     $mostrarForm = false;
 } else if (isset($_REQUEST["evento"]) && $_REQUEST["evento"] == "modificar") {
     $visibilidad = "visibility";
-    $mensaje = "Usuario {$user->usuario} con id {$id} - {$user->name} Modificado con éxito";
+    $mensaje = "Usuario {$user->nombre} con id {$id} - Modificado con éxito";
     if (isset($_REQUEST["error"])) {
-        $mensaje = "No se ha podido modificar el {$user->usuario} con id {$id} - {$user->name} {$id}";
+        $mensaje = "No se ha podido modificar el {$user->nombre} con id {$id}";
         $clase = "alert alert-danger";
     }
 }
+
+const PERMISOS = [
+    "Administrador" => "1",
+    "Usuario" => "0",
+  ];
+
 ?>
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -39,13 +45,13 @@ if ($user == null) {
         if ($mostrarForm) {
             $errores = $_SESSION["errores"] ?? [];
         ?>
-            <form action="index.php?tabla=usuarios&accion=guardar&evento=modificar" method="POST">
+            <form action="index.php?tabla=usuarios&accion=guardar&evento=modificar&nombre=<?= $user->nombre ?>" method="POST" enctype="multipart/form-data">
                 <input type="hidden" id="id" name="id" value="<?= $user->id ?>">
+                <input type="hidden" id="imagen" name="imagen" value="<?= $user->imagen ?>">
                 <div class="form-group">
                     <label for="nombre">Nombre </label>
-                    <input type="text" required class="form-control" id="nombre" name="nombre" aria-describedby="nombre" value="<?= $_SESSION["datos"]["nombre"] ?? $user->nombre ?>">
+                    <input type="text" disabled class="form-control" id="nombre" name="nombre" aria-describedby="nombre" value="<?= $_SESSION["datos"]["nombre"] ?? $user->nombre ?>">
                     <input type="hidden" id="nombreOriginal" name="nombreOriginal" value="<?= $user->nombre ?>">
-                    <small id="nombre" class="form-text text-muted">Compartir tu nombre lo hace menos seguro.</small>
                     <?= isset($errores["nombre"]) ? '<div class="alert alert-danger" role="alert">' . DibujarErrores($errores, "nombre") . '</div>' : ""; ?>
                 </div>
                 <div class="form-group">
@@ -72,8 +78,15 @@ if ($user == null) {
                 </div>
                 <div class="form-group">
                     <label for="permisos">Permisos </label>
-                    <input type="text" class="form-control" id="permisos" name="permisos" value="<?= $_SESSION["datos"]["permisos"] ?? $user->permisos ?>">
-                    <input type="hidden" id="permisosesOriginal" name="permisosOriginal" value="<?= $user->permisos ?>">
+                    <select id="permisos" name="permisos" class="form-select" aria-label="Selecciona los permisos del usuario">
+                        <option value="">---- Elije El Permiso ----</option>
+                        <?php
+                        foreach (PERMISOS as $key => $permiso) :
+                            $selected = isset($_SESSION["datos"]["permisos"]) && $_SESSION["datos"]["permisos"] == $permiso ? "selected" : "";
+                            echo "<option value='{$permiso}' {$selected}>{$key}</option>";
+                        endforeach;
+                        ?>
+                    </select>
                     <?= isset($errores["permisos"]) ? '<div class="alert alert-danger" role="alert">' . DibujarErrores($errores, "permisos") . '</div>' : ""; ?>
                 </div>
                 <div class="form-group">
@@ -84,12 +97,32 @@ if ($user == null) {
                 </div>
 
                 <button type="submit" class="btn btn-primary">Guardar</button>
-                <a class="btn btn-danger" href="index.php?tabla=usuarios&accion=ver&id=<?= $user->id ?>">Cancelar</a>
+                <?php
+                if (isset($_REQUEST["buscar"])) {
+                ?>
+                    <a class="btn btn-danger" href="index.php?tabla=usuarios&accion=ver&id=<?= $user->id ?>&buscar=true">Cancelar</a>
+                <?php
+                } else {
+                ?>
+                    <a class="btn btn-danger" href="index.php?tabla=usuarios&accion=ver&id=<?= $user->id ?>">Cancelar</a>
+                <?php
+                }
+                ?>
             </form>
         <?php
         } else {
         ?>
-            <a href="index.php" class="btn btn-primary">Volver a Inicio</a>
+            <?php
+            if (isset($_REQUEST["buscar"])) {
+            ?>
+                <a class="btn btn-danger" href="index.php?tabla=usuarios&accion=ver&id=<?= $user->id ?>&buscar=true">Cancelar</a>
+            <?php
+            } else {
+            ?>
+                <a class="btn btn-danger" href="index.php?tabla=usuarios&accion=ver&id=<?= $user->id ?>">Cancelar</a>
+            <?php
+            }
+            ?>
         <?php
         }
         //Una vez mostrados los errores, los eliminamos

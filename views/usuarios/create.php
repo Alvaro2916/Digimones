@@ -36,7 +36,7 @@ const PERMISOS = [
       </div>
       <div class="form-group">
         <label for="contrasenya">Contraseña</label>
-        <input type="contrasenya" required class="form-control" id="contrasenya" name="contrasenya" value="<?= $_SESSION["datos"]["contrasenya"] ?? "" ?>" placeholder="Contraseña">
+        <input type="password" required class="form-control" id="contrasenya" name="contrasenya" value="<?= $_SESSION["datos"]["contrasenya"] ?? "" ?>" placeholder="Contraseña">
         <?= isset($errores["contrasenya"]) ? '<div class="alert alert-danger" role="alert">' . DibujarErrores($errores, "contrasenya") . '</div>' : ""; ?>
       </div>
       <div class="form-group">
@@ -58,7 +58,7 @@ const PERMISOS = [
         <?= isset($errores["imagen"]) ? '<div class="alert alert-danger" role="alert">' . DibujarErrores($errores, "imagen") . '</div>' : ""; ?>
       </div>
       <button type="submit" class="btn btn-primary">Guardar</button>
-      <a class="btn btn-danger" href="index.php">Cancelar</a>
+      <a href="index.php?tabla=usuarios&accion=administrar" class="btn btn-danger">Cancelar</a>
     </form>
 
     <?php

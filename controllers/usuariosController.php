@@ -106,29 +106,24 @@ class UsuariosController
         }
 
         // ERRORES DE TIPO
-        if (!is_valid_email($arrayUser["email"])) {
-            $error = true;
-            $errores["email"][] = "El email tiene un formato incorrecto";
-        }
 
         //campos NO VACIOS
-        $arrayNoNulos = ["email", "password", "usuario"];
+        $arrayNoNulos = ["nombre", "contrasenya"];
         $nulos = HayNulos($arrayNoNulos, $arrayUser);
         if (count($nulos) > 0) {
             $error = true;
             for ($i = 0; $i < count($nulos); $i++) {
-                $errores[$nulos[$i]][] = "El campo {$nulos[$i]} NO puede estar vacio ";
+                $errores[$nulos[$i]][] = "El campo {$nulos[$i]} es nulo";
             }
         }
 
         //CAMPOS UNICOS
         $arrayUnicos = [];
-        if ($arrayUser["email"] != $arrayUser["emailOriginal"]) $arrayUnicos[] = "email";
-        if ($arrayUser["usuario"] != $arrayUser["usuarioOriginal"]) $arrayUnicos[] = "usuario";
+        if ($arrayUser["nombre"] != $arrayUser["nombreOriginal"]) $arrayUnicos[] = "nombre";
 
         foreach ($arrayUnicos as $CampoUnico) {
             if ($this->model->exists($CampoUnico, $arrayUser[$CampoUnico])) {
-                $errores[$CampoUnico][] = "El {$CampoUnico}  {$arrayUser[$CampoUnico]}  ya existe";
+                $errores[$CampoUnico][] = "El {$arrayUser[$CampoUnico]} de {$CampoUnico} ya existe";
                 $error = true;
             }
         }
@@ -140,14 +135,14 @@ class UsuariosController
         if ($editado == false) {
             $_SESSION["errores"] = $errores;
             $_SESSION["datos"] = $arrayUser;
-            $redireccion = "location:index.php?accion=editar&tabla=user&evento=modificar&id={$id}&error=true";
+            $redireccion = "location:index.php?accion=editar&tabla=usuarios&evento=modificar&id={$id}&error=true";
         } else {
             //vuelvo a limpiar por si acaso
             unset($_SESSION["errores"]);
             unset($_SESSION["datos"]);
             //este es el nuevo numpieza
             $id = $arrayUser["id"];
-            $redireccion = "location:index.php?accion=editar&tabla=user&evento=modificar&id={$id}";
+            $redireccion = "location:index.php?accion=editar&tabla=usuarios&evento=modificar&id={$id}";
         }
         header($redireccion);
         exit();
