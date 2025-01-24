@@ -1,14 +1,18 @@
 <?php
 require_once "models/usuariosModel.php";
 require_once "assets/php/funciones.php";
+require_once "inventariosController.php";
 
 class UsuariosController
 {
     private $model;
 
+    private $inventario;
+
     public function __construct()
     {
         $this->model = new UsuariosModel();
+        $this->inventario = new InventariosController();
     }
 
     public function crear(array $arrayUser): void
@@ -68,6 +72,8 @@ class UsuariosController
                 $destino = $directorio . "default.png";
                 copy($imagenPorDefecto, $destino);
             }
+
+            $this->inventario->addPrimerosDigimones($id);
 
             header("location:index.php?accion=ver&tabla=usuarios&id=" . $id);
             exit();
