@@ -32,6 +32,8 @@ function router (){
                 "borrar"=>"delete.php",
                 "editar"=>"edit.php",
                 "administrar"=>"administrar.php",
+                "combate"=>"combate.php",
+                "inventario"=>"inventario.php",
         ],
         "digimones"=>[//defino las acciones permitidas para esa tabla
                 "crear"=>"create.php",
