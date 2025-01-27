@@ -12,12 +12,13 @@ class InventariosModel
     public function insert(array $digi): ?int //devuelve entero o null
     {
         try{
-            $sql = "INSERT INTO digimones_inv(usuario_id, digimon_id)  
-            VALUES (:usuario_id, :digimon_id);";
+            $sql = "INSERT INTO digimones_inv(usuario_id, digimon_id, seleccionado)  
+            VALUES (:usuario_id, :digimon_id, :seleccionado);";
             $sentencia = $this->conexion->prepare($sql);
             $arrayDatos = [
                 ":usuario_id"=>$digi["usuario_id"],
                 ":digimon_id"=>$digi["digimon_id"],
+                ":seleccionado"=>$digi["seleccionado"],
             ];
             $resultado = $sentencia->execute($arrayDatos);
 
@@ -134,5 +135,12 @@ class InventariosModel
 
         return $proyectos; 
 
-    } 
+    }
+
+    public function exists(string $campo, string $valor):bool{
+        $sentencia = $this->conexion->prepare("SELECT * FROM digimones WHERE $campo=:valor");
+        $arrayDatos = [":valor" => $valor];
+        $resultado = $sentencia->execute($arrayDatos);
+        return (!$resultado || $sentencia->rowCount()<=0)?false:true;
+    }
 }
