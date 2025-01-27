@@ -120,8 +120,6 @@ ALTER TABLE `digimones`
 --
 ALTER TABLE `digimones_inv`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `usuario_id` (`usuario_id`),
-  ADD UNIQUE KEY `digimon_id` (`digimon_id`),
   ADD KEY `digi_usuario` (`usuario_id`),
   ADD KEY `digi_digimon` (`digimon_id`);
 
@@ -130,8 +128,6 @@ ALTER TABLE `digimones_inv`
 --
 ALTER TABLE `equipo`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `usuario_id` (`usuario_id`),
-  ADD UNIQUE KEY `digimon_id` (`digimon_id`),
   ADD KEY `equipo_usuario` (`usuario_id`),
   ADD KEY `equipo_digimon` (`digimon_id`);
 
