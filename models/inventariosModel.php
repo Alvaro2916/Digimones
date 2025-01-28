@@ -117,15 +117,15 @@ class InventariosModel
 
     public function readAllbyUser(stdClass $user ): array{ 
 
-        $sql= "select digimones_inv.*,  digimones.*, "; 
+        $sql= "select digimones_inv.*,  digimones.* "; 
 
-        $sql.="from digimon_inv "; 
+        $sql.="from digimones_inv "; 
 
-        $sql.="left join digimones on (digimon_inv.digimon_id=digimones.id) ";  
+        $sql.="left join digimones on (digimones_inv.digimon_id=digimones.id) ";  
 
-        $sql.= " WHERE digimon_inv.digimon_id=:digimones_id;"; 
+        $sql.= " WHERE digimones_inv.usuario_id=:usuario_id;"; 
 
-        $arrayDatos = [":digimones_id" => $user->id ]; 
+        $arrayDatos = [":usuario_id" => $user->id ]; 
 
         $sentencia = $this->conexion->prepare($sql); 
 
