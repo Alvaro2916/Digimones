@@ -136,6 +136,12 @@ class InventariosController
         return $digimones;
     }
 
+    public function listarUsu($usuario)
+    {
+        $digimones = $this->model->readAllbyUser($usuario);
+        return $digimones;
+    }
+
     public function borrar(int $id): void
     {
         $digimon = $this->ver($id);

@@ -131,9 +131,9 @@ class InventariosModel
 
         $sentencia->execute($arrayDatos); 
 
-        $proyectos = $sentencia->fetchAll(PDO::FETCH_OBJ); 
+        $digimones = $sentencia->fetchAll(PDO::FETCH_OBJ); 
 
-        return $proyectos; 
+        return $digimones; 
 
     }
 
