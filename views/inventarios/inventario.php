@@ -35,7 +35,8 @@ $id = $_REQUEST['id'];
         <h1 class="h3">Tu Inventario</h1>
     </div>
     <div id="contenido">
-        <form action="">
+        <form action="index.php?tabla=inventarios&accion=inventario&evento=cambiar">
+            <input type="hidden" id="id" name="id" value="<?= $id ?>">
             <button type="submit">Cambiar</button>
             <?php
             //var_dump($digimones);
@@ -66,7 +67,7 @@ $id = $_REQUEST['id'];
                         Defensa: $digimon->defensa <br>
                         Tipo: $digimon->tipo <br>
                         Nivel: $digimon->nivel <br>
-                        <input type='radio' name='noseleccionado' id='$digimon->id'>
+                        <input type='radio' name='id_noSeleccionado' id='$digimon->id'>
                     </p>
                     ";
                     }

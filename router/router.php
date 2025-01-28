@@ -44,6 +44,9 @@ function router (){
                 "borrar"=>"delete.php",
                 "editar"=>"edit.php",
         ],
+        "inventarios"=>[//defino las acciones permitidas para esa tabla
+                "inventario"=>"inventario.php",
+        ],
     ];
 
     $tabla= $_REQUEST["tabla"];

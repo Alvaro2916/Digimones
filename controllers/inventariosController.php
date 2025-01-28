@@ -16,6 +16,10 @@ class InventariosController
         $this->digimones = new DigimonesController();
     }
 
+    public function cambiarDigimones($digimonesC){
+        $this->model->cambiarDigimones($digimonesC);
+    }
+
     private function EstaEnArray(stdClass $digi, array $nuevoDigis): bool
     {
         foreach ($nuevoDigis as $key => $d) {
