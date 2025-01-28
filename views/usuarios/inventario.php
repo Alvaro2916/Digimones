@@ -14,6 +14,9 @@ $controladorDigi = new DigimonesController();
 $controladorInv = new InventariosController();
 $digimones = $controladorInv->listarUsu($usuario);
 
+if(count($digimones) > 0){
+    $mostrarDatos = true;
+}
 
 if (!isset($_REQUEST['id'])) {
     header("location:index.php");
@@ -31,7 +34,7 @@ $id = $_REQUEST['id'];
     </div>
     <div id="contenido">
         <?php
-        var_dump($digimones);
+        //var_dump($digimones);
         if ($mostrarDatos) {
             foreach ($digimones as $digimon) :
                 $id = $digimon->id;
@@ -40,10 +43,10 @@ $id = $_REQUEST['id'];
                     ID: <?= $digimon->id ?> <br>
                     Nombre: <?= $digimon->nombre ?><br>
                     <img src=assets/img/usuarios/<?= $digimon->nombre . "/" . $digimon->imagen ?> width="100px"><br>
-                    Ataque: <?= $digimon->partidas_ganadas ?><br>
-                    Defensa: <?= $digimon->partidas_perdidas ?><br>
-                    Tipo: <?= $digimon->partidas_totales ?><br>
-                    Nivel: <?= $digimon->partidas_totales ?><br>
+                    Ataque: <?= $digimon->ataque ?><br>
+                    Defensa: <?= $digimon->defensa ?><br>
+                    Tipo: <?= $digimon->tipo ?><br>
+                    Nivel: <?= $digimon->nivel ?><br>
                 </p>
             <?php
             endforeach;
