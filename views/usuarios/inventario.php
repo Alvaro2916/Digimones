@@ -10,11 +10,13 @@ $visibilidad = "hidden";
 $mostrarDatos = false;
 $controlador = new UsuariosController();
 $usuario = $controlador->ver($id);
-$controladorDigi = new DigimonesController();
 $controladorInv = new InventariosController();
 $digimones = $controladorInv->listarUsu($usuario);
+$digimonesSelec = "";
+$digimonesNOSelec = "";
 
-if(count($digimones) > 0){
+
+if (count($digimones) > 0) {
     $mostrarDatos = true;
 }
 
@@ -33,27 +35,50 @@ $id = $_REQUEST['id'];
         <h1 class="h3">Tu Inventario</h1>
     </div>
     <div id="contenido">
-        <?php
-        //var_dump($digimones);
-        if ($mostrarDatos) {
-            foreach ($digimones as $digimon) :
-                $id = $digimon->id;
-        ?>
-                <p class="card-text">
-                    ID: <?= $digimon->id ?> <br>
-                    Nombre: <?= $digimon->nombre ?><br>
-                    <img src=assets/img/usuarios/<?= $digimon->nombre . "/" . $digimon->imagen ?> width="100px"><br>
-                    Ataque: <?= $digimon->ataque ?><br>
-                    Defensa: <?= $digimon->defensa ?><br>
-                    Tipo: <?= $digimon->tipo ?><br>
-                    Nivel: <?= $digimon->nivel ?><br>
-                </p>
+        <form action="">
+            <button type="submit">Cambiar</button>
             <?php
-            endforeach;
+            //var_dump($digimones);
+            if ($mostrarDatos) {
+                foreach ($digimones as $digimon) :
+                    $id = $digimon->id;
+                    if ($digimon->seleccionado) {
+                        $digimonesSelec .= "
+                    <p class='card-text'>
+                        ID: $digimon->id <br>
+                        Nombre: $digimon->nombre <br>
+                        <img src=assets/img/digimones/$digimon->nombre/$digimon->imagen width='100px'><br>
+                        Ataque: $digimon->ataque <br>
+                        Defensa: $digimon->defensa <br>
+                        Tipo: $digimon->tipo <br>
+                        Nivel: $digimon->nivel <br>
+                        <input type='radio' name='seleccionado' id='$digimon->id'>
+                    </p>
+                    ";
+                    } else {
+
+                        $digimonesNOSelec .= "
+                    <p class='card-text'>
+                        ID: $digimon->id <br>
+                        Nombre: $digimon->nombre <br>
+                        <img src=assets/img/digimones/$digimon->nombre/$digimon->imagen width='100px'><br>
+                        Ataque: $digimon->ataque <br>
+                        Defensa: $digimon->defensa <br>
+                        Tipo: $digimon->tipo <br>
+                        Nivel: $digimon->nivel <br>
+                        <input type='radio' name='noseleccionado' id='$digimon->id'>
+                    </p>
+                    ";
+                    }
+                endforeach;
+
+                echo "<h2 class='h3'>Equipo</h2> $digimonesSelec";
+                echo "<h2 class='h3'>Guardados</h2> $digimonesNOSelec";
             ?>
-            <a href="index.php?tabla=usuarios&accion=administrar" class="btn btn-primary">Volver a Inicio</a>
-        <?php
-        }
-        ?>
+                <a href="index.php" class="btn btn-primary">Volver a Inicio</a>
+            <?php
+            }
+            ?>
+        </form>
     </div>
 </main>
