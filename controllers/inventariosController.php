@@ -16,37 +16,37 @@ class InventariosController
         $this->digimones = new DigimonesController();
     }
 
+    private function EstaEnArray(stdClass $digi, array $nuevoDigis): bool
+    {
+        foreach ($nuevoDigis as $key => $d) {
+            if ($d->id == $digi->id) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public function addPrimerosDigimones($userId)
     {
-        $cantidadDigimones = count($this->digimones->listar());
-        $contador = 0;
-        $digimon = 1;
-        $digimonesCreados = [];
-        $existe = false;
+        //$digimonesN1= $this->digimones->listar();
+        $digimonesN1 = $this->digimones->buscar("nivel", "igual", "1");
+        $totalDigiN1 = count($digimonesN1);
+        $nuevoDigis = [];
 
-        while ($contador < 3 && $cantidadDigimones >= 3) {
-            $digimon = rand(1, $cantidadDigimones);
-            $existe = false;
-            foreach ($digimonesCreados as $key => $dC) {
-                if ($dC["digimon_id"] == $digimon) {
-                    $existe = true;
-                }
-            }
-
-            if (!$existe) {
-                $digimonesCreados[] = [
+        while (count($nuevoDigis) < 3) {
+            $i = random_int(0, $totalDigiN1 - 1);
+            if (!$this->EstaEnArray($digimonesN1[$i], $nuevoDigis)) {
+                //$nuevoDigis[]=$digimonesN1[$i];            
+                $nuevoDigis[] = [
                     "usuario_id" => $userId,
-                    "digimon_id" => $digimon,
+                    "digimon_id" => $digimonesN1[$i]->id,
                     "seleccionado" => 1,
                 ];
-                $contador++;
             }
         }
 
-        if ($cantidadDigimones >= 3) {
-            foreach ($digimonesCreados as $key => $dC) {
-                $this->model->insert($dC);
-            }
+        foreach ($nuevoDigis as $key => $dC) {
+            $this->model->insert($dC);
         }
     }
 
