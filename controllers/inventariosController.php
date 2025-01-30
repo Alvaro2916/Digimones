@@ -18,6 +18,8 @@ class InventariosController
 
     public function cambiarDigimones($digimonesC){
         $this->model->cambiarDigimones($digimonesC);
+        header("location:index.php?tabla=inventarios&accion=inventario&id={$digimonesC["id_usuario"]}");
+        exit();
     }
 
     private function EstaEnArray(stdClass $digi, array $nuevoDigis): bool

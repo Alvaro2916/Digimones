@@ -21,9 +21,9 @@ class InventariosModel
 
             $sql .= " WHERE digimon_id IN (:id_seleccionado, :id_noSeleccionado) AND usuario_id = :id_usuario; ";
             $arrayDatos = [
-                ":id_seleccionado" => $digimonesC->id_seleccionado,
-                ":id_noSeleccionado" => $digimonesC->id_noSeleccionado,
-                ":id_usuario" => $digimonesC->id_usuario,
+                ":id_seleccionado" => $digimonesC["id_seleccionado"],
+                ":id_noSeleccionado" => $digimonesC["id_noSeleccionado"],
+                ":id_usuario" => $digimonesC["id_usuario"],
             ];
             $sentencia = $this->conexion->prepare($sql);
             return $sentencia->execute($arrayDatos);

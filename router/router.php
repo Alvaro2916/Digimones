@@ -46,6 +46,7 @@ function router (){
         ],
         "inventarios"=>[//defino las acciones permitidas para esa tabla
                 "inventario"=>"inventario.php",
+                "guardar"=>"store.php",
         ],
     ];
 
