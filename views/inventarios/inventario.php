@@ -38,7 +38,6 @@ if (isset($_REQUEST["evento"])) {
         <h1 class="h3">Tu Inventario</h1>
     </div>
     <div id="contenido">
-
         <div id="contenido">
             <div class="<?= $clase ?>" <?= $visibilidad ?> role="alert">
                 <?= $mensaje ?>
@@ -48,7 +47,6 @@ if (isset($_REQUEST["evento"])) {
                     <div class="form-group">
                         <label for="digimon">Buscar Digimon</label><br>
                         <select class="form-select" aria-label="Default select example" id="campo" name="campo">
-                            <option value="id">ID</option>
                             <option value="nombre" selected>Nombre</option>
                             <option value="tipo">Tipo de Digimon</option>
                             <option value="nivel">Nivel del Digimon</option>
