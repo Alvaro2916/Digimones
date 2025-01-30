@@ -12,6 +12,7 @@
   <!-- Custom styles for this template -->
   <link href="assets/css/dashboard.css" rel="stylesheet">
   <link href="assets/css/404.css" rel="stylesheet">
+  <link href="assets/css/inventario.css" rel="stylesheet">
 </head>
 
 <body>

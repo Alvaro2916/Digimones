@@ -16,6 +16,19 @@ class InventariosController
         $this->digimones = new DigimonesController();
     }
 
+    public function buscarDigimonesSelec($usuario){
+        $digisUsu = $this->listarUsu($usuario);
+        $digisS = [];
+
+        foreach ($digisUsu as $digi) {
+            if($digi->seleccionado){
+                $digisS[]=$digi;
+            }
+        }
+
+        return $digisS;
+    }
+
     public function cambiarDigimones($digimonesC){
         $this->model->cambiarDigimones($digimonesC);
         header("location:index.php?tabla=inventarios&accion=inventario&id={$digimonesC["id_usuario"]}");
@@ -217,9 +230,9 @@ class InventariosController
         //vuelvo a la pagina donde estaba
     }
 
-    public function buscar(string $campo = "digimones", string $metodo = "contiene", string $texto = ""): array
+    public function buscar(string $campo = "nombre", string $metodo = "contiene", string $texto = "", stdClass $user): array
     {
-        $users = $this->model->search($campo, $metodo, $texto);
+        $users = $this->model->search($campo, $metodo, $texto, $user);
         return $users;
     }
 }

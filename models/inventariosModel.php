@@ -115,32 +115,38 @@ class InventariosModel
         }
     }
 
-    public function search(string $campo, string $modo, string $digimon): array
+    public function search(string $campo, string $modo, string $digimon, stdClass $user): array
     {
-        $sentencia = $this->conexion->prepare("SELECT * FROM digimones WHERE $campo LIKE :digimon");
-        //ojo el si ponemos % siempre en comillas dobles "
-        switch ($modo) {
-            case 'empieza':
-                $arrayDatos = [":digimon" => "$digimon%"];
-                break;
+        try {
+            $sentencia = $this->conexion->prepare("SELECT * FROM digimones_inv 
+            LEFT JOIN digimones on (digimones_inv.digimon_id=digimones.id) 
+            WHERE $campo LIKE :digimon AND digimones_inv.usuario_id=:usuario_id");
+            //ojo el si ponemos % siempre en comillas dobles "
+            switch ($modo) {
+                case 'empieza':
+                    $digimon = "$digimon%";
+                    break;
+                case 'acaba':
+                    $digimon = "%$digimon";
+                    break;
+                case 'contiene':
+                    $digimon = "%$digimon%";
+                    break;
+            }
+    
+            $arrayDatos = [
+                ":digimon" => $digimon,
+                ":usuario_id" => $user->id,
+            ];
 
-            case 'acaba':
-                $arrayDatos = [":digimon" => "%$digimon"];
-                break;
-
-            case 'contiene':
-                $arrayDatos = [":digimon" => "%$digimon%"];
-                break;
-
-            default:
-                $arrayDatos = [":digimon" => $digimon];
-                break;
+            $resultado = $sentencia->execute($arrayDatos);
+            if (!$resultado) return [];
+            $digimones = $sentencia->fetchAll(PDO::FETCH_OBJ);
+            return $digimones;
+        } catch (Exception $e) {
+            echo 'Excepción capturada: ', $e->getMessage(), "<bR>";
+            return false;
         }
-
-        $resultado = $sentencia->execute($arrayDatos);
-        if (!$resultado) return [];
-        $digimones = $sentencia->fetchAll(PDO::FETCH_OBJ);
-        return $digimones;
     }
 
     public function readAllbyUser(stdClass $user): array
