@@ -72,38 +72,6 @@ if (isset($_REQUEST["evento"])) {
                 <button type="submit" class="btn btn-success">Cambiar</button>
                 <?php
                 //var_dump($digimones);
-                /*if ($mostrarDatos) {
-                foreach ($digimones as $digimon) :
-                    if ($digimon->seleccionado) {
-                        $digimonesSelec .= "
-                        <div class='form-group'>
-                            <label>
-                                ID: $digimon->id <br>
-                                Nombre: $digimon->nombre <br>
-                                <img src=assets/img/digimones/$digimon->nombre/$digimon->imagen width='100px'><br>
-                                Ataque: $digimon->ataque <br>
-                                Defensa: $digimon->defensa <br>
-                                Tipo: $digimon->tipo <br>
-                                Nivel: $digimon->nivel <br>
-                                <input type='radio' name='id_seleccionado' id='$digimon->id' value='$digimon->id'>
-                            </label>
-                        </div>";
-                    } else {
-                        $digimonesNOSelec .= "
-                        <div class='form-group'>
-                            <label>
-                                ID: $digimon->id <br>
-                                Nombre: $digimon->nombre <br>
-                                <img src=assets/img/digimones/$digimon->nombre/$digimon->imagen width='100px'><br>
-                                Ataque: $digimon->ataque <br>
-                                Defensa: $digimon->defensa <br>
-                                Tipo: $digimon->tipo <br>
-                                Nivel: $digimon->nivel <br>
-                                <input type='radio' name='id_noSeleccionado' id='$digimon->id' value='$digimon->id'>
-                            </label>
-                        </div>";
-                    }
-                endforeach;*/
                 foreach ($seleccionados as $key => $digimon) {
                     $digimonesSelec .= "
                         <div class='form-group'>

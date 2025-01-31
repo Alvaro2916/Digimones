@@ -38,7 +38,7 @@ class InventariosController
     private function EstaEnArray(stdClass $digi, array $nuevoDigis): bool
     {
         foreach ($nuevoDigis as $key => $d) {
-            if ($d->id == $digi->id) {
+            if ($d["digimon_id"] == $digi->id) {
                 return true;
             }
         }

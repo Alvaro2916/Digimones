@@ -160,4 +160,94 @@ class UsuariosController
         $users = $this->model->search($campo, $metodo, $texto);
         return $users;
     }
+
+    public function combatir(array $digimonesUsu, array $digimonesRiv): array
+    {
+        for ($i=0; $i < 3; $i++) { 
+            $digimonesUsu[$i];
+            $digimonesRiv[$i];
+
+        }
+        //$digimonesUsu[$i]["ataque"]+$digimonesUsu[$i]["defensa"]+el return de calculo + el random
+        return $usuario;
+    }
+
+    public function calculo(array $digimonUsu, array $digimonRiv): array
+    {
+        switch ($digimonUsu) {
+            case "vacuna":
+                switch ($digimonRiv) {
+                    case "virus":
+                        return 10;
+                    case "animal":
+                        return 5;
+                    case "planta":
+                        return -5;
+                    case "elemental":
+                        return -10;
+                    default:
+                        return 0;
+                }
+            
+            case "virus":
+                switch ($digimonRiv) {
+                    case "animal":
+                        return 10;
+                    case "planta":
+                        return 5;
+                    case "elemental":
+                        return -5;
+                    case "vacuna":
+                        return -10;
+                    default:
+                        return 0;
+                }
+            
+            case "animal":
+                switch ($digimonRiv) {
+                    case "planta":
+                        return 10;
+                    case "elemental":
+                        return 5;
+                    case "vacuna":
+                        return -5;
+                    case "virus":
+                        return -10;
+                    default:
+                        return 0;
+                }
+            
+            case "planta":
+                switch ($digimonRiv) {
+                    case "elemental":
+                        return 10;
+                    case "vacuna":
+                        return 5;
+                    case "virus":
+                        return -5;
+                    case "animal":
+                        return -10;
+                    default:
+                        return 0;
+                }
+            
+            case "elemental":
+                switch ($digimonRiv) {
+                    case "vacuna":
+                        return 10;
+                    case "virus":
+                        return 5;
+                    case "animal":
+                        return -5;
+                    case "planta":
+                        return -10;
+                    default:
+                        return 0;
+                }
+            
+            default:
+                return 0;
+        }
+    }
+
 }
