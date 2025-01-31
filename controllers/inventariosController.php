@@ -16,23 +16,50 @@ class InventariosController
         $this->digimones = new DigimonesController();
     }
 
-    public function buscarDigimonesSelec($usuario){
+    public function buscarDigimonesSelec($usuario, bool $rival = false)
+    {
         $digisUsu = $this->listarUsu($usuario);
         $digisS = [];
 
         foreach ($digisUsu as $digi) {
-            if($digi->seleccionado){
-                $digisS[]=$digi;
+            if ($digi->seleccionado) {
+                $digisS[] = $digi;
             }
         }
 
         return $digisS;
     }
 
-    public function cambiarDigimones($digimonesC){
-        $this->model->cambiarDigimones($digimonesC);
-        header("location:index.php?tabla=inventarios&accion=inventario&id={$digimonesC["id_usuario"]}");
-        exit();
+    public function cambiarDigimones($digimonesC)
+    {
+        $error = false;
+        $errores = [];
+        //vaciamos los posibles errores
+        $_SESSION["errores"] = [];
+        $_SESSION["datos"] = [];
+
+        //campos NO VACIOS
+        $arrayNoNulos = ["id_seleccionado", "id_noSeleccionado", "id_usuario"];
+        $nulos = HayNulos($arrayNoNulos, $digimonesC);
+        if (count($nulos) > 0) {
+            $error = true;
+            for ($i = 0; $i < count($nulos); $i++) {
+                $errores[$nulos[$i]][] = "Tienes que seleccionar los dos digimones que quieras intercambiar!";
+            }
+        }
+
+        if ($error) {
+            $_SESSION["errores"] = $errores;
+            $_SESSION["datos"] = $digimonesC;
+
+            header("location:index.php?tabla=inventarios&accion=inventario&id={$digimonesC["id_usuario"]}&error=true");
+            exit();
+        } else {
+            $this->model->cambiarDigimones($digimonesC);
+
+            header("location:index.php?tabla=inventarios&accion=inventario&id={$digimonesC["id_usuario"]}");
+            exit();
+        }
     }
 
     private function EstaEnArray(stdClass $digi, array $nuevoDigis): bool

@@ -31,6 +31,13 @@ if (isset($_REQUEST["evento"])) {
 } else {
     $digimones = $controladorInv->listarUsu($usuario);
 }
+
+if (isset($_REQUEST["error"])) {
+    $visibilidad = "";
+    $mensaje = "No se ha podido cambiar el digimon, tienes que seleccionar los dos que quieras intercambiar!";
+    $clase = "alert alert-danger";
+}
+
 ?>
 
 <main class="col-md-9 col-lg-10 px-md-4">
@@ -38,10 +45,8 @@ if (isset($_REQUEST["evento"])) {
         <h1 class="h3">Tu Inventario</h1>
     </div>
     <div id="contenido">
+        <div id="msg" name="msg" class="<?= $clase ?>" <?= $visibilidad ?>> <?= $mensaje ?> </div>
         <div id="contenido">
-            <div class="<?= $clase ?>" <?= $visibilidad ?> role="alert">
-                <?= $mensaje ?>
-            </div>
             <div>
                 <form action="index.php?tabla=inventarios&accion=inventario&id=<?= $id ?>&evento=filtrar" method="POST">
                     <div class="form-group">

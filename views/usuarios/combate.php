@@ -18,14 +18,21 @@ $controlador = new UsuariosController();
 //Usuario
 $usuario = $controlador->ver($id);
 //Rival
-$elegirRival = $controlador->buscar("id", "distinto", $id);
-$rival = $elegirRival[rand(0, count($elegirRival) - 1)];
+
+$rivalEncontrado=false;
+while(!$rivalEncontrado){
+    $elegirRival = $controlador->buscar("id", "distinto", $id);
+    $rival = $elegirRival[rand(0, count($elegirRival) - 1)];
+    if(!$rival->permisos){
+        $rivalEncontrado = true;
+    }
+}
 
 $controladorInv = new InventariosController();
 //Usuario
 $seleccionados = $controladorInv->buscarDigimonesSelec($usuario);
 //Rival
-$seleccionadosRival = $controladorInv->buscarDigimonesSelec($rival);
+$seleccionadosRival = $controladorInv->buscarDigimonesSelec($rival, true);
 
 $combatir = $controlador->combatir($seleccionados, $seleccionadosRival);
 var_dump($combatir);

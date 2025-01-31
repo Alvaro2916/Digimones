@@ -66,18 +66,18 @@ class DigimonesController
             $nombreTemp = $_FILES["imagen"]["tmp_name"];
             $nombreImagen = $_FILES["imagen"]["name"];
 
-            move_uploaded_file($nombreTemp, $directorio . $nombreImagen);
+            move_uploaded_file($nombreTemp, $directorio . urlencode($nombreImagen));
 
             $nombreTemp = $_FILES["imagenV"]["tmp_name"];
             $nombreImagen = $_FILES["imagenV"]["name"];
 
-            move_uploaded_file($nombreTemp, $directorio . $nombreImagen);
+            move_uploaded_file($nombreTemp, $directorio . urlencode($nombreImagen));
 
 
             $nombreTemp = $_FILES["imagenD"]["tmp_name"];
             $nombreImagen = $_FILES["imagenD"]["name"];
 
-            move_uploaded_file($nombreTemp, $directorio . $nombreImagen);
+            move_uploaded_file($nombreTemp, $directorio . urlencode($nombreImagen));
 
             header("location:index.php?accion=ver&tabla=digimones&id=" . $id);
             exit();

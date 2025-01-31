@@ -66,7 +66,7 @@ class UsuariosController
 
 
             if (!empty($_FILES["imagen"]["tmp_name"])) {
-                move_uploaded_file($nombreTemp, $directorio . $nombreImagen);
+                move_uploaded_file($nombreTemp, $directorio . urlencode($nombreImagen));
             } else {
                 $imagenPorDefecto = "assets/img/usuarios/default.png";
                 $destino = $directorio . "default.png";
@@ -165,10 +165,8 @@ class UsuariosController
     {
         $ganador = [];
         for ($i = 0; $i < 3; $i++) {
-            $digimonesUsu[$i];
-            $digimonesRiv[$i];
-            $calcUsu=$this->calculo($digimonesUsu, $digimonesRiv);
-            $calcRiv=$this->calculo($digimonesRiv, $digimonesUsu);
+            $calcUsu=$this->calculo($digimonesUsu[$i], $digimonesRiv[$i]);
+            $calcRiv=$this->calculo($digimonesRiv[$i], $digimonesUsu[$i]);
 
             if ($calcUsu > $calcRiv) {
                 $ganador []= true;
@@ -179,77 +177,77 @@ class UsuariosController
         return $ganador;
     }
 
-    public function calculo(array $digimonPrincipal, array $digimonRival): int
+    public function calculo(stdClass $digimonPrincipal, stdClass $digimonRival): int
     {
-        switch ($digimonPrincipal) {
+        switch ($digimonPrincipal->tipo) {
             case "vacuna":
-                switch ($digimonRival) {
+                switch ($digimonRival->tipo) {
                     case "virus":
-                        return $digimonPrincipal["ataque"] + $digimonPrincipal["defensa"] + 10 + rand(0, 50);
+                        return $digimonPrincipal->ataque + $digimonPrincipal->defensa + 10 + rand(0, 50);
                     case "animal":
-                        return $digimonPrincipal["ataque"] + $digimonPrincipal["defensa"] + 5 + rand(0, 50);
+                        return $digimonPrincipal->ataque + $digimonPrincipal->defensa + 5 + rand(0, 50);
                     case "planta":
-                        return $digimonPrincipal["ataque"] + $digimonPrincipal["defensa"] - 5 + rand(0, 50);
+                        return $digimonPrincipal->ataque + $digimonPrincipal->defensa - 5 + rand(0, 50);
                     case "elemental":
-                        return $digimonPrincipal["ataque"] + $digimonPrincipal["defensa"] - 10 + rand(0, 50);
+                        return $digimonPrincipal->ataque + $digimonPrincipal->defensa - 10 + rand(0, 50);
                     default:
-                        return $digimonPrincipal["ataque"] + $digimonPrincipal["defensa"] + 0 + rand(0, 50);
+                        return $digimonPrincipal->ataque + $digimonPrincipal->defensa + 0 + rand(0, 50);
                 }
 
             case "virus":
-                switch ($digimonRival) {
+                switch ($digimonRival->tipo) {
                     case "animal":
-                        return $digimonPrincipal["ataque"] + $digimonPrincipal["defensa"] + 10 + rand(0, 50);
+                        return $digimonPrincipal->ataque + $digimonPrincipal->defensa + 10 + rand(0, 50);
                     case "planta":
-                        return $digimonPrincipal["ataque"] + $digimonPrincipal["defensa"] + 5 + rand(0, 50);
+                        return $digimonPrincipal->ataque + $digimonPrincipal->defensa + 5 + rand(0, 50);
                     case "elemental":
-                        return $digimonPrincipal["ataque"] + $digimonPrincipal["defensa"] - 5 + rand(0, 50);
+                        return $digimonPrincipal->ataque + $digimonPrincipal->defensa - 5 + rand(0, 50);
                     case "vacuna":
-                        return $digimonPrincipal["ataque"] + $digimonPrincipal["defensa"] - 10 + rand(0, 50);
+                        return $digimonPrincipal->ataque + $digimonPrincipal->defensa - 10 + rand(0, 50);
                     default:
-                        return $digimonPrincipal["ataque"] + $digimonPrincipal["defensa"] + 0 + rand(0, 50);
+                        return $digimonPrincipal->ataque + $digimonPrincipal->defensa + 0 + rand(0, 50);
                 }
 
             case "animal":
-                switch ($digimonRival) {
+                switch ($digimonRival->tipo) {
                     case "planta":
-                        return $digimonPrincipal["ataque"] + $digimonPrincipal["defensa"] + 10 + rand(0, 50);
+                        return $digimonPrincipal->ataque + $digimonPrincipal->defensa + 10 + rand(0, 50);
                     case "elemental":
-                        return $digimonPrincipal["ataque"] + $digimonPrincipal["defensa"] + 5 + rand(0, 50);
+                        return $digimonPrincipal->ataque + $digimonPrincipal->defensa + 5 + rand(0, 50);
                     case "vacuna":
-                        return $digimonPrincipal["ataque"] + $digimonPrincipal["defensa"] - 5 + rand(0, 50);
+                        return $digimonPrincipal->ataque + $digimonPrincipal->defensa - 5 + rand(0, 50);
                     case "virus":
-                        return $digimonPrincipal["ataque"] + $digimonPrincipal["defensa"] - 10 + rand(0, 50);
+                        return $digimonPrincipal->ataque + $digimonPrincipal->defensa - 10 + rand(0, 50);
                     default:
-                        return $digimonPrincipal["ataque"] + $digimonPrincipal["defensa"] + 0 + rand(0, 50);
+                        return $digimonPrincipal->ataque + $digimonPrincipal->defensa + 0 + rand(0, 50);
                 }
 
             case "planta":
-                switch ($digimonRival) {
+                switch ($digimonRival->tipo) {
                     case "elemental":
-                        return $digimonPrincipal["ataque"] + $digimonPrincipal["defensa"] + 10 + rand(0, 50);
+                        return $digimonPrincipal->ataque + $digimonPrincipal->defensa + 10 + rand(0, 50);
                     case "vacuna":
-                        return $digimonPrincipal["ataque"] + $digimonPrincipal["defensa"] + 5 + rand(0, 50);
+                        return $digimonPrincipal->ataque + $digimonPrincipal->defensa + 5 + rand(0, 50);
                     case "virus":
-                        return $digimonPrincipal["ataque"] + $digimonPrincipal["defensa"] - 5 + rand(0, 50);
+                        return $digimonPrincipal->ataque + $digimonPrincipal->defensa - 5 + rand(0, 50);
                     case "animal":
-                        return $digimonPrincipal["ataque"] + $digimonPrincipal["defensa"] - 10 + rand(0, 50);
+                        return $digimonPrincipal->ataque + $digimonPrincipal->defensa - 10 + rand(0, 50);
                     default:
-                        return $digimonPrincipal["ataque"] + $digimonPrincipal["defensa"] + 0 + rand(0, 50);
+                        return $digimonPrincipal->ataque + $digimonPrincipal->defensa + 0 + rand(0, 50);
                 }
 
             case "elemental":
-                switch ($digimonRival) {
+                switch ($digimonRival->tipo) {
                     case "vacuna":
-                        return $digimonPrincipal["ataque"] + $digimonPrincipal["defensa"] + 10 + rand(0, 50);
+                        return $digimonPrincipal["ataque"] + $digimonPrincipal->defensa + 10 + rand(0, 50);
                     case "virus":
-                        return $digimonPrincipal["ataque"] + $digimonPrincipal["defensa"] + 5 + rand(0, 50);
+                        return $digimonPrincipal["ataque"] + $digimonPrincipal->defensa + 5 + rand(0, 50);
                     case "animal":
-                        return $digimonPrincipal["ataque"] + $digimonPrincipal["defensa"] - 5 + rand(0, 50);
+                        return $digimonPrincipal["ataque"] + $digimonPrincipal->defensa - 5 + rand(0, 50);
                     case "planta":
-                        return $digimonPrincipal["ataque"] + $digimonPrincipal["defensa"] - 10 + rand(0, 50);
+                        return $digimonPrincipal["ataque"] + $digimonPrincipal->defensa - 10 + rand(0, 50);
                     default:
-                        return $digimonPrincipal["ataque"] + $digimonPrincipal["defensa"] + 0 + rand(0, 50);
+                        return $digimonPrincipal["ataque"] + $digimonPrincipal->defensa + 0 + rand(0, 50);
                 }
 
             default:
