@@ -161,7 +161,7 @@ class UsuariosController
         return $users;
     }
 
-    public function combatir(array $digimonesUsu, array $digimonesRiv): array
+    public function combatir(stdClass $usuario, stdClass $rival, array $digimonesUsu, array $digimonesRiv): array
     {
         $ganador = [];
         for ($i = 0; $i < 3; $i++) {
@@ -169,10 +169,19 @@ class UsuariosController
             $calcRiv=$this->calculo($digimonesRiv[$i], $digimonesUsu[$i]);
 
             if ($calcUsu > $calcRiv) {
-                $ganador []= true;
+                $ganador []= 1;
             }else {
-                $ganador []= false;
+                $ganador []= 0;
             }
+        }
+        if(array_sum($ganador) >= 2){
+            $usuario->partidas_ganadas+=1;
+            $usuario->partidas_totales+=1;
+            $this->model->edit($usuario->id, get_object_vars($usuario));
+        }else {
+            $usuario->partidas_perdidas+=1;
+            $usuario->partidas_totales+=1;
+            $this->model->edit($usuario->id, get_object_vars($usuario));
         }
         return $ganador;
     }
