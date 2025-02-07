@@ -5,26 +5,27 @@ class DigimonesModel
 {
     private $conexion;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->conexion = db::conexion();
     }
 
     public function insert(array $digi): ?int //devuelve entero o null
     {
-        try{
+        try {
             $sql = "INSERT INTO digimones(nombre, imagen, imagenV, imagenD, ataque, defensa, nivel, evo_id, tipo)  
             VALUES (:nombre, :imagen, :imagenV, :imagenD, :ataque, :defensa, :nivel, :evo_id, :tipo);";
             $sentencia = $this->conexion->prepare($sql);
             $arrayDatos = [
-                ":nombre"=>$digi["nombre"],
-                ":imagen"=>$digi["imagen"]["name"],
-                ":imagenV"=>$digi["imagenV"]["name"],
-                ":imagenD"=>$digi["imagenD"]["name"],
-                ":ataque"=>$digi["ataque"],
-                ":defensa"=>$digi["defensa"],
-                ":nivel"=>$digi["nivel"],
-                ":evo_id"=>$digi["evo_id"],
-                ":tipo"=>$digi["tipo"],
+                ":nombre" => $digi["nombre"],
+                ":imagen" => $digi["imagen"]["name"],
+                ":imagenV" => $digi["imagenV"]["name"],
+                ":imagenD" => $digi["imagenD"]["name"],
+                ":ataque" => $digi["ataque"],
+                ":defensa" => $digi["defensa"],
+                ":nivel" => $digi["nivel"],
+                ":evo_id" => $digi["evo_id"],
+                ":tipo" => $digi["tipo"],
             ];
             $resultado = $sentencia->execute($arrayDatos);
 
@@ -32,14 +33,14 @@ class DigimonesModel
             True en caso de que todo vaya bien, falso en caso contrario.*/
             //Así podriamos evaluar
             return ($resultado == true) ? $this->conexion->lastInsertId() : null;
-
         } catch (Exception $e) {
             echo 'Excepción capturada: ', $e->getMessage(), "<bR>";
             return false;
         }
     }
 
-    public function read(int $id): ?stdClass {
+    public function read(int $id): ?stdClass
+    {
         $sentencia = $this->conexion->prepare("SELECT * FROM digimones WHERE id=:id");
         $arrayDatos = [":id" => $id];
         $resultado = $sentencia->execute($arrayDatos);
@@ -53,75 +54,96 @@ class DigimonesModel
         return ($user == false) ? null : $user;
     }
 
-    public function readAll(): array {
+    public function readAll(): array
+    {
         $sentencia = $this->conexion->prepare("SELECT * FROM digimones;");
         $resultado = $sentencia->execute();
         $digimones = $sentencia->fetchAll(PDO::FETCH_OBJ);
         return $digimones;
     }
 
-    public function delete (int $id):bool {
-        $sql="DELETE FROM digimones WHERE id =:id";
+    public function delete(int $id): bool
+    {
+        $sql = "DELETE FROM digimones WHERE id =:id";
         try {
             $sentencia = $this->conexion->prepare($sql);
             //devuelve true si se borra correctamente
             //false si falla el borrado
-            $resultado= $sentencia->execute([":id" => $id]);
-            return ($sentencia->rowCount ()<=0)?false:true;
-        }  catch (Exception $e) {
+            $resultado = $sentencia->execute([":id" => $id]);
+            return ($sentencia->rowCount() <= 0) ? false : true;
+        } catch (Exception $e) {
             echo 'Excepción capturada: ',  $e->getMessage(), "<bR>";
             return false;
         }
     }
 
-    public function edit (int $idAntiguo, array $arrayUsuario):bool{
+    public function actualizarEvolucion($idDigimonBase, $idDigimonEvolucion)
+    {
         try {
-            $sql="UPDATE usuarios SET nombre = :nombre, email=:email, ";
-            $sql.= "usuario = :usuario, contrasenya= :contrasenya ";
-            $sql.= " WHERE id = :id;";
-            $arrayDatos=[
-                    ":id"=>$idAntiguo,
-                    ":usuario"=>$arrayUsuario["usuario"],
-                    ":contrasenya"=>password_verify($arrayUsuario["contrasenya"], PASSWORD_DEFAULT),
-                    ":nombre"=>$arrayUsuario["nombre"],
-                    ":email"=>$arrayUsuario["email"],
-                    ];
+            $sql = "UPDATE digimones SET evo_id = :digiEvo WHERE id = :idActual";
+            $arrayDatos = [
+                ":idActual" => $idDigimonBase,
+                ":digiEvo" => $idDigimonEvolucion,
+            ];
             $sentencia = $this->conexion->prepare($sql);
-            return $sentencia->execute($arrayDatos); 
+            return $sentencia->execute($arrayDatos);
         } catch (Exception $e) {
             echo 'Excepción capturada: ', $e->getMessage(), "<bR>";
             return false;
         }
     }
 
-    public function search (string $campo, string $modo, string $digimon):array{
+    public function edit(int $idAntiguo, array $arrayUsuario): bool
+    {
+        try {
+            $sql = "UPDATE usuarios SET nombre = :nombre, email=:email, ";
+            $sql .= "usuario = :usuario, contrasenya= :contrasenya ";
+            $sql .= " WHERE id = :id;";
+            $arrayDatos = [
+                ":id" => $idAntiguo,
+                ":usuario" => $arrayUsuario["usuario"],
+                ":contrasenya" => password_verify($arrayUsuario["contrasenya"], PASSWORD_DEFAULT),
+                ":nombre" => $arrayUsuario["nombre"],
+                ":email" => $arrayUsuario["email"],
+            ];
+            $sentencia = $this->conexion->prepare($sql);
+            return $sentencia->execute($arrayDatos);
+        } catch (Exception $e) {
+            echo 'Excepción capturada: ', $e->getMessage(), "<bR>";
+            return false;
+        }
+    }
+
+    public function search(string $campo, string $modo, string $digimon): array
+    {
         $sentencia = $this->conexion->prepare("SELECT * FROM digimones WHERE $campo LIKE :digimon");
         //ojo el si ponemos % siempre en comillas dobles "
         switch ($modo) {
             case 'empieza':
-                $arrayDatos=[":digimon"=>"$digimon%" ];
+                $arrayDatos = [":digimon" => "$digimon%"];
                 break;
 
             case 'acaba':
-                $arrayDatos=[":digimon"=>"%$digimon" ];
+                $arrayDatos = [":digimon" => "%$digimon"];
                 break;
 
             case 'contiene':
-                $arrayDatos=[":digimon"=>"%$digimon%" ];
+                $arrayDatos = [":digimon" => "%$digimon%"];
                 break;
-            
+
             default:
-                $arrayDatos=[":digimon"=>$digimon];
+                $arrayDatos = [":digimon" => $digimon];
                 break;
         }
 
         $resultado = $sentencia->execute($arrayDatos);
         if (!$resultado) return [];
-        $digimones = $sentencia->fetchAll(PDO::FETCH_OBJ); 
+        $digimones = $sentencia->fetchAll(PDO::FETCH_OBJ);
         return $digimones;
     }
 
-    public function login(string $nombre,string $contrasenya): ?stdClass {
+    public function login(string $nombre, string $contrasenya): ?stdClass
+    {
         $sentencia = $this->conexion->prepare("SELECT * FROM digimones WHERE nombre=:nombre");
         $arrayDatos = [
             ":nombre" => $nombre,
@@ -133,21 +155,11 @@ class DigimonesModel
         return ($user == false || !password_verify($contrasenya, $user->contrasenya)) ? null : $user;
     }
 
-    public function exists(string $campo, string $valor):bool{
+    public function exists(string $campo, string $valor): bool
+    {
         $sentencia = $this->conexion->prepare("SELECT * FROM digimones WHERE $campo=:valor");
         $arrayDatos = [":valor" => $valor];
         $resultado = $sentencia->execute($arrayDatos);
-        return (!$resultado || $sentencia->rowCount()<=0)?false:true;
-    }
-
-    public function obtenerPorId($id) {
-        $resultado = $this->conexion->prepare("SELECT * FROM digimones WHERE id = ?");
-        $resultado->execute([$id]);
-        return $resultado->fetch(PDO::FETCH_OBJ);
-    }
-
-    public function actualizarEvolucion($idDigimonBase, $idDigimonEvolucion) {
-        $resultado = $this->conexion->prepare("UPDATE digimones SET digi_evu = ? WHERE id = ?");
-        return $resultado->execute([$idDigimonEvolucion, $idDigimonBase]);
+        return (!$resultado || $sentencia->rowCount() <= 0) ? false : true;
     }
 }

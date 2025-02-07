@@ -9,8 +9,8 @@
     - ~~Corregir Buscar digimones del buscar digimones. (hecho).~~
     - ~~Hacer lo del navbar, modificando todos sus datos. (hecho).~~
     - ~~Añadir el boton de crear usuarios y que funcione (hecho).~~
-    - **(P)** Cambiar digi_evu en la creacion de digimoness
-    - **(P)** Terminar DigiEvolucioness Admin {Vista, Actualización y Asignación de puntos}
+    - **(P)** Cambiar digi_evu en la creacion de digimones
+    - **(P)** Terminar DigiEvolucioness Admin {~~Vista, Actualización~~, Asignación de puntos y ~~Evitar evolucionar un Digimon lvl 4~~}
     - **(P)** Asignar puntos por cada 10 victorias
     - **(P)** Asignar digimon nuevo (random) por cada 10 partidas. 
 
@@ -20,7 +20,12 @@
     - ~~Hacer el controlador y vistas de inventario.~~
     - **(P)** Digievolucionar digimon según los puntos de digimones
 
-- ~~Base de datos:~~
+- Base de datos:
     - ~~Añadir indentificador al inventario para identificar el usuario. (controlar los digimones repetidos)~~
+    - **(P)** Arreglar imagenes Usuarios
+    - **(P)** Arreglar imagenes por defecto Usuarios y Digimones.
 
 - Hacer todo el diseño.
+
+- General:
+    - **(P)** Eliminar contenido innecesario y extra de todos los códigos.

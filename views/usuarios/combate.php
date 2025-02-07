@@ -110,7 +110,7 @@ if (isset($_REQUEST["evento"]) && $_REQUEST["evento"] == "combatir") {
         </div>
         <?php
         foreach ($seleccionadosRival as $key => $digimon) {
-            $imagen = $combatir[$key]?$digimon->imagenV:$digimon->imagenD;
+            $imagen = $combatir[$key]?$digimon->imagenD:$digimon->imagenV;
             $digimonesSelecR .= "
                 <div class='form-group'>
                     <label>
