@@ -169,4 +169,30 @@ class DigimonesController
         $users = $this->model->search($campo, $metodo, $texto);
         return $users;
     }
+
+    public function darEvolucion(int $idDigimonBase, int $idDigimonEvolucion): string
+    {
+        $digimonBase = $this->model->obtenerPorId($idDigimonBase);
+        $digimonEvolucion = $this->model->obtenerPorId($idDigimonEvolucion);
+
+        // Verificar si los Digimon existen
+        if (!$digimonBase || !$digimonEvolucion) {
+            return "Uno o ambos Digimon no existen.";
+        }
+
+        // Verificar que el nivel del segundo Digimon sea mayor que el del primero
+        if ($digimonEvolucion->nivel <= $digimonBase->nivel) {
+            return "El Digimon de evolución debe tener un nivel mayor.";
+        }
+
+        // Verificar que ambos Digimon sean del mismo tipo
+        if ($digimonBase->tipo !== $digimonEvolucion->tipo) {
+            return "Los Digimon deben ser del mismo tipo para evolucionar.";
+        }
+
+        // Actualizar el campo digi_evu del primer Digimon con el ID del segundo
+        $resultado = $this->model->actualizarEvolucion($idDigimonBase, $idDigimonEvolucion);
+
+        return $resultado ? "Evolución realizada con éxito." : "Hubo un error al realizar la evolución.";
+    }
 }

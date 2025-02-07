@@ -139,4 +139,15 @@ class DigimonesModel
         $resultado = $sentencia->execute($arrayDatos);
         return (!$resultado || $sentencia->rowCount()<=0)?false:true;
     }
+
+    public function obtenerPorId($id) {
+        $resultado = $this->conexion->prepare("SELECT * FROM digimones WHERE id = ?");
+        $resultado->execute([$id]);
+        return $resultado->fetch(PDO::FETCH_OBJ);
+    }
+
+    public function actualizarEvolucion($idDigimonBase, $idDigimonEvolucion) {
+        $resultado = $this->conexion->prepare("UPDATE digimones SET digi_evu = ? WHERE id = ?");
+        return $resultado->execute([$idDigimonEvolucion, $idDigimonBase]);
+    }
 }
