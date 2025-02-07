@@ -30,6 +30,18 @@ class InventariosController
         return $digisS;
     }
 
+    public function buscarDigimones($usuario)
+    {
+        $digisUsu = $this->listarUsu($usuario);
+        $digisS = [];
+
+        foreach ($digisUsu as $digi) {
+            $digisS[] = $digi;
+        }
+
+        return $digisS;
+    }
+
     public function cambiarDigimones($digimonesC)
     {
         $error = false;

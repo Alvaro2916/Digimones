@@ -7,7 +7,6 @@ $id = $_REQUEST['id'];
 $mensaje = "";
 $clase = "alert alert-success";
 $visibilidad = "hidden";
-$mostrarDatos = true;
 $controlador = new UsuariosController();
 $usuario = $controlador->ver($id);
 $controladorInv = new InventariosController();
@@ -75,6 +74,7 @@ if (isset($_REQUEST["error"])) {
             <form action="index.php?tabla=inventarios&accion=guardar&evento=cambiar" method="POST">
                 <input type="hidden" id="id_usuario" name="id_usuario" value="<?= $id ?>">
                 <button type="submit" class="btn btn-success">Cambiar</button>
+                <a class="btn btn-primary" href="index.php?tabla=inventarios&accion=digievolucionar&id=<?= $id ?>"><i class="fa-solid fa-hand-fist"></i>Evolucionar</a>
                 <?php
                 //var_dump($digimones);
                 foreach ($seleccionados as $key => $digimon) {
@@ -121,8 +121,5 @@ if (isset($_REQUEST["error"])) {
             </form>
 
             <a href="index.php" class="btn btn-primary">Volver a Inicio</a>
-            <?php
-            //}
-            ?>
         </div>
 </main>

@@ -43,10 +43,12 @@ function router (){
 		        "buscar"=>"search.php",
                 "borrar"=>"delete.php",
                 "editar"=>"edit.php",
-                "evolucion"=>"evolucion.php",
+                "verEvolucion"=>"evolucion.php",
+                "darEvolucion"=>"storeEvolucion.php",
         ],
         "inventarios"=>[//defino las acciones permitidas para esa tabla
                 "inventario"=>"inventario.php",
+                "digievolucionar"=>"digievolucionar.php",
                 "guardar"=>"store.php",
         ],
     ];
