@@ -100,12 +100,31 @@ class DigimonesController
     public function borrar(int $id): void
     {
         $digimon = $this->ver($id);
+
+        if ($digimon) {
+            $directorio = "assets/img/digimones/" . $digimon->nombre;
+            $this->eliminarCarpeta($directorio);
+        }
+
         $borrado = $this->model->delete($id);
         $redireccion = "location:index.php?accion=buscar&tabla=digimones";
 
         if ($borrado == false) $redireccion .=  "&error=true";
         header($redireccion);
         exit();
+    }
+
+    function eliminarCarpeta($carpeta)
+    {
+        if (is_dir($carpeta)) {
+            $archivos = array_diff(scandir($carpeta), array('.', '..'));
+            foreach ($archivos as $archivo) {
+                $ruta = $carpeta . "/" . $archivo;
+                is_dir($ruta) ? $this->eliminarCarpeta($ruta) : unlink($ruta);
+            }
+            return rmdir($carpeta);
+        }
+        return false;
     }
 
     public function editar(string $id, array $arrayDigi): void
@@ -153,7 +172,23 @@ class DigimonesController
             //este es el nuevo numpieza
             $id = $arrayDigi["id"];
             $redireccion = "location:index.php?accion=editar&tabla=digimones&evento=modificar&id={$id}";
+
+            if ($arrayDigi["nombre"] != $arrayDigi["nombreOriginal"]) {
+                $directorioAntiguo = "assets/img/digimones/" . $arrayDigi["nombreOriginal"] . "/";
+                $directorioNuevo = "assets/img/digimones/" . $arrayDigi["nombre"] . "/";
+
+                if (file_exists($directorioAntiguo)) {
+                    rename($directorioAntiguo, $directorioNuevo);
+                }
+
+                // Verificar si hay una imagen personalizada y actualizar la referencia
+                $imagenActual = $arrayUser["imagen"] ?? "default.png";
+                if ($imagenActual !== "default.png") {
+                    $arrayUser["imagen"] = $directorioNuevo . basename($imagenActual);
+                }
+            }
         }
+
         header($redireccion);
         exit();
         //vuelvo a la pagina donde estaba

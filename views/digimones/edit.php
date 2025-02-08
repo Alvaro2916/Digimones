@@ -56,8 +56,8 @@ if ($digimon == null) {
                         <option value="">---- Elije el Nivel del Digimon ----</option>
                         <?php
                         foreach (NIVEL as $nivel) :
-                            $selected = isset($_SESSION["datos"]["nivel"]) && $_SESSION["datos"]["nivel"] == $nivel ? "selected" : "";
-                            echo "<option value='{$nivel}'>Nivel: {$nivel}</option>";
+                            $selected = $digimon->nivel == $nivel ? "selected" : "";
+                            echo "<option value='{$nivel}' $selected >Nivel: {$nivel}</option>";
                         endforeach;
                         ?>
                     </select>
@@ -70,8 +70,8 @@ if ($digimon == null) {
                         <option value="">---- Elije El Tipo del Digimon ----</option>
                         <?php
                         foreach (TIPO as $tipo) :
-                            $selected = isset($_SESSION["datos"]["tipo"]) && $_SESSION["datos"]["tipo"] == $tipo ? "selected" : "";
-                            echo "<option value='{$tipo}'>{$tipo}</option>";
+                            $selected = (strtolower($digimon->tipo)) == strtolower($tipo) ? "selected" : "";
+                            echo "<option value='{$tipo}' $selected >{$tipo}</option>";
                         endforeach;
                         ?>
                         <input type="hidden" id="tipoOriginal" name="tipoOriginal" value="<?= $digimon->tipo ?>">
