@@ -74,7 +74,7 @@ if (isset($_REQUEST["error"])) {
             <form action="index.php?tabla=inventarios&accion=guardar&evento=cambiar" method="POST">
                 <input type="hidden" id="id_usuario" name="id_usuario" value="<?= $id ?>">
                 <button type="submit" class="btn btn-success asignar-2letra cambiar"><i class="fa-solid fas fa-sort"></i> Cambiar</button>
-                <a class="btn btn-primary" href="index.php?tabla=inventarios&accion=digievolucionar&id=<?= $id ?>"><i class="fa-solid fas fa-bolt"></i> Evolucionar</a>
+                <a class="btn btn-primary <?= ($usuario->digi_evu) <= 0 ? 'disabled' : ''?>" href="index.php?tabla=inventarios&accion=digievolucionar&id=<?= $id ?>"><i class="fa-solid fas fa-bolt"></i> Evolucionar</a>
                 <?php
                 //var_dump($digimones);
                 foreach ($seleccionados as $key => $digimon) {

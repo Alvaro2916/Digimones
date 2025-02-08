@@ -134,4 +134,19 @@ class InventariosModel
 
         return $digimones;
     }
+
+    public function delete(int $id): bool
+    {
+        $sql = "DELETE FROM digimones_inv WHERE digimon_id =:id";
+        try {
+            $sentencia = $this->conexion->prepare($sql);
+            //devuelve true si se borra correctamente
+            //false si falla el borrado
+            $resultado = $sentencia->execute([":id" => $id]);
+            return ($sentencia->rowCount() <= 0) ? false : true;
+        } catch (Exception $e) {
+            echo 'Excepción capturada: ',  $e->getMessage(), "<bR>";
+            return false;
+        }
+    }
 }

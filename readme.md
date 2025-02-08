@@ -20,7 +20,8 @@
     - ~~Mover el boton de digievolucionar al Inventario.~~
     - ~~Combatir.~~
     - ~~Hacer el controlador y vistas de inventario.~~
-    - **(P)** Digievolucionar digimon según los puntos de digimones
+    - ~~Digievolucionar digimon según los puntos de digimones~~
+    - **(P)** 
 
 - Base de datos:
     - ~~Añadir indentificador al inventario para identificar el usuario. (controlar los digimones repetidos)~~

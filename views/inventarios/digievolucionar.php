@@ -34,7 +34,7 @@ if (isset($_REQUEST["error"])) {
     <div id="contenido">
         <div id="msg" name="msg" class="<?= $clase ?>" <?= $visibilidad ?>> <?= $mensaje ?> </div>
         <div id="contenido">
-            <form action="index.php?tabla=inventarios&accion=guardar&evento=evolucionar" method="POST">
+            <form action="index.php?tabla=inventarios&accion=guardar&evento=evolucionar&id=<?= $id ?>" method="POST">
                 <button type="submit" class="btn btn-success">Evolucionar</button>
                 <?php
                 //var_dump($digimones);
@@ -49,7 +49,8 @@ if (isset($_REQUEST["error"])) {
                             Defensa: <?=$digimon->defensa?> <br>
                             Tipo: <?=$digimon->tipo?> <br>
                             Nivel: <?=$digimon->nivel?> <br>
-                            <input type='radio' name='id_Evo' id='<?=$digimon->id?>' value='<?=$digimon->id?>'>
+                            <input type="radio" name="id" id="<?=$digimon->id?>" value="<?=$digimon->id?>">
+                            <input type="hidden" id="id_usuario" name="id_usuario" value="<?= $id ?>">
                         </label>
                     </div>
                 <?php

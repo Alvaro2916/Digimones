@@ -2,6 +2,7 @@
 require_once "models/inventariosModel.php";
 require_once "assets/php/funciones.php";
 require_once "digimonesController.php";
+require_once "usuariosController.php";
 
 class InventariosController
 {
@@ -72,6 +73,72 @@ class InventariosController
             header("location:index.php?tabla=inventarios&accion=inventario&id={$digimonesC["id_usuario"]}");
             exit();
         }
+    }
+
+    public function evolucionarDigimon($id, $id_usuario)
+    {
+        $controladorDigi = new DigimonesController();
+        $controladorUsu = new UsuariosController();
+        
+        //Usuario
+        $usuario = $controladorUsu->ver($id_usuario);
+
+        //Digimon que tenemos
+        $digimon = $controladorDigi->ver($id);
+        
+        //Digimon al que evoluciona
+        $idDigiEvolucionar = $digimon->evo_id;
+        $error = false;
+        $errores = [];
+
+        if($usuario->digi_evu == 0){
+            $error = true;
+            $errores[$usuario->digi_evu][] = "Tienes que tener puntos de evolucion!";
+        }
+
+        $digiEvolucion = [
+            "usuario_id" => $id_usuario,
+            "digimon_id" => $idDigiEvolucionar,
+            "seleccionado" => 1,
+        ];
+
+        //var_dump($digiEvolucion);
+        $this->model->insert($digiEvolucion);
+        $this->model->delete($id);
+
+        header("location:index.php?tabla=inventarios&accion=inventario&id={$id_usuario}");
+        exit();
+
+        /*
+        $error = false;
+        $errores = [];
+        //vaciamos los posibles errores
+        $_SESSION["errores"] = [];
+        $_SESSION["datos"] = [];
+
+        //campos NO VACIOS
+        $arrayNoNulos = ["evo_id"];
+        $nulos = HayNulos($arrayNoNulos, $id);
+        if (count($nulos) > 0) {
+            $error = true;
+            for ($i = 0; $i < count($nulos); $i++) {
+                $errores[$nulos[$i]][] = "Tienes que seleccionar el digimon que quieras evolucionar!";
+            }
+        }
+
+
+        if ($error) {
+            $_SESSION["errores"] = $errores;
+            $_SESSION["datos"] = $id;
+
+            header("location:index.php?tabla=inventarios&accion=inventario&id={$id["id_usuario"]}&error=true");
+            exit();
+        } else {
+            $this->model->cambiarDigimones($id);
+
+            header("location:index.php?tabla=inventarios&accion=inventario&id={$id["id_usuario"]}");
+            exit();
+        }*/
     }
 
     private function EstaEnArray(stdClass $digi, array $nuevoDigis): bool
