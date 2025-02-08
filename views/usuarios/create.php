@@ -57,8 +57,8 @@ const PERMISOS = [
         <input type="file" class="form-control" id="imagen" name="imagen" value="<?= $_SESSION["datos"]["imagen"] ?? "" ?>" placeholder="Introduce la Imagen (opcional)">
         <?= isset($errores["imagen"]) ? '<div class="alert alert-danger" role="alert">' . DibujarErrores($errores, "imagen") . '</div>' : ""; ?>
       </div>
-      <button type="submit" class="btn btn-primary">Guardar</button>
-      <a href="index.php?tabla=usuarios&accion=administrar" class="btn btn-danger">Cancelar</a>
+      <button type="submit" class="btn btn-primary"><i class="fa-solid fas fa-check"></i> Guardar</button>
+      <a href="index.php?tabla=usuarios&accion=administrar" class="btn btn-danger"><i class="fa-solid fas fa-ban"></i> Cancelar</a>
     </form>
 
     <?php

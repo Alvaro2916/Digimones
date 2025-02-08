@@ -24,16 +24,6 @@ $digimones = $controlador->listar();
     </div>
     <form action="index.php?tabla=digimones&accion=darEvolucion&evento=asignar" method="POST">
         <input type="hidden" name="digimonBase" id="digimonBase" value="<?= $digimonPrincipal->id ?>">
-        <?php /*<div id="contenido1">
-            <label for="digimonBase">Elige un Digimon para evolucionar:</label>
-            <select id="digimonBase" name="digimonBase" required>
-                <?php foreach ($digimones as $digimon): ?>
-                    <option value="<?= $digimon->id ?>">
-                        <?= $digimon->nombre ?> (Nivel <?= $digimon->nivel ?>, Tipo <?= ucfirst($digimon->tipo) ?>)
-                    </option>
-                <?php endforeach; ?>
-            </select>
-        </div>*/?>
         <div id="contenido2">
             <label for="digimonEvolucion">Elige el Digimon al que quieres que evolucione:</label><br>
             <select id="digimonEvolucion" name="digimonEvolucion" required class="form-select">
@@ -50,7 +40,7 @@ $digimones = $controlador->listar();
             </select>
         </div><br>
         <button type="submit" class="btn btn-success"><i class="fas fa-arrow-up"></i> Dar evolución</button>
-        <a class="btn btn-primary" href="index.php?tabla=digimones&accion=ver&id=<?= $id ?>&buscar=true">Volver al Digimon</a>
+        <a class="btn btn-primary" href="index.php?tabla=digimones&accion=ver&id=<?= $id ?>&buscar=true"><i class="fa-solid fas fa-chevron-left"></i> Volver al Digimon</a>
     </form>
 
 </main>

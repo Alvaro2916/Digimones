@@ -80,8 +80,8 @@ const NIVEL = ["1", "2", "3", "4"];
         <input type="file" class="form-control" id="imagenD" name="imagenD" value="<?= $_SESSION["datos"]["imagenD"] ?? "" ?>" placeholder="Introduce la Imagen de derrota">
         <?= isset($errores["imagenD"]) ? '<div class="alert alert-danger" role="alert">' . DibujarErrores($errores, "imagenD") . '</div>' : ""; ?>
       </div>
-      <button type="submit" class="btn btn-primary">Guardar</button>
-      <a class="btn btn-danger" href="index.php?tabla=usuarios&accion=administrar">Cancelar</a>
+      <button type="submit" class="btn btn-primary"><i class="fa-solid fas fa-check"></i> Guardar</button>
+      <a class="btn btn-danger" href="index.php?tabla=usuarios&accion=administrar"><i class="fa-solid fas fa-ban"></i> Cancelar</a>
     </form>
 
     <?php

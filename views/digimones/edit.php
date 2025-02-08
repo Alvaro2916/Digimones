@@ -89,13 +89,13 @@ if ($digimon == null) {
                     <input type="hidden" id="defensaOriginal" name="defensaOriginal" value="<?= $digimon->defensa ?>">
                     <?= isset($errores["defensa"]) ? '<div class="alert alert-danger" role="alert">' . DibujarErrores($errores, "defensa") . '</div>' : ""; ?>
                 </div>
-                <button type="submit" class="btn btn-primary">Guardar</button>
-                <a class="btn btn-danger" href="index.php?tabla=digimones&accion=buscar">Cancelar</a>
+                <button type="submit" class="btn btn-primary"><i class="fa-solid fas fa-check"></i>  Guardar</button>
+                <a class="btn btn-danger" href="index.php?tabla=digimones&accion=buscar"><i class="fa-solid fas fa-ban"></i> Cancelar</a>
             </form>
         <?php
         } else {
         ?>
-            <a href="index.php" class="btn btn-primary">Volver a Inicio</a>
+            <a href="index.php" class="btn btn-primary"><i class="fa-solid fas fa-chevron-left"></i> Volver a Inicio</a>
         <?php
         }
         //Una vez mostrados los errores, los eliminamos

@@ -73,8 +73,8 @@ if (isset($_REQUEST["error"])) {
             <br><br>
             <form action="index.php?tabla=inventarios&accion=guardar&evento=cambiar" method="POST">
                 <input type="hidden" id="id_usuario" name="id_usuario" value="<?= $id ?>">
-                <button type="submit" class="btn btn-success">Cambiar</button>
-                <a class="btn btn-primary" href="index.php?tabla=inventarios&accion=digievolucionar&id=<?= $id ?>"><i class="fa-solid fa-hand-fist"></i>Evolucionar</a>
+                <button type="submit" class="btn btn-success"><i class="fa-solid fas fa-sort"></i> Cambiar</button>
+                <a class="btn btn-primary" href="index.php?tabla=inventarios&accion=digievolucionar&id=<?= $id ?>"><i class="fa-solid fas fa-bolt"></i> Evolucionar</a>
                 <?php
                 //var_dump($digimones);
                 foreach ($seleccionados as $key => $digimon) {
@@ -120,6 +120,6 @@ if (isset($_REQUEST["error"])) {
                 </div>
             </form>
 
-            <a href="index.php" class="btn btn-primary">Volver a Inicio</a>
+            <a href="index.php" class="btn btn-primary"><i class="fa-solid fas fa-chevron-left"></i> Volver a Inicio</a>
         </div>
 </main>

@@ -18,8 +18,8 @@
     <table class="table table-light table-hover">
       <thead class="table-dark">
         <tr>
-          <th scope="col"><a class="btn btn-primary" href="index.php?tabla=inventarios&accion=inventario&id=<?= $_SESSION["usuario"]->id ?>"><i class="fa-regular fa-eye"></i> Ver mis Digimons (Inventario)</a></th>
-          <th scope="col"><a class="btn btn-primary" href="index.php?tabla=usuarios&accion=combate&id=<?= $_SESSION["usuario"]->id ?>"><i class="fa-solid fa-hand-fist"></i> Jugar Partida</a></th>
+          <th scope="col"><a class="btn btn-primary" href="index.php?tabla=inventarios&accion=inventario&id=<?= $_SESSION["usuario"]->id ?>"><i class="fa-regular fas fa-eye"></i> Ver mis Digimons (Inventario)</a></th>
+          <th scope="col"><a class="btn btn-primary" href="index.php?tabla=usuarios&accion=combate&id=<?= $_SESSION["usuario"]->id ?>"><i class="fa-solid fas fa-dice-d20"></i> Jugar Partida</a></th>
         </tr>
       </thead>
     </table>

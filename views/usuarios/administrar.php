@@ -22,16 +22,16 @@
         <table class="table table-light table-hover">
             <thead class="table-dark">
                 <tr>
-                <th scope="col"><a class="btn btn-primary" href="index.php?tabla=usuarios&accion=crear&id=<?= $_SESSION["usuario"]->id ?>"><i class="fa-solid fa-sitemap"></i> Crear Usuario</a></th>
-                <th scope="col"><a class="btn btn-primary" href="index.php?tabla=usuarios&accion=buscar"><i class="fa-regular fa-eye"></i> Listar Usuarios</a></th>
-                    <th scope="col"><a class="btn btn-primary" href="index.php?tabla=usuarios&accion=ver&id=<?= $_SESSION["usuario"]->id ?>"><i class="fa-solid fa-sitemap"></i> Ver Usuario</a></th>
-                    <th scope="col"><a class="btn btn-primary" href="index.php?tabla=digimones&accion=crear&id=<?= $_SESSION["usuario"]->id ?>"><i class="fa-solid fa-hand-fist"></i> Dar de alta a un Digimon</a></th>
-                    <th scope="col"><a class="btn btn-primary" href="index.php?tabla=digimones&accion=buscar&id=<?= $_SESSION["usuario"]->id ?>"><i class="fa-solid fa-gear"></i> Listar Digimones</a></th>
+                <th scope="col"><a class="btn btn-primary" href="index.php?tabla=usuarios&accion=crear&id=<?= $_SESSION["usuario"]->id ?>"><i class="fa-solid fas fa-plus"></i> Crear Usuario</a></th>
+                <th scope="col"><a class="btn btn-primary" href="index.php?tabla=usuarios&accion=buscar"><i class="fa-solid fas fa-list"></i> Listar Usuarios</a></th>
+                    <th scope="col"><a class="btn btn-primary" href="index.php?tabla=usuarios&accion=ver&id=<?= $_SESSION["usuario"]->id ?>"><i class="fa-solid fas fa-user-tie"></i> Ver Usuario</a></th>
+                    <th scope="col"><a class="btn btn-primary" href="index.php?tabla=digimones&accion=crear&id=<?= $_SESSION["usuario"]->id ?>"><i class="fa-solid fas fa-upload"></i> Dar de alta a un Digimon</a></th>
+                    <th scope="col"><a class="btn btn-primary" href="index.php?tabla=digimones&accion=buscar&id=<?= $_SESSION["usuario"]->id ?>"><i class="fa-solid fas fa-list"></i> Listar Digimones</a></th>
                 </tr>
             </thead>
         </table>
     </div>
     <div>
-        <a href="index.php" class="btn btn-primary">Volver</a>
+        <a href="index.php" class="btn btn-primary"><i class="fa-solid fas fa-chevron-left"></i> Volver</a>
     </div>
 </main>

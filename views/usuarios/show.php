@@ -27,16 +27,16 @@ $usuarios = $controlador->ver($id);
                     Partidas Perdidas: <?= $usuarios->partidas_perdidas ?><br>
                     Partidas Totales: <?= $usuarios->partidas_totales ?><br>
                 </p>
-                <a class="btn btn-success" href="index.php?tabla=usuarios&accion=editar&id=<?= $id ?><?= isset($_REQUEST["buscar"]) ? "&buscar=true" : ""; ?>"><i class="fa fa-pencil"></i>Editar</a>
-                <a class="btn btn-danger <?= $disable ?>" href="index.php?tabla=usuarios&accion=borrar&id=<?= $id ?>"><i class="fa fa-trash"></i> Borrar</a>
+                <a class="btn btn-success" href="index.php?tabla=usuarios&accion=editar&id=<?= $id ?><?= isset($_REQUEST["buscar"]) ? "&buscar=true" : ""; ?>"><i class="fa-solid fas fa-pen"></i> Editar</a>
+                <a class="btn btn-danger <?= $disable ?>" href="index.php?tabla=usuarios&accion=borrar&id=<?= $id ?>"><i class="fa-solid fas fa-trash"></i> Borrar</a>
                 <?php
                 if (isset($_REQUEST["buscar"])) {
                 ?>
-                    <a href="index.php?tabla=usuarios&accion=buscar&evento=todos" class="btn btn-primary">Atras</a>
+                    <a href="index.php?tabla=usuarios&accion=buscar&evento=todos" class="btn btn-primary"><i class="fa-solid fas fa-chevron-left"></i> Atras</a>
                 <?php
                 } else {
                 ?>
-                    <a href="index.php?tabla=usuarios&accion=administrar" class="btn btn-primary">Atras</a>
+                    <a href="index.php?tabla=usuarios&accion=administrar" class="btn btn-primary"><i class="fa-solid fas fa-chevron-left"></i> Atras</a>
                 <?php
                 }
                 ?>

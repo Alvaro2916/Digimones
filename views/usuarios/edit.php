@@ -96,15 +96,15 @@ const PERMISOS = [
                     <?= isset($errores["digi_evu"]) ? '<div class="alert alert-danger" role="alert">' . DibujarErrores($errores, "digi_evu") . '</div>' : ""; ?>
                 </div>
 
-                <button type="submit" class="btn btn-primary">Guardar</button>
+                <button type="submit" class="btn btn-primary"><i class="fa-solid fas fa-check"></i> Guardar</button>
                 <?php
                 if (isset($_REQUEST["buscar"])) {
                 ?>
-                    <a class="btn btn-danger" href="index.php?tabla=usuarios&accion=ver&id=<?= $user->id ?>&buscar=true">Cancelar</a>
+                    <a class="btn btn-danger" href="index.php?tabla=usuarios&accion=ver&id=<?= $user->id ?>&buscar=true"><i class="fa-solid fas fa-ban"></i> Cancelar</a>
                 <?php
                 } else {
                 ?>
-                    <a class="btn btn-danger" href="index.php?tabla=usuarios&accion=ver&id=<?= $user->id ?>">Cancelar</a>
+                    <a class="btn btn-danger" href="index.php?tabla=usuarios&accion=ver&id=<?= $user->id ?>"><i class="fa-solid fas fa-ban"></i> Cancelar</a>
                 <?php
                 }
                 ?>
