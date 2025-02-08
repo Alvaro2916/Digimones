@@ -74,9 +74,9 @@ class UsuariosController
                 $arrayUser["imagen"]["name"] = "default.png";
             }
 
-            $this->inventario->addPrimerosDigimones($id);
-
             $id = $this->model->insert($arrayUser);
+
+            $this->inventario->addPrimerosDigimones($id);
 
             header("location:index.php?accion=ver&tabla=usuarios&id=" . $id);
             exit();
@@ -97,12 +97,31 @@ class UsuariosController
     public function borrar(int $id): void
     {
         $usuario = $this->ver($id);
+
+        if ($usuario) {
+            $directorio = "assets/img/usuarios/" . $usuario->nombre;
+            $this->eliminarCarpeta($directorio);
+        }
+
         $borrado = $this->model->delete($id);
         $redireccion = "location:index.php?accion=buscar&tabla=usuarios";
 
         if ($borrado == false) $redireccion .=  "&error=true";
         header($redireccion);
         exit();
+    }
+
+    function eliminarCarpeta($carpeta)
+    {
+        if (is_dir($carpeta)) {
+            $archivos = array_diff(scandir($carpeta), array('.', '..'));
+            foreach ($archivos as $archivo) {
+                $ruta = $carpeta . "/" . $archivo;
+                is_dir($ruta) ? $this->eliminarCarpeta($ruta) : unlink($ruta);
+            }
+            return rmdir($carpeta);
+        }
+        return false;
     }
 
     public function editar(string $id, array $arrayUser): void
@@ -146,18 +165,18 @@ class UsuariosController
             if ($arrayUser["nombre"] != $arrayUser["nombreOriginal"]) {
                 $directorioAntiguo = "assets/img/usuarios/" . $arrayUser["nombreOriginal"] . "/";
                 $directorioNuevo = "assets/img/usuarios/" . $arrayUser["nombre"] . "/";
-    
+
                 if (file_exists($directorioAntiguo)) {
                     rename($directorioAntiguo, $directorioNuevo);
                 }
-    
+
                 // Verificar si hay una imagen personalizada y actualizar la referencia
                 $imagenActual = $arrayUser["imagen"] ?? "default.png";
                 if ($imagenActual !== "default.png") {
                     $arrayUser["imagen"] = $directorioNuevo . basename($imagenActual);
                 }
             }
-    
+
             unset($_SESSION["errores"]);
             unset($_SESSION["datos"]);
             $id = $arrayUser["id"];
@@ -167,7 +186,7 @@ class UsuariosController
             $_SESSION["datos"] = $arrayUser;
             $redireccion = "location:index.php?accion=editar&tabla=usuarios&evento=modificar&id={$id}&error=true";
         }
-        
+
         header($redireccion);
         exit();
         //vuelvo a la pagina donde estaba
@@ -183,29 +202,29 @@ class UsuariosController
     {
         $ganador = [];
         for ($i = 0; $i < 3; $i++) {
-            $calcUsu=$this->calculo($digimonesUsu[$i], $digimonesRiv[$i]);
-            $calcRiv=$this->calculo($digimonesRiv[$i], $digimonesUsu[$i]);
+            $calcUsu = $this->calculo($digimonesUsu[$i], $digimonesRiv[$i]);
+            $calcRiv = $this->calculo($digimonesRiv[$i], $digimonesUsu[$i]);
 
             if ($calcUsu > $calcRiv) {
-                $ganador []= 1;
-            }else {
-                $ganador []= 0;
+                $ganador[] = 1;
+            } else {
+                $ganador[] = 0;
             }
         }
-        if(array_sum($ganador) >= 2){
-            $usuario->partidas_ganadas+=1;
-            $usuario->partidas_totales+=1;
-            if($usuario->partidas_ganadas % 10 == 0){
-                $usuario->digi_evu+=1;
+        if (array_sum($ganador) >= 2) {
+            $usuario->partidas_ganadas += 1;
+            $usuario->partidas_totales += 1;
+            if ($usuario->partidas_ganadas % 10 == 0) {
+                $usuario->digi_evu += 1;
             }
             $this->model->edit($usuario->id, get_object_vars($usuario));
-        }else {
-            $usuario->partidas_perdidas+=1;
-            $usuario->partidas_totales+=1;
+        } else {
+            $usuario->partidas_perdidas += 1;
+            $usuario->partidas_totales += 1;
             $this->model->edit($usuario->id, get_object_vars($usuario));
         }
 
-        if($usuario->partidas_totales % 10 == 0){
+        if ($usuario->partidas_totales % 10 == 0) {
             $this->inventario->addRandomDigimon($usuario);
         }
 
@@ -274,15 +293,15 @@ class UsuariosController
             case "elemental":
                 switch ($digimonRival->tipo) {
                     case "vacuna":
-                        return $digimonPrincipal["ataque"] + $digimonPrincipal->defensa + 10 + rand(0, 50);
+                        return $digimonPrincipal->ataque + $digimonPrincipal->defensa + 10 + rand(0, 50);
                     case "virus":
-                        return $digimonPrincipal["ataque"] + $digimonPrincipal->defensa + 5 + rand(0, 50);
+                        return $digimonPrincipal->ataque + $digimonPrincipal->defensa + 5 + rand(0, 50);
                     case "animal":
-                        return $digimonPrincipal["ataque"] + $digimonPrincipal->defensa - 5 + rand(0, 50);
+                        return $digimonPrincipal->ataque + $digimonPrincipal->defensa - 5 + rand(0, 50);
                     case "planta":
-                        return $digimonPrincipal["ataque"] + $digimonPrincipal->defensa - 10 + rand(0, 50);
+                        return $digimonPrincipal->ataque + $digimonPrincipal->defensa - 10 + rand(0, 50);
                     default:
-                        return $digimonPrincipal["ataque"] + $digimonPrincipal->defensa + 0 + rand(0, 50);
+                        return $digimonPrincipal->ataque + $digimonPrincipal->defensa + 0 + rand(0, 50);
                 }
 
             default:

@@ -13,7 +13,8 @@
     - ~~Terminar DigiEvolucioness Admin {Vista, Actualización, Asignación de puntos y Evitar evolucionar un Digimon lvl 4}~~
     - **(P)** ~~Deshabilitar boton de digievolucionar para digimones de nivel 4~~ (opcional: hacer lo mismo pero con los digimones que no tienen evolucion por culpa de su tipo y/o nivel ).
     - ~~Asignar puntos por cada 10 victorias~~
-    - ~~Asignar digimon nuevo (random) por cada 10 partidas.~~ 
+    - ~~Asignar digimon nuevo (random) por cada 10 partidas.~~
+    - **(P)** Eliminar la carpeta de las imagenes si se elimina el ~~usuario y/o~~ digimon.
 
 - Inventario:
     - ~~Mover el boton de digievolucionar al Inventario.~~
@@ -24,7 +25,7 @@
 - Base de datos:
     - ~~Añadir indentificador al inventario para identificar el usuario. (controlar los digimones repetidos)~~
     - ~~Arreglar imagenes Usuarios~~
-    - **(P)** Arreglar imagenes por defecto Usuarios y Digimones y arreglar las imagenes cuando se edita el nombre de usuario o digimon.
+    - **(P)** Arreglar ~~imagenes por defecto Usuarios y~~ Digimones y arreglar las imagenes cuando se edita el nombre de ~~usuario o~~ digimon.
 
 - Hacer todo el diseño.
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-02-2025 a las 16:13:03
+-- Tiempo de generación: 08-02-2025 a las 16:56:59
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -95,18 +95,21 @@ CREATE TABLE `digimones_inv` (
 --
 
 INSERT INTO `digimones_inv` (`id`, `usuario_id`, `digimon_id`, `seleccionado`) VALUES
-(35, 1, 27, 1),
-(36, 1, 15, 1),
-(37, 1, 11, 1),
-(38, 1, 27, 1),
-(39, 1, 11, 1),
-(40, 1, 19, 1),
-(41, 1, 6, 1),
-(42, 1, 2, 1),
-(43, 1, 27, 1),
-(44, 1, 6, 1),
-(45, 1, 31, 1),
-(46, 1, 10, 1);
+(1, 2, 27, 1),
+(2, 2, 15, 1),
+(3, 2, 31, 1),
+(4, 3, 6, 1),
+(5, 3, 1, 1),
+(6, 3, 10, 1),
+(7, 4, 23, 1),
+(8, 4, 15, 1),
+(9, 4, 27, 1),
+(10, 5, 27, 1),
+(11, 5, 19, 1),
+(12, 5, 10, 1),
+(13, 6, 11, 1),
+(14, 6, 15, 1),
+(15, 6, 6, 1);
 
 -- --------------------------------------------------------
 
@@ -132,10 +135,11 @@ CREATE TABLE `usuarios` (
 
 INSERT INTO `usuarios` (`id`, `nombre`, `imagen`, `partidas_ganadas`, `partidas_perdidas`, `partidas_totales`, `permisos`, `contrasenya`, `digi_evu`) VALUES
 (1, 'admin', 'default.png', 0, 0, 0, 1, '$2y$10$dIBvy.QseqFNzP7GErgSF.P7coKdx/onIiO4QNiiLnbwYyPMxOUFm', 0),
-(2, 'Ismael', 'bb193d3c2af2d12905197222b95e635d.jpg', 0, 0, 0, 0, '$2y$10$f0REKCje9bcS1D8VI6Xm9.zw3scaUsG3Mx2GIOe6xMBW4No2mCBCu', 0),
-(3, 'Alvaro', '6cukfi.jpg', 0, 0, 0, 0, '$2y$10$XLwVIHsjp8emORhcMh9OyOGbZtg.LVnyCf9WAqp6ujAxlw2U669E.', 0),
-(4, 'Ana', 'default.png', 0, 0, 0, 1, '$2y$10$wVRpBDbyZ5K6D7LV6t5jS.zEHWfsI7mkY1.aZ5nHt0Y7X6q.AUWsW', 0),
-(5, 'Luis', 'default.png', 0, 0, 0, 0, '$2y$10$YfOn83Zk.VWazVL5b6UCCe0EVYC1RbQxkH2NoJPpan3vcoMxtjiGW', 0);
+(2, 'Ismael', 'bb193d3c2af2d12905197222b95e635d.jpg', 0, 0, 0, 0, '$2y$10$3VuQPKNklJ0141cTTgGZs.g2qcIKbyb9zLQU/Fts9kxWvDdLlcvfy', 0),
+(3, 'Alvaro', '6cukfi.jpg', 0, 0, 0, 0, '$2y$10$vQIVG0TXOTD88Jmkhx9I0e2PCPNaDyUJsfaiEo9AyS4zcb/kcGZHy', 0),
+(4, 'Jesus', 'FB_IMG_1695833204428.jpg', 0, 0, 0, 1, '$2y$10$NCQL1vsTeZRJasOqZfFhJOGJCeP872.ifPicHCem/tX8/k0HAI4NG', 0),
+(5, 'Ana', 'default.png', 0, 0, 0, 1, '$2y$10$2ChEUT3mIJBMYbJG7h75HOiX.l5XbvLX7Ns8WmfZjpYPzCTpi7Ph.', 0),
+(6, 'Luis', 'default.png', 0, 0, 0, 0, '$2y$10$UycR3sySl4fZl9LKVNrlLu/gHSKTjXmWmg9.utQh43ArwvzMJ6/M6', 0);
 
 --
 -- Índices para tablas volcadas
@@ -179,13 +183,13 @@ ALTER TABLE `digimones`
 -- AUTO_INCREMENT de la tabla `digimones_inv`
 --
 ALTER TABLE `digimones_inv`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Restricciones para tablas volcadas

@@ -15,7 +15,7 @@ $rivalEncontrado = false;
 while (!$rivalEncontrado) {
     $elegirRival = $controlador->buscar("id", "distinto", $id);
     $rival = $elegirRival[rand(0, count($elegirRival) - 1)];
-    if (!$rival->permisos) {
+    if ($rival->nombre != "admin") {
         $rivalEncontrado = true;
     }
 }

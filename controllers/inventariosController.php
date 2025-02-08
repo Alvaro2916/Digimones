@@ -238,64 +238,6 @@ class InventariosController
         exit();
     }
 
-    public function editar(string $id, array $arrayDigi): void
-    {
-        $error = false;
-        $errores = [];
-        if (isset($_SESSION["errores"])) {
-            unset($_SESSION["errores"]);
-            unset($_SESSION["datos"]);
-        }
-
-        // ERRORES DE TIPO
-        if (!is_valid_email($arrayDigi["email"])) {
-            $error = true;
-            $errores["email"][] = "El email tiene un formato incorrecto";
-        }
-
-        //campos NO VACIOS
-        $arrayNoNulos = ["email", "password", "usuario"];
-        $nulos = HayNulos($arrayNoNulos, $arrayDigi);
-        if (count($nulos) > 0) {
-            $error = true;
-            for ($i = 0; $i < count($nulos); $i++) {
-                $errores[$nulos[$i]][] = "El campo {$nulos[$i]} NO puede estar vacio ";
-            }
-        }
-
-        //CAMPOS UNICOS
-        $arrayUnicos = [];
-        if ($arrayDigi["email"] != $arrayDigi["emailOriginal"]) $arrayUnicos[] = "email";
-        if ($arrayDigi["usuario"] != $arrayDigi["usuarioOriginal"]) $arrayUnicos[] = "usuario";
-
-        foreach ($arrayUnicos as $CampoUnico) {
-            if ($this->model->exists($CampoUnico, $arrayDigi[$CampoUnico])) {
-                $errores[$CampoUnico][] = "El {$CampoUnico}  {$arrayDigi[$CampoUnico]}  ya existe";
-                $error = true;
-            }
-        }
-
-        //todo correcto
-        $editado = false;
-        if (!$error) $editado = $this->model->edit($id, $arrayDigi);
-
-        if ($editado == false) {
-            $_SESSION["errores"] = $errores;
-            $_SESSION["datos"] = $arrayDigi;
-            $redireccion = "location:index.php?accion=editar&tabla=user&evento=modificar&id={$id}&error=true";
-        } else {
-            //vuelvo a limpiar por si acaso
-            unset($_SESSION["errores"]);
-            unset($_SESSION["datos"]);
-            //este es el nuevo numpieza
-            $id = $arrayDigi["id"];
-            $redireccion = "location:index.php?accion=editar&tabla=user&evento=modificar&id={$id}";
-        }
-        header($redireccion);
-        exit();
-        //vuelvo a la pagina donde estaba
-    }
-
     public function buscar(string $campo = "nombre", string $metodo = "contiene", string $texto = "", stdClass $user): array
     {
         $users = $this->model->search($campo, $metodo, $texto, $user);
