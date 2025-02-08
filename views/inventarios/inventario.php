@@ -46,35 +46,30 @@ if (isset($_REQUEST["error"])) {
     <div>
         <div id="msg" name="msg" class="<?= $clase ?>" <?= $visibilidad ?>> <?= $mensaje ?> </div>
         <div class="contenidoInventario">
+            <div class="botones-superiores">
+                <a href="index.php" class="btn btn-primary volver"><i class="fa-solid fas fa-chevron-left"></i> Volver a Inicio</a>
+                <a class="btn btn-primary <?= ($usuario->digi_evu) <= 0 ? 'disabled evolucionar' : 'evolucionarEnabled' ?>" href="index.php?tabla=inventarios&accion=digievolucionar&id=<?= $id ?>"><i class="fa-solid fas fa-bolt"></i> Evolucionar</a>
+            </div>
             <div class="buscar">
-                <form action="index.php?tabla=inventarios&accion=inventario&id=<?= $id ?>&evento=filtrar" method="POST">
+                <form action="index.php?tabla=inventarios&accion=inventario&id=<?= $id ?>&evento=filtrar" method="POST" class="buscar_content">
                     <div class="form-group">
-                        <label for="digimon">Buscar Digimon</label><br>
-                        <select class="form-select" aria-label="Default select example" id="campo" name="campo">
-                            <option value="nombre" selected>Nombre</option>
-                            <option value="tipo">Tipo de Digimon</option>
-                            <option value="nivel">Nivel del Digimon</option>
-                        </select>
-                        <select class="form-select" aria-label="Default select example" id="modo" name="modo">
-                            <option value="empieza" selected>Empieza Por</option>
-                            <option value="acaba">Acaba En</option>
-                            <option value="contiene">Contiene</option>
-                            <option value="igual">Igual A</option>
-                        </select>
-                        <input type="text" required class="form-control" id="busqueda" name="busqueda" placeholder="Buscar por Digimon">
+                        <input type="hidden" id="modo" name="modo" value="empieza">
+                        <div>
+                            <label for="digimon">Buscar Digimon</label><br>
+                            <select class="form-select" aria-label="Default select example" id="campo" name="campo">
+                                <option value="nombre" selected>Nombre</option>
+                                <option value="tipo">Tipo de Digimon</option>
+                                <option value="nivel">Nivel del Digimon</option>
+                            </select>
+                            <input type="text" class="form-control" id="busqueda" name="busqueda" placeholder="Buscar por Digimon">
+                        </div>
                     </div>
-                    <button type="submit" class="btn btn-success asignar-2letra" name="Filtrar"><i class="fas fa-search"></i> Buscar</button>
+                    <button type="submit" class="btn btn-success asignar-2letra btn-buscar" name="Filtrar"><i class="fas fa-search"></i> Buscar</button>
                 </form>
                 <!-- Este formulario es para ver todos los datos    -->
-                <form action="index.php?tabla=inventarios&accion=inventario&id=<?= $id ?>&evento=todos" method="POST">
-                    <button type="submit" class="btn btn-info asignar-2letra" name="Todos"><i class="fas fa-list"></i> Listar</button>
-                </form>
             </div>
-            <br><br>
             <form action="index.php?tabla=inventarios&accion=guardar&evento=cambiar" method="POST">
                 <input type="hidden" id="id_usuario" name="id_usuario" value="<?= $id ?>">
-                <button type="submit" class="btn btn-success asignar-2letra cambiar"><i class="fa-solid fas fa-sort"></i> Cambiar</button>
-                <a class="btn btn-primary <?= ($usuario->digi_evu) <= 0 ? 'disabled' : ''?>" href="index.php?tabla=inventarios&accion=digievolucionar&id=<?= $id ?>"><i class="fa-solid fas fa-bolt"></i> Evolucionar</a>
                 <?php
                 //var_dump($digimones);
                 foreach ($seleccionados as $key => $digimon) {
@@ -110,21 +105,23 @@ if (isset($_REQUEST["error"])) {
                     }
                 }
                 ?>
-                <div class="equipo">
-                    <h2 class='h3'>Equipo</h2>
-                    <div class='form-group, digimones__seleccionados'>
-                        <?= $digimonesSelec ?>
-                    </div>
-                </div>
-                <div class="guardados">
-                    <h2 class='h3'>Guardados</h2>
-                    <div class='form-group'>
-                        <?= $digimonesNOSelec ?>
-                    </div>
-                </div>
             </form>
-
-            
+            <div class="equipo">
+                <div class="equipo__header">
+                    <h2 class='h3'>Equipo</h2>
+                    <button type="submit" class="btn btn-success asignar-2letra cambiar">
+                        <i class="fa-solid fas fa-sort"> Cambiar</i>
+                    </button>
+                </div>
+                <div class='form-group, digimones__lista'>
+                    <?= $digimonesSelec ?>
+                </div>
+            </div>
+            <h2 class='h3'>Guardados</h2>
+            <div class="guardados">
+                <div class='form-group digimones__lista'>
+                    <?= $digimonesNOSelec ?>
+                </div>
+            </div>
         </div>
-        <a href="index.php" class="btn btn-primary"><i class="fa-solid fas fa-chevron-left"></i> Volver a Inicio</a>
 </main>
