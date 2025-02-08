@@ -1,4 +1,64 @@
 .digimones__seleccionados{
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    place-items: center; /* Centra tanto horizontal como verticalmente */
+    gap: 0.5rem;
+    margin: 5rem;
+    margin-left: 20rem;
+    margin-right: 20rem;
+}
+
+h2{
+    text-align: center;
+    color: white;
+    background: url("../img/Fondos/Fondo2.jpg");
+    border-radius: 1rem;
+    padding: 1rem;
+    margin-left: 40%;
+    margin-right: 40%;
+}
+
+.cambiar{
+    order: 0;
+    text-align: center;
+}
+
+.contenidoInventario {
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
+    gap: 1rem;
+    background-color: #c6e3eeb9;
+}
+
+.equipo{
+    order: 0;
+}
+
+.cartaDigimon{
+    background-color: aqua;
+    text-align: center;
+    width: 10rem;
+    border: 0.3rem solid #ffffff00;
+    border-radius: 12px;
+    background: url("../img/Fondos/Fondo3.jpg") padding-box, linear-gradient(var(--angle),
+            #40f2ff,
+            #ff46ff) border-box;
+    animation: 8s rotate linear infinite;
+}
+
+.buscar{
+    order: 1;
+}
+
+@keyframes rotate {
+    to {
+        --angle: 360deg;
+    }
+}
+
+@property --angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
 }

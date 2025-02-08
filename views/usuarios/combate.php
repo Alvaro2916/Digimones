@@ -86,6 +86,7 @@ if (isset($_REQUEST["evento"]) && $_REQUEST["evento"] == "combatir") {
     <form action="index.php?tabla=usuarios&accion=combate&id=<?= $id ?>&evento=combatir" method="POST">
         <button type="submit" class="btn btn-success" name="Combatir">Combatir</button>
     </form>
+    <a href="index.php" class="btn btn-primary"><i class="fa-solid fas fa-chevron-left"></i> Volver a Inicio</a>
 
     <?php
         if (isset($_REQUEST["evento"]) && $_REQUEST["evento"] == "combatir") {

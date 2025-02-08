@@ -1,0 +1,108 @@
+.cabeceraAdmin {
+    background-image: url("../img/Fondos/Fondo6.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.cabeceraNormal {
+    background-image: url("../img/Fondos/Fondo3.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 0%;
+}
+
+.asignar-letra {
+    font-family: "Geo", serif;
+    font-size: large;
+    font-weight: 500;
+    font-style: normal;
+    color: black;
+}
+
+.asignar-2letra {
+    font-family: "Jersey 15", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+header {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: rgba(0, 0, 0, 0.55);
+}
+
+.navbar-dark:hover .navbar-nav:hover .nav-link:hover {
+    color: rgb(194, 122, 178);
+}
+
+.navbar-grid {
+    color: black;
+    display: flex;
+    flex-direction: row;
+}
+
+.inicio {
+    height: 80vh;
+    display: flex;
+    align-items: center;
+}
+
+.inicioTabla {
+    display: grid;
+    grid-template-columns: 2fr;
+    width: 100%;
+    height: 100%;
+    gap: 10rem;
+    /* Asegura que ocupe el ancho disponible */
+}
+
+.btn-principal {
+    background-color: rgb(235, 129, 58);
+    color: white;
+    font-size: 3rem;
+    border: 0.3rem solid #ffffff00;
+    border-radius: 12px;
+    background: linear-gradient(#e77f08, #853f0b) padding-box, linear-gradient(var(--angle),
+            #7be6ee,
+            #ffa2ff) border-box;
+    animation: 8s rotate linear infinite;
+}
+
+.btn-principal:hover {
+    background-color: rgb(235, 129, 58);
+    font-size: 3rem;
+    border: 0.3rem solid #ffffff00;
+    border-radius: 12px;
+    background: linear-gradient(#fd951d, #502707) padding-box, linear-gradient(var(--angle),
+            #40f2ff,
+            #ff46ff) border-box;
+    animation: 8s rotate linear infinite;
+}
+
+h1 {
+    color: white;
+}
+
+.fondoPrincipal {
+    background-image: url("../img/Fondos/FondoPrincipal.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+@keyframes rotate {
+    to {
+        --angle: 360deg;
+    }
+}
+
+@property --angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+}
