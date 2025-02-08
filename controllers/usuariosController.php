@@ -141,18 +141,33 @@ class UsuariosController
         $editado = false;
         if (!$error) $editado = $this->model->edit($id, $arrayUser);
 
-        if ($editado == false) {
+        if ($editado) {
+            // Si el nombre del usuario ha cambiado, renombrar la carpeta
+            if ($arrayUser["nombre"] != $arrayUser["nombreOriginal"]) {
+                $directorioAntiguo = "assets/img/usuarios/" . $arrayUser["nombreOriginal"] . "/";
+                $directorioNuevo = "assets/img/usuarios/" . $arrayUser["nombre"] . "/";
+    
+                if (file_exists($directorioAntiguo)) {
+                    rename($directorioAntiguo, $directorioNuevo);
+                }
+    
+                // Verificar si hay una imagen personalizada y actualizar la referencia
+                $imagenActual = $arrayUser["imagen"] ?? "default.png";
+                if ($imagenActual !== "default.png") {
+                    $arrayUser["imagen"] = $directorioNuevo . basename($imagenActual);
+                }
+            }
+    
+            unset($_SESSION["errores"]);
+            unset($_SESSION["datos"]);
+            $id = $arrayUser["id"];
+            $redireccion = "location:index.php?accion=editar&tabla=usuarios&evento=modificar&id={$id}";
+        } else {
             $_SESSION["errores"] = $errores;
             $_SESSION["datos"] = $arrayUser;
             $redireccion = "location:index.php?accion=editar&tabla=usuarios&evento=modificar&id={$id}&error=true";
-        } else {
-            //vuelvo a limpiar por si acaso
-            unset($_SESSION["errores"]);
-            unset($_SESSION["datos"]);
-            //este es el nuevo numpieza
-            $id = $arrayUser["id"];
-            $redireccion = "location:index.php?accion=editar&tabla=usuarios&evento=modificar&id={$id}";
         }
+        
         header($redireccion);
         exit();
         //vuelvo a la pagina donde estaba

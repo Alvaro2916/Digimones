@@ -50,7 +50,7 @@ const PERMISOS = [
                 <input type="hidden" id="imagen" name="imagen" value="<?= $user->imagen ?>">
                 <div class="form-group">
                     <label for="nombre">Nombre </label>
-                    <input type="text" disabled class="form-control" id="nombre" name="nombre" aria-describedby="nombre" value="<?= $_SESSION["datos"]["nombre"] ?? $user->nombre ?>">
+                    <input type="text" class="form-control" id="nombre" name="nombre" aria-describedby="nombre" value="<?= $_SESSION["datos"]["nombre"] ?? $user->nombre ?>">
                     <input type="hidden" id="nombreOriginal" name="nombreOriginal" value="<?= $user->nombre ?>">
                     <?= isset($errores["nombre"]) ? '<div class="alert alert-danger" role="alert">' . DibujarErrores($errores, "nombre") . '</div>' : ""; ?>
                 </div>
