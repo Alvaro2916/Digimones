@@ -84,6 +84,33 @@ class InventariosController
         return false;
     }
 
+
+    public function addRandomDigimon(stdClass $usuario)
+    {
+        $digimonesN1 = $this->digimones->buscar("nivel", "igual", "1");
+        $totalDigiN1 = count($digimonesN1);
+        $digimonesUsuario = array_map(function ($item) {
+            return (array) $item;
+        }, $this->listarUsu($usuario));
+        $encontrado = false;
+
+        if (!(count($digimonesUsuario) >= $totalDigiN1)) {
+            while (!$encontrado) {
+                $i = random_int(0, $totalDigiN1 - 1);
+                if (!$this->EstaEnArray($digimonesN1[$i], $digimonesUsuario)) {
+                    //$nuevoDigis[]=$digimonesN1[$i];            
+                    $digimonNuevo = [
+                        "usuario_id" => $usuario->id,
+                        "digimon_id" => $digimonesN1[$i]->id,
+                        "seleccionado" => 0,
+                    ];
+                    $encontrado = true;
+                }
+            }
+        }
+        $this->model->insert($digimonNuevo);
+    }
+
     public function addPrimerosDigimones($userId)
     {
         //$digimonesN1= $this->digimones->listar();

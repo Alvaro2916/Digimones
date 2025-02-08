@@ -55,8 +55,8 @@ if (isset($_REQUEST['error'])) {
                     ?>
                     <br>
                 </p>
-                <a class="btn btn-danger <?= $disable ?>" href="index.php?tabla=digimones&accion=borrar&id=<?= $id ?>"><i class="fa fa-trash"></i> Borrar</a>
-                <a class="btn btn-success" href="index.php?tabla=digimones&accion=verEvolucion&id=<?= $digi->id ?>">Definir Evoluciones</a>
+                <a class="btn btn-danger" href="index.php?tabla=digimones&accion=borrar&id=<?= $id ?>"><i class="fa fa-trash"></i> Borrar</a>
+                <a class="btn btn-success <?= ($digi->nivel) == 4 ? 'disabled' : ''?>" href="index.php?tabla=digimones&accion=verEvolucion&id=<?= $digi->id ?>">Definir Evoluciones</a>
                 <?php
                 if (isset($_REQUEST["buscar"])) {
                 ?>

@@ -17,7 +17,7 @@ $arrayUser = [
     "ataque" => $_REQUEST["ataque"],
     "defensa" => $_REQUEST["defensa"],
     "nivel" => $_REQUEST["nivel"] ?? "1",
-    "evo_id" => $_REQUEST["evo_id"],
+    "evo_id" => "0",
     "tipo" => $_REQUEST["tipo"],
 ];
 

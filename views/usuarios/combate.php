@@ -34,7 +34,7 @@ if (!isset($_REQUEST['id'])) {
     // No poner exit puede provocar acciones no esperadas dificiles de depurar
 }
 if (isset($_REQUEST["evento"]) && $_REQUEST["evento"] == "combatir") {
-    $combatir = $controlador->combatir($usuario, $rival, $seleccionados, $seleccionadosRival);
+    $combatir = $controlador->combatir($usuario, $seleccionados, $seleccionadosRival);
     var_dump($combatir);
 }
 ?>

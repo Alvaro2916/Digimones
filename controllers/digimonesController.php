@@ -28,7 +28,7 @@ class DigimonesController
         }
 
         //campos NO VACIOS
-        $arrayNoNulos = ["nombre", "imagen", "ataque", "defensa", "evo_id", "tipo", "imagenV", "imagenD"];
+        $arrayNoNulos = ["nombre", "imagen", "ataque", "defensa", "tipo", "imagenV", "imagenD"];
         $nulos = HayNulos($arrayNoNulos, $arrayDigi);
         if (count($nulos) > 0) {
             $error = true;

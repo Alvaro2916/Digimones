@@ -45,7 +45,7 @@ class UsuariosController
             }
         }
         $id = null;
-        if (!$error) $id = $this->model->insert($arrayUser);
+        if (!$error) $id = 1;
 
         if ($id == null) {
             $_SESSION["errores"] = $errores;
@@ -71,9 +71,12 @@ class UsuariosController
                 $imagenPorDefecto = "assets/img/usuarios/default.png";
                 $destino = $directorio . "default.png";
                 copy($imagenPorDefecto, $destino);
+                $arrayUser["imagen"]["name"] = "default.png";
             }
 
             $this->inventario->addPrimerosDigimones($id);
+
+            $id = $this->model->insert($arrayUser);
 
             header("location:index.php?accion=ver&tabla=usuarios&id=" . $id);
             exit();
@@ -161,7 +164,7 @@ class UsuariosController
         return $users;
     }
 
-    public function combatir(stdClass $usuario, stdClass $rival, array $digimonesUsu, array $digimonesRiv): array
+    public function combatir(stdClass $usuario, array $digimonesUsu, array $digimonesRiv): array
     {
         $ganador = [];
         for ($i = 0; $i < 3; $i++) {
@@ -177,12 +180,20 @@ class UsuariosController
         if(array_sum($ganador) >= 2){
             $usuario->partidas_ganadas+=1;
             $usuario->partidas_totales+=1;
+            if($usuario->partidas_ganadas % 10 == 0){
+                $usuario->digi_evu+=1;
+            }
             $this->model->edit($usuario->id, get_object_vars($usuario));
         }else {
             $usuario->partidas_perdidas+=1;
             $usuario->partidas_totales+=1;
             $this->model->edit($usuario->id, get_object_vars($usuario));
         }
+
+        if($usuario->partidas_totales % 10 == 0){
+            $this->inventario->addRandomDigimon($usuario);
+        }
+
         return $ganador;
     }
 

@@ -53,11 +53,6 @@ const NIVEL = ["1", "2", "3", "4"];
         <?= isset($errores["tipo"]) ? '<div class="alert alert-danger" role="alert">' . DibujarErrores($errores, "tipo") . '</div>' : ""; ?>
       </div>
       <div class="form-group">
-        <label for="evo_id">Evolución ID </label>
-        <input type="text" class="form-control" id="evo_id" name="evo_id" value="<?= $_SESSION["datos"]["evo_id"] ?? "" ?>" placeholder="Introduce ID de evolucion">
-        <?= isset($errores["evo_id"]) ? '<div class="alert alert-danger" role="alert">' . DibujarErrores($errores, "evo_id") . '</div>' : ""; ?>
-      </div>
-      <div class="form-group">
         <label for="tipo">Tipo </label>
         <select id="tipo" name="tipo" class="form-select" aria-label="Selecciona el tipo del digimon">
           <option value="">---- Elije El Tipo del Digimon ----</option>
