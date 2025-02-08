@@ -79,42 +79,6 @@ class InventariosModel
         return $digimones;
     }
 
-    public function delete(int $id): bool
-    {
-        $sql = "DELETE FROM digimones_inv WHERE id =:id";
-        try {
-            $sentencia = $this->conexion->prepare($sql);
-            //devuelve true si se borra correctamente
-            //false si falla el borrado
-            $resultado = $sentencia->execute([":id" => $id]);
-            return ($sentencia->rowCount() <= 0) ? false : true;
-        } catch (Exception $e) {
-            echo 'Excepción capturada: ',  $e->getMessage(), "<bR>";
-            return false;
-        }
-    }
-
-    public function edit(int $idAntiguo, array $arrayUsuario): bool
-    {
-        try {
-            $sql = "UPDATE digimones_inv SET nombre = :nombre, email=:email, ";
-            $sql .= "usuario = :usuario, contrasenya= :contrasenya ";
-            $sql .= " WHERE id = :id;";
-            $arrayDatos = [
-                ":id" => $idAntiguo,
-                ":usuario" => $arrayUsuario["usuario"],
-                ":contrasenya" => password_verify($arrayUsuario["contrasenya"], PASSWORD_DEFAULT),
-                ":nombre" => $arrayUsuario["nombre"],
-                ":email" => $arrayUsuario["email"],
-            ];
-            $sentencia = $this->conexion->prepare($sql);
-            return $sentencia->execute($arrayDatos);
-        } catch (Exception $e) {
-            echo 'Excepción capturada: ', $e->getMessage(), "<bR>";
-            return false;
-        }
-    }
-
     public function search(string $campo, string $modo, string $digimon, stdClass $user): array
     {
         try {
@@ -169,13 +133,5 @@ class InventariosModel
         $digimones = $sentencia->fetchAll(PDO::FETCH_OBJ);
 
         return $digimones;
-    }
-
-    public function exists(string $campo, string $valor): bool
-    {
-        $sentencia = $this->conexion->prepare("SELECT * FROM digimones WHERE $campo=:valor");
-        $arrayDatos = [":valor" => $valor];
-        $resultado = $sentencia->execute($arrayDatos);
-        return (!$resultado || $sentencia->rowCount() <= 0) ? false : true;
     }
 }

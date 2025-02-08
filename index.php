@@ -26,7 +26,6 @@ $vista = router();
             "crear" => "views/usuarios/create.php",
             "guardar" => "views/usuarios/store.php",
             "ver" => "views/usuarios/show.php",
-            "listar" => "views/usuarios/list.php",
             "buscar" => "views/usuarios/search.php",
             "borrar" => "views/usuarios/delete.php",
             "editar" => "views/usuarios/edit.php",

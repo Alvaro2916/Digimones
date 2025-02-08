@@ -43,7 +43,7 @@
   <body class="d-flex align-items-center py-4 bg-body-tertiary">
 <main class="form-signin w-100 m-auto">
   <form action="<?= $_SERVER['PHP_SELF']?>" method="POST">
-    <center><img class="mb-4" src="assets/img/proyecto.png" alt="" width="150" height="150"></center>
+    <center><img class="mb-4" src="assets/img/Digimon.png" alt="" width="150"></center>
     <div class="alert <?=$style.' '.$visibilidad?>" ><?=$msg?></div>
     <h1 class="h3 mb-3 fw-normal">Inicio de Sesión</h1>
     <div class="form-floating">

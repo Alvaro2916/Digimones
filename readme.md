@@ -30,4 +30,4 @@
 - Hacer todo el diseño.
 
 - General:
-    - **(P)** Eliminar contenido innecesario y extra de todos los códigos.
+    - **(P)** Eliminar contenido innecesario y extra de todos los códigos. (sobretodo de Digimones)
