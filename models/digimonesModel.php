@@ -93,18 +93,19 @@ class DigimonesModel
         }
     }
 
-    public function edit(int $idAntiguo, array $arrayUsuario): bool
+    public function edit(int $idAntiguo, array $arrayDigimon): bool
     {
         try {
-            $sql = "UPDATE usuarios SET nombre = :nombre, email=:email, ";
-            $sql .= "usuario = :usuario, contrasenya= :contrasenya ";
+            $sql = "UPDATE digimones SET nombre = :nombre, nivel = :nivel, tipo = :tipo, ";
+            $sql .= "ataque = :ataque, defensa = :defensa ";
             $sql .= " WHERE id = :id;";
             $arrayDatos = [
                 ":id" => $idAntiguo,
-                ":usuario" => $arrayUsuario["usuario"],
-                ":contrasenya" => password_verify($arrayUsuario["contrasenya"], PASSWORD_DEFAULT),
-                ":nombre" => $arrayUsuario["nombre"],
-                ":email" => $arrayUsuario["email"],
+                ":nombre" => $arrayDigimon["nombre"],
+                ":nivel" => $arrayDigimon["nivel"],
+                ":tipo" => $arrayDigimon["tipo"],
+                ":ataque" => $arrayDigimon["ataque"],
+                ":defensa" => $arrayDigimon["defensa"],
             ];
             $sentencia = $this->conexion->prepare($sql);
             return $sentencia->execute($arrayDatos);

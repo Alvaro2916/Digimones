@@ -38,7 +38,8 @@ class DigimonesController
         }
 
         //CAMPOS UNICOS
-        $arrayUnicos = ["nombre"];
+        $arrayUnicos = [];
+        if ($arrayDigi["nombre"] != $arrayDigi["nombreOriginal"]) $arrayUnicos[] = "nombre";
 
         foreach ($arrayUnicos as $CampoUnico) {
             if ($this->model->exists($CampoUnico, $arrayDigi[$CampoUnico])) {
@@ -46,6 +47,7 @@ class DigimonesController
                 $error = true;
             }
         }
+        
         $id = null;
         if (!$error) $id = $this->model->insert($arrayDigi);
 
@@ -115,14 +117,8 @@ class DigimonesController
             unset($_SESSION["datos"]);
         }
 
-        // ERRORES DE TIPO
-        if (!is_valid_email($arrayDigi["email"])) {
-            $error = true;
-            $errores["email"][] = "El email tiene un formato incorrecto";
-        }
-
         //campos NO VACIOS
-        $arrayNoNulos = ["email", "password", "usuario"];
+        $arrayNoNulos = ["nombre", "nivel", "tipo", "ataque", "defensa"];
         $nulos = HayNulos($arrayNoNulos, $arrayDigi);
         if (count($nulos) > 0) {
             $error = true;
@@ -133,8 +129,7 @@ class DigimonesController
 
         //CAMPOS UNICOS
         $arrayUnicos = [];
-        if ($arrayDigi["email"] != $arrayDigi["emailOriginal"]) $arrayUnicos[] = "email";
-        if ($arrayDigi["usuario"] != $arrayDigi["usuarioOriginal"]) $arrayUnicos[] = "usuario";
+        if ($arrayDigi["nombre"] != $arrayDigi["nombreOriginal"]) $arrayUnicos[] = "nombre";
 
         foreach ($arrayUnicos as $CampoUnico) {
             if ($this->model->exists($CampoUnico, $arrayDigi[$CampoUnico])) {
@@ -150,14 +145,14 @@ class DigimonesController
         if ($editado == false) {
             $_SESSION["errores"] = $errores;
             $_SESSION["datos"] = $arrayDigi;
-            $redireccion = "location:index.php?accion=editar&tabla=user&evento=modificar&id={$id}&error=true";
+            $redireccion = "location:index.php?accion=editar&tabla=digimones&evento=modificar&id={$id}&error=true";
         } else {
             //vuelvo a limpiar por si acaso
             unset($_SESSION["errores"]);
             unset($_SESSION["datos"]);
             //este es el nuevo numpieza
             $id = $arrayDigi["id"];
-            $redireccion = "location:index.php?accion=editar&tabla=user&evento=modificar&id={$id}";
+            $redireccion = "location:index.php?accion=editar&tabla=digimones&evento=modificar&id={$id}";
         }
         header($redireccion);
         exit();
