@@ -91,7 +91,7 @@ if (isset($_REQUEST["evento"]) && $_REQUEST["evento"] == "combatir") {
                 if (isset($_REQUEST["evento"]) && $_REQUEST["evento"] == "combatir") {
                 ?>
                     <div class="centro-combate">
-                        <h2>GANADOR: <?= $ganador ? $usuario->nombre : $rival->nombre ?>!!</h2><br>
+                        <h2>GANADOR: <?= $ganador >= 2 ? $usuario->nombre : $rival->nombre ?>!!</h2><br>
                         <img src="assets/img/versus.gif" alt="versus">
                     </div>
                     <div class="cartasDigimones-Interior">
