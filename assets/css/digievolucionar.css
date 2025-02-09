@@ -1,0 +1,75 @@
+.contenidoEvolucion {
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
+    gap: 0.5rem;
+    background-color: #c6e3eeb9;
+}
+
+.digimones__listaEvu {
+    display: grid;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    padding: 2rem;
+    background: white;
+    border-radius: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin: 2rem auto;
+    max-width: 80%;
+}
+
+.botones-superioreEvu {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 1rem;
+}
+
+
+
+.evolucionarEnabledEvu {
+    border: 0.3rem solid #ffffff00;
+    border-radius: 12px;
+    background: url("../img/Fondos/Fondo5.jpg") padding-box, linear-gradient(var(--angle),
+            #eeff00,
+            #ff800a) border-box;
+    animation: 8s rotate linear infinite;
+    position: relative;
+    left: 40rem;
+    margin-bottom: 1rem;
+}
+
+.evolucionarEnabledEvu:hover {
+    transform: scale(1.1);
+}
+
+.cartaDigimonEvu{
+    background-color: aqua;
+    text-align: center;
+    width: 10rem;
+    border: 0.3rem solid #ffffff00;
+    border-radius: 12px;
+    background: url("../img/Fondos/Fondo3.jpg") padding-box, linear-gradient(var(--angle),
+            #40f2ff,
+            #ff46ff) border-box;
+    animation: 8s rotate linear infinite;
+    transition: transform 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.cartaDigimonEvu:hover {
+    transform: scale(1.1);
+}
+
+@keyframes rotate {
+    to {
+        --angle: 360deg;
+    }
+}
+
+@property --angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+}

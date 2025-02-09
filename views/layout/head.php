@@ -17,6 +17,7 @@
   <link href="assets/css/404.css" rel="stylesheet">
   <link href="assets/css/inventario.css" rel="stylesheet">
   <link href="assets/css/inicio.css" rel="stylesheet">
+  <link href="assets/css/digievolucionar.css" rel="stylesheet">
 
   <style>
     

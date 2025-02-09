@@ -49,7 +49,7 @@ if (isset($_REQUEST["evento"]) && $_REQUEST["evento"] == "combatir") {
                     ID: <?= $usuario->id ?> <br>
                     Nombre: <?= $usuario->nombre ?><br>
                     <img src=assets/img/usuario/<?= $usuario->nombre . "/" . $usuario->imagen ?> width="100px"><br>
-                    Partidas Gandas: <?= $usuario->partidas_ganadas ?><br>
+                    Partidas Ganadas: <?= $usuario->partidas_ganadas ?><br>
                     Partidas Perdidas: <?= $usuario->partidas_perdidas ?><br>
                     Partidas Totales: <?= $usuario->partidas_totales ?><br>
                 </p>
