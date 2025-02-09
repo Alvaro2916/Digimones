@@ -76,7 +76,6 @@ if (isset($_REQUEST["error"])) {
                     $digimonesSelec .= "
                         <div class='cartaDigimon'>
                             <label>
-                                ID: $digimon->id <br>
                                 Nombre: $digimon->nombre <br>
                                 <img src=assets/img/digimones/$digimon->nombre/$digimon->imagen width='100px' height='100px'><br>
                                 Ataque: $digimon->ataque <br>
@@ -92,7 +91,6 @@ if (isset($_REQUEST["error"])) {
                         $digimonesNOSelec .= "
                         <div class='cartaDigimon'>
                             <label>
-                                ID: $digimon->id <br>
                                 Nombre: $digimon->nombre <br>
                                 <img src=assets/img/digimones/$digimon->nombre/$digimon->imagen width='100px' height='100px'><br>
                                 Ataque: $digimon->ataque <br>

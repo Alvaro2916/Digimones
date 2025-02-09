@@ -142,7 +142,7 @@ class InventariosModel
             $sentencia = $this->conexion->prepare($sql);
             //devuelve true si se borra correctamente
             //false si falla el borrado
-            $resultado = $sentencia->execute([":id" => $id]);
+            $resultado = $sentencia->execute([":id" => $id, ":user_id" => $user_id]);
             return ($sentencia->rowCount() <= 0) ? false : true;
         } catch (Exception $e) {
             echo 'Excepción capturada: ',  $e->getMessage(), "<bR>";

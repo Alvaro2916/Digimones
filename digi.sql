@@ -71,7 +71,7 @@ INSERT INTO `digimones` (`id`, `nombre`, `imagen`, `imagenV`, `imagenD`, `ataque
 (24, 'Tentomon', 'Tentomon.png', 'Tentomon_v.png', 'Tentomon_d.png', 120, 110, 2, 0, 'vacuna'),
 (25, 'Kabuterimon', 'Kabuterimon.png', 'Kabuterimon_v.png', 'Kabuterimon_d.png', 150, 160, 3, 0, 'vacuna'),
 (26, 'MegaKabuterimon', 'MegaKabuterimon.png', 'MegaKabuterimon_v.png', 'MegaKabuterimon_d.png', 180, 200, 4, 0, 'vacuna'),
-(27, 'Tanemon', 'Tanemon.png', 'Tanemon_v.png', 'Tanemon_d.png', 40, 20, 1, 0, 'planta'),
+(27, 'Tanemon', 'Tanemon.png', 'Tanemon_v.png', 'Tanemon_d.png', 40, 20, 1, 28, 'planta'),
 (28, 'Palmon', 'Palmon.png', 'Palmon_v.png', 'Palmon_d.png', 100, 90, 2, 29, 'planta'),
 (29, 'Togemon', 'Togemon.png', 'Togemon_v.png', 'Togemon_d.png', 130, 140, 3, 30, 'planta'),
 (30, 'Lillymon', 'Lillymon.png', 'Lillymon_v.png', 'Lillymon_d.png', 140, 130, 4, 0, 'planta'),
