@@ -13,16 +13,15 @@ $controladorInv = new InventariosController();
 $digimones = $controladorInv->buscarDigimones($usuario);
 
 if (isset($_REQUEST["evento"])) {
-    if ($_REQUEST["evento"]=="evolucionar") {
+    if ($_REQUEST["evento"] == "evolucionar") {
         foreach ($evo as $digimon) {
-            
         }
     }
 }
 
 if (isset($_REQUEST["error"])) {
     $visibilidad = "";
-    $mensaje = "No se ha podido cambiar el digimon, tienes que seleccionar los dos que quieras intercambiar!";
+    $mensaje = $_SESSION["errores"];
     $clase = "alert alert-danger";
 }
 ?>
@@ -34,7 +33,7 @@ if (isset($_REQUEST["error"])) {
     <div id="contenido">
         <div id="msg" name="msg" class="<?= $clase ?>" <?= $visibilidad ?>> <?= $mensaje ?> </div>
         <div id="contenido">
-            <form action="index.php?tabla=inventarios&accion=guardar&evento=evolucionar&id=<?= $id ?>" method="POST">
+            <form action="index.php?tabla=inventarios&accion=guardar&evento=evolucionar" method="POST">
                 <button type="submit" class="btn btn-success">Evolucionar</button>
                 <?php
                 //var_dump($digimones);
@@ -42,14 +41,14 @@ if (isset($_REQUEST["error"])) {
                 ?>
                     <div class='form-group'>
                         <label>
-                            ID: <?=$digimon->id?> <br>
-                            Nombre: <?=$digimon->nombre?> <br>
-                            <img src="assets/img/digimones/<?= $digimon->nombre.'/'.$digimon->imagen?>" width='100px'><br>
-                            Ataque: <?=$digimon->ataque?> <br>
-                            Defensa: <?=$digimon->defensa?> <br>
-                            Tipo: <?=$digimon->tipo?> <br>
-                            Nivel: <?=$digimon->nivel?> <br>
-                            <input type="radio" name="id" id="<?=$digimon->id?>" value="<?=$digimon->id?>">
+                            ID: <?= $digimon->id ?> <br>
+                            Nombre: <?= $digimon->nombre ?> <br>
+                            <img src="assets/img/digimones/<?= $digimon->nombre . '/' . $digimon->imagen ?>" width='100px'><br>
+                            Ataque: <?= $digimon->ataque ?> <br>
+                            Defensa: <?= $digimon->defensa ?> <br>
+                            Tipo: <?= $digimon->tipo ?> <br>
+                            Nivel: <?= $digimon->nivel ?> <br>
+                            <input type="radio" name="id" id="<?= $digimon->id ?>" value="<?= $digimon->id ?>">
                             <input type="hidden" id="id_usuario" name="id_usuario" value="<?= $id ?>">
                         </label>
                     </div>
@@ -61,3 +60,8 @@ if (isset($_REQUEST["error"])) {
             <a href="index.php" class="btn btn-primary">Volver a Inicio</a>
         </div>
 </main>
+<?php
+//Una vez mostrados los errores, los eliminamos
+unset($_SESSION["datos"]);
+unset($_SESSION["errores"]);
+?>

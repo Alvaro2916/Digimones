@@ -1,5 +1,6 @@
 <?php
 require_once "models/inventariosModel.php";
+require_once "models/usuariosModel.php";
 require_once "assets/php/funciones.php";
 require_once "digimonesController.php";
 require_once "usuariosController.php";
@@ -8,11 +9,15 @@ class InventariosController
 {
     private $model;
 
+    public $modelUsu;
+
     private $digimones;
 
     public function __construct()
     {
         $this->model = new InventariosModel();
+
+        $this->modelUsu = new UsuariosModel();
 
         $this->digimones = new DigimonesController();
     }
@@ -47,6 +52,7 @@ class InventariosController
     {
         $error = false;
         $errores = [];
+
         //vaciamos los posibles errores
         $_SESSION["errores"] = [];
         $_SESSION["datos"] = [];
@@ -75,70 +81,62 @@ class InventariosController
         }
     }
 
-    public function evolucionarDigimon($id, $id_usuario)
+    public function evolucionarDigimon(int $id, int $id_usuario)
     {
         $controladorDigi = new DigimonesController();
         $controladorUsu = new UsuariosController();
-        
-        //Usuario
-        $usuario = $controladorUsu->ver($id_usuario);
 
-        //Digimon que tenemos
-        $digimon = $controladorDigi->ver($id);
-        
-        //Digimon al que evoluciona
-        $idDigiEvolucionar = $digimon->evo_id;
+        //Errores
         $error = false;
-        $errores = [];
+        $errores = "";
 
-        if($usuario->digi_evu == 0){
-            $error = true;
-            $errores[$usuario->digi_evu][] = "Tienes que tener puntos de evolucion!";
-        }
-
-        $digiEvolucion = [
-            "usuario_id" => $id_usuario,
-            "digimon_id" => $idDigiEvolucionar,
-            "seleccionado" => 1,
-        ];
-
-        //var_dump($digiEvolucion);
-        $this->model->insert($digiEvolucion);
-        $this->model->delete($id);
-
-        header("location:index.php?tabla=inventarios&accion=inventario&id={$id_usuario}");
-        exit();
-
-        /*
-        $error = false;
-        $errores = [];
-        //vaciamos los posibles errores
         $_SESSION["errores"] = [];
         $_SESSION["datos"] = [];
 
         //campos NO VACIOS
-        $arrayNoNulos = ["evo_id"];
-        $nulos = HayNulos($arrayNoNulos, $id);
-        if (count($nulos) > 0) {
+        if ($id == 0) {
             $error = true;
-            for ($i = 0; $i < count($nulos); $i++) {
-                $errores[$nulos[$i]][] = "Tienes que seleccionar el digimon que quieras evolucionar!";
+            $errores = "Tienes que seleccionar el digimon que quieres evolucionar!";
+        } else {
+            //Digimon que tenemos
+            $digimon = $controladorDigi->ver($id);
+
+            //Digimon que no tiene evolucion
+            if ($digimon->evo_id == 0) {
+                $error = true;
+                $errores = "Este digimon no tiene evolucion";
             }
         }
-
 
         if ($error) {
             $_SESSION["errores"] = $errores;
             $_SESSION["datos"] = $id;
 
-            header("location:index.php?tabla=inventarios&accion=inventario&id={$id["id_usuario"]}&error=true");
+            header("location:index.php?tabla=inventarios&accion=digievolucionar&id={$id_usuario}&error=true");
             exit();
         } else {
-            $this->model->cambiarDigimones($id);
 
-            header("location:index.php?tabla=inventarios&accion=inventario&id={$id["id_usuario"]}");
+            //Usuario
+            $usuario = $controladorUsu->ver($id_usuario);
+
+            //Digimon al que evoluciona
+            $idDigiEvolucionar = $digimon->evo_id;
+
+            $digiEvolucion = [
+                "usuario_id" => $id_usuario,
+                "digimon_id" => $idDigiEvolucionar,
+                "seleccionado" => 1,
+            ];
+            $insertado = $this->model->insert($digiEvolucion);
+            $usuario->digi_evu -= 1;
+            $this->modelUsu->edit($usuario->id, get_object_vars($usuario));
+            if ($insertado) {
+                $this->model->delete($id);
+            }
+
+            header("location:index.php?tabla=inventarios&accion=inventario&id={$id_usuario}");
             exit();
-        }*/
+        }
     }
 
     private function EstaEnArray(stdClass $digi, array $nuevoDigis): bool
@@ -165,7 +163,6 @@ class InventariosController
             while (!$encontrado) {
                 $i = random_int(0, $totalDigiN1 - 1);
                 if (!$this->EstaEnArray($digimonesN1[$i], $digimonesUsuario)) {
-                    //$nuevoDigis[]=$digimonesN1[$i];            
                     $digimonNuevo = [
                         "usuario_id" => $usuario->id,
                         "digimon_id" => $digimonesN1[$i]->id,
@@ -174,8 +171,8 @@ class InventariosController
                     $encontrado = true;
                 }
             }
+            $this->model->insert($digimonNuevo);
         }
-        $this->model->insert($digimonNuevo);
     }
 
     public function addPrimerosDigimones($userId)
@@ -188,7 +185,7 @@ class InventariosController
         while (count($nuevoDigis) < 3) {
             $i = random_int(0, $totalDigiN1 - 1);
             if (!$this->EstaEnArray($digimonesN1[$i], $nuevoDigis)) {
-                //$nuevoDigis[]=$digimonesN1[$i];            
+                //$nuevoDigis[]=$digimonesN1[$i];       	 
                 $nuevoDigis[] = [
                     "usuario_id" => $userId,
                     "digimon_id" => $digimonesN1[$i]->id,

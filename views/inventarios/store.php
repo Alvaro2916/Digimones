@@ -4,8 +4,8 @@ require_once "controllers/inventariosController.php";
 //pagina invisible
 $controlador = new InventariosController();
 
-$id = ($_REQUEST["id"]) ?? "";
-$id_usuario = ($_REQUEST["id_usuario"]) ?? "";
+$id = ($_REQUEST["id"]) ?? 0;
+$id_usuario = ($_REQUEST["id_usuario"]) ?? 0;
 
 if($_REQUEST["evento"] !== "evolucionar"){
     $digimones = [

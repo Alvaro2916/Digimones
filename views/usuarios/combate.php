@@ -35,7 +35,6 @@ if (!isset($_REQUEST['id'])) {
 }
 if (isset($_REQUEST["evento"]) && $_REQUEST["evento"] == "combatir") {
     $combatir = $controlador->combatir($usuario, $seleccionados, $seleccionadosRival);
-    var_dump($combatir);
 }
 ?>
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">

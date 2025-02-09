@@ -13,11 +13,11 @@ class InventariosModel
     public function cambiarDigimones($digimonesC)
     {
         try {
-            $sql = "UPDATE digimones_inv SET seleccionado = CASE 
-            WHEN digimon_id = :id_seleccionado THEN 0
-            WHEN digimon_id = :id_noSeleccionado THEN 1
-            ELSE seleccionado
-            END  ";
+            $sql = "UPDATE digimones_inv SET seleccionado = CASE
+        	WHEN digimon_id = :id_seleccionado THEN 0
+        	WHEN digimon_id = :id_noSeleccionado THEN 1
+        	ELSE seleccionado
+        	END  ";
 
             $sql .= " WHERE digimon_id IN (:id_seleccionado, :id_noSeleccionado) AND usuario_id = :id_usuario; ";
             $arrayDatos = [
@@ -37,7 +37,7 @@ class InventariosModel
     {
         try {
             $sql = "INSERT INTO digimones_inv(usuario_id, digimon_id, seleccionado)  
-            VALUES (:usuario_id, :digimon_id, :seleccionado);";
+        	VALUES (:usuario_id, :digimon_id, :seleccionado);";
             $sentencia = $this->conexion->prepare($sql);
             $arrayDatos = [
                 ":usuario_id" => $digi["usuario_id"],
@@ -46,8 +46,8 @@ class InventariosModel
             ];
             $resultado = $sentencia->execute($arrayDatos);
 
-            /*Pasar en el mismo orden de los ? execute devuelve un booleano. 
-            True en caso de que todo vaya bien, falso en caso contrario.*/
+            /*Pasar en el mismo orden de los ? execute devuelve un booleano.
+        	True en caso de que todo vaya bien, falso en caso contrario.*/
             //Así podriamos evaluar
             return ($resultado == true) ? $this->conexion->lastInsertId() : null;
         } catch (Exception $e) {
@@ -82,9 +82,9 @@ class InventariosModel
     public function search(string $campo, string $modo, string $digimon, stdClass $user): array
     {
         try {
-            $sentencia = $this->conexion->prepare("SELECT * FROM digimones_inv 
-            LEFT JOIN digimones on (digimones_inv.digimon_id=digimones.id) 
-            WHERE $campo LIKE :digimon AND digimones_inv.usuario_id=:usuario_id");
+            $sentencia = $this->conexion->prepare("SELECT * FROM digimones_inv
+        	LEFT JOIN digimones on (digimones_inv.digimon_id=digimones.id)
+        	WHERE $campo LIKE :digimon AND digimones_inv.usuario_id=:usuario_id");
             //ojo el si ponemos % siempre en comillas dobles "
             switch ($modo) {
                 case 'empieza':
@@ -97,7 +97,7 @@ class InventariosModel
                     $digimon = "%$digimon%";
                     break;
             }
-    
+
             $arrayDatos = [
                 ":digimon" => $digimon,
                 ":usuario_id" => $user->id,
