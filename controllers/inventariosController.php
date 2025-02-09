@@ -122,11 +122,26 @@ class InventariosController
             //Digimon al que evoluciona
             $idDigiEvolucionar = $digimon->evo_id;
 
+            $digisInv = $this->buscar("usuario_id", "igual", $id_usuario, $usuario);
+            foreach ($digisInv as $digiInv) {
+                if ($digiInv->digimon_id == $idDigiEvolucionar) {
+                    $_SESSION["errores"] = "Este digimon ya está evolucionado!";
+                    $_SESSION["datos"] = $id;
+
+                    header("location:index.php?tabla=inventarios&accion=digievolucionar&id={$id_usuario}&error=true");
+                    exit();
+                }
+                if ($digiInv->digimon_id == $id) {
+                    $inv = $digiInv->seleccionado;
+                }
+            }
+
             $digiEvolucion = [
                 "usuario_id" => $id_usuario,
                 "digimon_id" => $idDigiEvolucionar,
-                "seleccionado" => 1,
+                "seleccionado" => $inv,
             ];
+
             $insertado = $this->model->insert($digiEvolucion);
             $usuario->digi_evu -= 1;
             $this->modelUsu->edit($usuario->id, get_object_vars($usuario));

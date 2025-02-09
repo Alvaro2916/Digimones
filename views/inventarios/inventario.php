@@ -103,23 +103,29 @@ if (isset($_REQUEST["error"])) {
                     }
                 }
                 ?>
-            </form>
-            <div class="equipo">
                 <div class="equipo__header">
                     <h2 class='h3'>Equipo</h2>
                     <button type="submit" class="btn btn-success asignar-2letra cambiar">
                         <i class="fa-solid fas fa-sort"> Cambiar</i>
                     </button>
                 </div>
-                <div class='form-group, digimones__lista'>
-                    <?= $digimonesSelec ?>
+                <div class="equipo">
+                    <div class='form-group, digimones__lista'>
+                        <?= $digimonesSelec ?>
+                    </div>
                 </div>
-            </div>
-            <h2 class='h3'>Guardados</h2>
-            <div class="guardados">
-                <div class='form-group digimones__lista'>
-                    <?= $digimonesNOSelec ?>
+                <h2 class='h3'>Guardados</h2>
+                <div class="guardados">
+                    <div class='form-group digimones__lista'>
+                        <?= $digimonesNOSelec ?>
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
 </main>
+
+<?php
+//Una vez mostrados los errores, los eliminamos
+unset($_SESSION["datos"]);
+unset($_SESSION["errores"]);
+?>
