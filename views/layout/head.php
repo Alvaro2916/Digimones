@@ -18,6 +18,7 @@
   <link href="assets/css/inventario.css" rel="stylesheet">
   <link href="assets/css/inicio.css" rel="stylesheet">
   <link href="assets/css/digievolucionar.css" rel="stylesheet">
+  <link href="assets/css/combatir.css" rel="stylesheet">
 
   <style>
     

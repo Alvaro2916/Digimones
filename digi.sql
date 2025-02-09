@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-02-2025 a las 16:56:59
+-- Tiempo de generación: 09-02-2025 a las 18:28:14
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -45,7 +45,7 @@ CREATE TABLE `digimones` (
 --
 
 INSERT INTO `digimones` (`id`, `nombre`, `imagen`, `imagenV`, `imagenD`, `ataque`, `defensa`, `nivel`, `evo_id`, `tipo`) VALUES
-(1, 'Botamon', 'Botamon.png', 'Botamon_v.png', 'Botamon_d.png', 50, 30, 1, 0, 'virus'),
+(1, 'Botamon', 'Botamon.png', 'Botamon_v.png', 'Botamon_d.png', 50, 30, 1, 35, 'virus'),
 (2, 'Koromon', 'Koromon.png', 'Koromon_v.png', 'Koromon_d.png', 70, 50, 1, 24, 'vacuna'),
 (3, 'Agumon', 'Agumon.png', 'Agumon_v.png', 'Agumon_d.png', 120, 100, 2, 0, 'vacuna'),
 (4, 'Greymon', 'Greymon.png', 'Greymon_v.png', 'Greymon_d.png', 160, 140, 3, 5, 'vacuna'),
@@ -54,7 +54,7 @@ INSERT INTO `digimones` (`id`, `nombre`, `imagen`, `imagenV`, `imagenD`, `ataque
 (7, 'Gabumon', 'Gabumon.png', 'Gabumon_v.png', 'Gabumon_d.png', 110, 90, 2, 0, 'vacuna'),
 (8, 'Garurumon', 'Garurumon.png', 'Garurumon_v.png', 'Garurumon_d.png', 140, 120, 3, 9, 'vacuna'),
 (9, 'WereGarurumon', 'WereGarurumon.png', 'WereGarurumon_v.png', 'WereGarurumon_d.png', 180, 160, 4, 0, 'vacuna'),
-(10, 'Poyomon', 'Poyomon.png', 'Poyomon_v.png', 'Poyomon_d.png', 40, 20, 1, 0, 'elemental'),
+(10, 'Poyomon', 'Poyomon.png', 'Poyomon_v.png', 'Poyomon_d.png', 40, 20, 1, 56, 'elemental'),
 (11, 'Tokomon', 'Tokomon.png', 'Tokomon_v.png', 'Tokomon_d.png', 60, 40, 1, 0, 'vacuna'),
 (12, 'Patamon', 'Patamon.png', 'Patamon_v.png', 'Patamon_d.png', 100, 80, 2, 0, 'vacuna'),
 (13, 'Angemon', 'Angemon.png', 'Angemon_v.png', 'Angemon_d.png', 150, 110, 3, 0, 'vacuna'),
@@ -67,7 +67,7 @@ INSERT INTO `digimones` (`id`, `nombre`, `imagen`, `imagenV`, `imagenD`, `ataque
 (20, 'Biyomon', 'Biyomon.png', 'Biyomon_v.png', 'Biyomon_d.png', 90, 80, 2, 0, 'vacuna'),
 (21, 'Birdramon', 'Birdramon.png', 'Birdramon_v.png', 'Birdramon_d.png', 140, 100, 3, 0, 'vacuna'),
 (22, 'Garudamon', 'Garudamon.png', 'Garudamon_v.png', 'Garudamon_d.png', 170, 130, 4, 0, 'vacuna'),
-(23, 'Motimon', 'Motimon.png', 'Motimon_v.png', 'Motimon_d.png', 50, 30, 1, 0, 'virus'),
+(23, 'Motimon', 'Motimon.png', 'Motimon_v.png', 'Motimon_d.png', 50, 30, 1, 36, 'virus'),
 (24, 'Tentomon', 'Tentomon.png', 'Tentomon_v.png', 'Tentomon_d.png', 120, 110, 2, 0, 'vacuna'),
 (25, 'Kabuterimon', 'Kabuterimon.png', 'Kabuterimon_v.png', 'Kabuterimon_d.png', 150, 160, 3, 0, 'vacuna'),
 (26, 'MegaKabuterimon', 'MegaKabuterimon.png', 'MegaKabuterimon_v.png', 'MegaKabuterimon_d.png', 180, 200, 4, 0, 'vacuna'),
@@ -75,7 +75,22 @@ INSERT INTO `digimones` (`id`, `nombre`, `imagen`, `imagenV`, `imagenD`, `ataque
 (28, 'Palmon', 'Palmon.png', 'Palmon_v.png', 'Palmon_d.png', 100, 90, 2, 29, 'planta'),
 (29, 'Togemon', 'Togemon.png', 'Togemon_v.png', 'Togemon_d.png', 130, 140, 3, 30, 'planta'),
 (30, 'Lillymon', 'Lillymon.png', 'Lillymon_v.png', 'Lillymon_d.png', 140, 130, 4, 0, 'planta'),
-(31, 'Upamon', 'Upamon.png', 'Upamon_v.png', 'Upamon_d.png', 70, 50, 1, 0, 'vacuna');
+(31, 'Upamon', 'Upamon.png', 'Upamon_v.png', 'Upamon_d.png', 70, 50, 1, 0, 'vacuna'),
+(32, 'Kuramon', 'Kuramon.png', 'Kuramon_v.png', 'Kuramon_d.png', 45, 25, 1, 0, 'virus'),
+(33, 'Pagumon', 'Pagumon.png', 'Pagumon_v.png', 'Pagumon_d.png', 50, 30, 1, 0, 'virus'),
+(34, 'Tsumemon', 'Tsumemon.png', 'Tsumemon_v.png', 'Tsumemon_d.png', 48, 28, 1, 0, 'virus'),
+(35, 'Gazimon', 'Gazimon.png', 'Gazimon_v.png', 'Gazimon_d.png', 70, 40, 2, 37, 'virus'),
+(36, 'DemiDevimon', 'DemiDevimon.png', 'DemiDevimon_v.png', 'DemiDevimon_d.png', 65, 38, 2, 38, 'virus'),
+(37, 'Devidramon', 'Devidramon.png', 'Devidramon_v.png', 'Devidramon_d.png', 90, 50, 3, 39, 'virus'),
+(38, 'Dokugumon', 'Dokugumon.png', 'Dokugumon_v.png', 'Dokugumon_d.png', 88, 48, 3, 40, 'virus'),
+(39, 'Myotismon', 'Myotismon.png', 'Myotismon_v.png', 'Myotismon_d.png', 120, 70, 4, 0, 'virus'),
+(40, 'Phantomon', 'Phantomon.png', 'Phantomon_v.png', 'Phantomon_d.png', 110, 65, 4, 0, 'virus'),
+(55, 'Yuramon', 'Yuramon.png', 'Yuramon_v.png', 'Yuramon_d.png', 42, 22, 1, 56, 'elemental'),
+(56, 'Nyokimon', 'Nyokimon.png', 'Nyokimon_v.png', 'Nyokimon_d.png', 58, 32, 2, 57, 'elemental'),
+(57, 'Tapirmon', 'Tapirmon.png', 'Tapirmon_v.png', 'Tapirmon_d.png', 85, 55, 3, 60, 'elemental'),
+(58, 'Elecmon', 'Elecmon.png', 'Elecmon_v.png', 'Elecmon_d.png', 88, 50, 3, 59, 'elemental'),
+(59, 'Piximon', 'Piximon.png', 'Piximon_v.png', 'Piximon_d.png', 120, 80, 4, 0, 'elemental'),
+(60, 'Shurimon', 'Shurimon.png', 'Shurimon_v.png', 'Shurimon_d.png', 125, 85, 4, 0, 'elemental');
 
 -- --------------------------------------------------------
 
@@ -137,7 +152,7 @@ INSERT INTO `usuarios` (`id`, `nombre`, `imagen`, `partidas_ganadas`, `partidas_
 (1, 'admin', 'default.png', 0, 0, 0, 1, '$2y$10$dIBvy.QseqFNzP7GErgSF.P7coKdx/onIiO4QNiiLnbwYyPMxOUFm', 0),
 (2, 'Ismael', 'bb193d3c2af2d12905197222b95e635d.jpg', 0, 0, 0, 0, '$2y$10$3VuQPKNklJ0141cTTgGZs.g2qcIKbyb9zLQU/Fts9kxWvDdLlcvfy', 0),
 (3, 'Alvaro', '6cukfi.jpg', 0, 0, 0, 0, '$2y$10$vQIVG0TXOTD88Jmkhx9I0e2PCPNaDyUJsfaiEo9AyS4zcb/kcGZHy', 0),
-(4, 'Jesus', 'FB_IMG_1695833204428.jpg', 0, 0, 0, 1, '$2y$10$NCQL1vsTeZRJasOqZfFhJOGJCeP872.ifPicHCem/tX8/k0HAI4NG', 0),
+(4, 'Jesus', 'FB_IMG_1695833204428.jpg', 100, 0, 100, 1, '$2y$10$NCQL1vsTeZRJasOqZfFhJOGJCeP872.ifPicHCem/tX8/k0HAI4NG', 100),
 (5, 'Ana', 'default.png', 0, 0, 0, 1, '$2y$10$2ChEUT3mIJBMYbJG7h75HOiX.l5XbvLX7Ns8WmfZjpYPzCTpi7Ph.', 0),
 (6, 'Luis', 'default.png', 0, 0, 0, 0, '$2y$10$UycR3sySl4fZl9LKVNrlLu/gHSKTjXmWmg9.utQh43ArwvzMJ6/M6', 0);
 
@@ -177,7 +192,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `digimones`
 --
 ALTER TABLE `digimones`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT de la tabla `digimones_inv`

@@ -6,17 +6,12 @@
     background-color: #c6e3eeb9;
 }
 
-.digimones__listaEvu {
+.equipo-Evolucion{
     display: grid;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1rem;
-    padding: 2rem;
-    background: white;
-    border-radius: 1rem;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    margin: 2rem auto;
-    max-width: 80%;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    place-items: center; /* Centra tanto horizontal como verticalmente */
+    gap: 0.5rem;
+    width: 100%;
 }
 
 .botones-superioreEvu {
@@ -26,8 +21,6 @@
     padding: 1rem;
 }
 
-
-
 .evolucionarEnabledEvu {
     border: 0.3rem solid #ffffff00;
     border-radius: 12px;
@@ -35,9 +28,9 @@
             #eeff00,
             #ff800a) border-box;
     animation: 8s rotate linear infinite;
-    position: relative;
-    left: 40rem;
-    margin-bottom: 1rem;
+    margin-left: auto;
+    margin-top: 1%;
+    margin-right: 1%;
 }
 
 .evolucionarEnabledEvu:hover {
@@ -45,6 +38,8 @@
 }
 
 .cartaDigimonEvu{
+    margin-top: 3rem;
+    margin-bottom: 3rem;
     background-color: aqua;
     text-align: center;
     width: 10rem;
