@@ -131,7 +131,7 @@ class InventariosController
             $usuario->digi_evu -= 1;
             $this->modelUsu->edit($usuario->id, get_object_vars($usuario));
             if ($insertado) {
-                $this->model->delete($id);
+                $this->model->delete($id, $id_usuario);
             }
 
             header("location:index.php?tabla=inventarios&accion=inventario&id={$id_usuario}");

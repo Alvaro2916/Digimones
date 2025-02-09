@@ -34,7 +34,7 @@ if (isset($_REQUEST["error"])) {
         <div id="msg" name="msg" class="<?= $clase ?>" <?= $visibilidad ?>> <?= $mensaje ?> </div>
         <div id="contenido">
             <form action="index.php?tabla=inventarios&accion=guardar&evento=evolucionar" method="POST">
-                <button type="submit" class="btn btn-success">Evolucionar</button>
+                <button type="submit" class="btn btn-success"><i class="fa-solid fas fa-dragon"></i> Evolucionar</button>
                 <?php
                 //var_dump($digimones);
                 foreach ($digimones as $digimon) {
@@ -57,7 +57,7 @@ if (isset($_REQUEST["error"])) {
                 ?>
             </form>
 
-            <a href="index.php" class="btn btn-primary">Volver a Inicio</a>
+            <a href="index.php" class="btn btn-primary"><i class="fa-solid fas fa-chevron-left"></i> Volver a Inicio</a>
         </div>
 </main>
 <?php

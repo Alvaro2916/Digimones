@@ -135,9 +135,9 @@ class InventariosModel
         return $digimones;
     }
 
-    public function delete(int $id): bool
+    public function delete(int $id, int $user_id): bool
     {
-        $sql = "DELETE FROM digimones_inv WHERE digimon_id =:id";
+        $sql = "DELETE FROM digimones_inv WHERE digimon_id =:id AND usuario_id =:user_id";
         try {
             $sentencia = $this->conexion->prepare($sql);
             //devuelve true si se borra correctamente
